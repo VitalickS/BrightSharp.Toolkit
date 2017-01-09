@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="JetFrames.AppleJobs.Editor.Views.Models"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JetFrames.AppleJobs.Editor.Views"
+             mc:Ignorable="d" d:DataContext="{StaticResource ViewModelLocator}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DataGrid CommandManager.PreviewCanExecute="DataGrid_PreviewCanExecute"
+                              ItemsSource="{Binding Editor.Models}"
+                              AlternatingRowBackground="{DynamicResource AlternatingRowBackgroundBrush}" InitializingNewItem="DataGrid_InitializingNewItem">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Модель" Width="120" />
+                <DataGridComboBoxColumn SelectedValueBinding="{Binding ModelCategory, ValidatesOnExceptions=True}" 
+                                                    ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.Categories}" 
+                                                    DisplayMemberPath="Name" Header="Категория" Width="120" SortMemberPath="ModelCategory.Name"
+                                                    EditingElementStyle="{StaticResource {x:Type ComboBox}}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

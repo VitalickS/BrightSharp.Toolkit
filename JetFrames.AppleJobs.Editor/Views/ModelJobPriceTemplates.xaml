@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="JetFrames.AppleJobs.Editor.Views.ModelJobPriceTemplates"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JetFrames.AppleJobs.Editor.Views"
+             mc:Ignorable="d" d:DataContext="{StaticResource ViewModelLocator}"
+             d:DesignHeight="300" d:DesignWidth="774">
+    <Grid>
+        <DataGrid CommandManager.PreviewCanExecute="DataGrid_PreviewCanExecute" ItemsSource="{Binding Editor.ModelJobPriceTemplates}"
+                              CanUserAddRows="False" AlternatingRowBackground="{DynamicResource AlternatingRowBackgroundBrush}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ModelJob.Name}" Header="Работа" Width="120"  SortMemberPath="ModelJob.Name"
+                                    ClipboardContentBinding="{Binding ModelJob.Name}"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding ModelJob.Model.Name}" Header="Модель" Width="120"  SortMemberPath="ModelJob.Model.Name"
+                                    ClipboardContentBinding="{Binding ModelJob.Model.Name}"
+                                    IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding ModelJob.Model.ModelCategory.Name}" 
+                                    IsReadOnly="True" Header="Категория" Width="120" SortMemberPath="ModelJob.Model.ModelCategory.Name"
+                                    ClipboardContentBinding="{Binding ModelJob.Model.ModelCategory.Name}" />
+                <DataGridTextColumn Binding="{Binding Price, TargetNullValue=''}" Header="Цена" Width="100" ClipboardContentBinding="{Binding Price}" />
+                <DataGridCheckBoxColumn Binding="{Binding IsPriceFrom}" Header="Цена от" Width="80" 
+                                        EditingElementStyle="{StaticResource {x:Type CheckBox}}" ClipboardContentBinding="{Binding IsPriceFrom}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>

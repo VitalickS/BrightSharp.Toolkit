@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="JetFrames.AppleJobs.Editor.Views.Orders"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JetFrames.AppleJobs.Editor.Views"
+             mc:Ignorable="d" d:DataContext="{StaticResource ViewModelLocator}"
+             d:DesignHeight="300" d:DesignWidth="1084">
+    <Grid>
+        <DataGrid CommandManager.PreviewCanExecute="DataGrid_PreviewCanExecute" ItemsSource="{Binding Editor.Orders}"
+                  InitializingNewItem="DataGrid_InitializingNewItem"
+                  AlternatingRowBackground="{DynamicResource AlternatingRowBackgroundBrush}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Contact}" Header="Контакт" Width="200" />
+                <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.OrderStatuses}" 
+                                        SelectedValueBinding="{Binding OrderStatus}" 
+                                        DisplayMemberPath="Name" SortMemberPath="OrderStatus.Name" ClipboardContentBinding="{Binding Name}"
+                                        EditingElementStyle="{StaticResource {x:Type ComboBox}}" Header="Статус" Width="80" />
+                <DataGridComboBoxColumn SelectedValueBinding="{Binding Model, UpdateSourceTrigger=PropertyChanged}" 
+                                        ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.Models}" 
+                                        DisplayMemberPath="Name" Header="Модель" Width="120" SortMemberPath="Model.Name"
+                                        EditingElementStyle="{StaticResource {x:Type ComboBox}}"/>
+                <DataGridTextColumn Binding="{Binding Comment}" Header="Коментарий" Width="100" />
+                <DataGridCheckBoxColumn Binding="{Binding IsFast}" Header="Быстро" Width="60" />
+                <DataGridCheckBoxColumn Binding="{Binding IsDrive}" Header="Доставка" Width="60" />
+                <DataGridTextColumn Binding="{Binding Price}" Header="Цена" Width="80" />
+                <DataGridTemplateColumn Header="Работа" Width="80" ClipboardContentBinding="{Binding JobModel.Name}" SortMemberPath="JobModel.Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding JobModel.Name}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding Model.ModelJobs}" DisplayMemberPath="Name"
+                                      SelectedItem="{Binding JobModel, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridComboBoxColumn SelectedValueBinding="{Binding Accessories}"
+                                        ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.Accessories}" 
+                                        DisplayMemberPath="Name" SortMemberPath="Accessories.Name"
+                                        EditingElementStyle="{StaticResource {x:Type ComboBox}}" Header="Инвентарь" Width="80" />
+                <DataGridComboBoxColumn SelectedValueBinding="{Binding Employee}"
+                                        ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.Employees}"
+                                        DisplayMemberPath="Name" SortMemberPath="Employee.Name"
+                                        EditingElementStyle="{StaticResource {x:Type ComboBox}}"
+                                        Header="Мастер" Width="80" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>
