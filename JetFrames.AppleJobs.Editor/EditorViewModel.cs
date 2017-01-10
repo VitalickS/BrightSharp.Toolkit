@@ -10,11 +10,12 @@ using System.Windows;
 using BrightSharp.Extensions;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System;
-using AppleJobs.Data.Models;
-using JetFrames.AppleJobs.Editor.Views;
 using JetFrames.AppleJobs.Editor.ViewModels;
 using System.Collections;
+using AppleJobs.Data.Models.Articles;
+using AppleJobs.Data.Models.Orders;
+using AppleJobs.Data.Models.Inventory;
+using System.ComponentModel;
 
 namespace JetFrames.AppleJobs.Editor
 {
@@ -27,31 +28,59 @@ namespace JetFrames.AppleJobs.Editor
             this.context = context;
         }
 
-        public string Name { get; set; }
-        public string Email { get; set; }
+        #region Data Properties
 
         List<Model> _models;
-        public IEnumerable<Model> Models
-        {
-            get
-            {
-                return _models ?? (_models = context.Models.ToList());
-            }
-        }
+        public IEnumerable<Model> Models { get { return GetSingleton(ref _models, context.Models); } }
         List<ModelCategory> _categories;
-        public IEnumerable<ModelCategory> Categories
+        public IEnumerable<ModelCategory> Categories { get { return GetSingleton(ref _categories, context.ModelCategories); } }
+        private List<News> _news;
+        public IEnumerable<News> News { get { return GetSingleton(ref _news, context.News); } }
+        private List<NewsCategory> _newsCategories;
+        public IEnumerable<NewsCategory> NewsCategories { get { return GetSingleton(ref _newsCategories, context.NewsCategories); } }
+        List<ModelJobPriceTemplate> _modelJobPriceTemplates;
+        public IEnumerable<ModelJobPriceTemplate> ModelJobPriceTemplates
         {
             get
             {
-                return _categories ?? (_categories = context.ModelCategories.ToList());
+                context.ModelJobs.Count();
+                return GetSingleton(ref _modelJobPriceTemplates, context.ModelJobPriceTemplates);
             }
         }
+        List<ModelJob> _modelJobs;
+        public IEnumerable<ModelJob> ModelJobs { get { return GetSingleton(ref _modelJobs, context.ModelJobs); } }
+        List<Order> _orders;
+        public IEnumerable<Order> Orders { get { return GetSingleton(ref _orders, context.Orders.OrderByDescending(o => o.DateCreated).Take(2000)); } }
+        List<OrderStatus> _orderStatuses;
+        public IEnumerable<OrderStatus> OrderStatuses { get { return GetSingleton(ref _orderStatuses, context.OrderStatuses); } }
+        List<Accessories> _accessories;
+        public IEnumerable<Accessories> Accessories { get { return GetSingleton(ref _accessories, context.Accessories); } }
+        List<Employee> _employees;
+        public IEnumerable<Employee> Employees { get { return GetSingleton(ref _employees, context.Employees); } }
 
-        public void OnLoaded()
+        #endregion
+
+        #region Initialize Grid
+
+        public static void InitGrid(DataGrid dg)
         {
-
+            CommandManager.AddPreviewCanExecuteHandler(dg, DataGridPreviewCanExecute);
+            dg.InitializingNewItem += DataGridInitializingNewItem;
+        }
+        private static void DataGridPreviewCanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            if (e.Command == DataGrid.DeleteCommand)
+                e.Handled = App.Locator.Editor.DeleteEntity(((DataGrid)sender).SelectedItems, true);
         }
 
+        private static void DataGridInitializingNewItem(object sender, InitializingNewItemEventArgs e)
+        {
+            App.Locator.Editor.AddEntity(e.NewItem);
+        }
+
+        #endregion
+
+        #region Commands
         public bool CanAdd(object item)
         {
             if (item is ModelJobPriceTemplate)
@@ -78,60 +107,6 @@ namespace JetFrames.AppleJobs.Editor
                 return !string.IsNullOrWhiteSpace(mc.Name);
             }
             return true;
-        }
-
-        List<ModelJobPriceTemplate> _modelJobPriceTemplates;
-        public IEnumerable<ModelJobPriceTemplate> ModelJobPriceTemplates
-        {
-            get
-            {
-                if (ModelJobs == null) throw new InvalidOperationException();
-                return _modelJobPriceTemplates ?? (_modelJobPriceTemplates = context.ModelJobPriceTemplates.ToList());
-            }
-        }
-
-        List<ModelJob> _modelJobs;
-        public IEnumerable<ModelJob> ModelJobs
-        {
-            get
-            {
-                return _modelJobs ?? (_modelJobs = context.ModelJobs.ToList());
-            }
-        }
-
-        List<Order> _orders;
-        public IEnumerable<Order> Orders
-        {
-            get
-            {
-                return _orders ?? (_orders = context.Orders.Take(1000).ToList());
-            }
-        }
-        List<OrderStatus> _orderStatuses;
-        public IEnumerable<OrderStatus> OrderStatuses
-        {
-            get
-            {
-                return _orderStatuses ?? (_orderStatuses = context.OrderStatuses.ToList());
-            }
-        }
-
-        List<Accessories> _accessories;
-        public IEnumerable<Accessories> Accessories
-        {
-            get
-            {
-                return _accessories ?? (_accessories = context.Accessories.ToList());
-            }
-        }
-
-        List<Employee> _employees;
-        public IEnumerable<Employee> Employees
-        {
-            get
-            {
-                return _employees ?? (_employees = context.Employees.ToList());
-            }
         }
 
         public ICommand SaveCommand
@@ -181,7 +156,6 @@ namespace JetFrames.AppleJobs.Editor
                     RaisePropertyChanged(nameof(Orders));
                     RaisePropertyChanged(nameof(OrderStatuses));
                     ShowMessage("Обновлено из базы данных");
-                    OnLoaded();
                 });
             }
         }
@@ -192,42 +166,27 @@ namespace JetFrames.AppleJobs.Editor
             {
                 return new RelayCommand(p =>
                 {
-                    var vm = new NewPriceTemplateVm(Models, ModelJobs, ModelJobPriceTemplates, CreateNewModelJobPriceTemplate);
-                    var dialog = new NewPriceTemplateDialog
+                    var vm = new NewPriceTemplateVm(Models, ModelJobs, ModelJobPriceTemplates, viewModel =>
+                    {
+                        var item = new ModelJobPriceTemplate
+                        {
+                            Price = viewModel.NewPrice,
+                            Customers_Id = 1,
+                            ModelJobs_Id = viewModel.SelectedModelJob.Id,
+                            IsPriceFrom = true
+                        };
+                        _modelJobPriceTemplates.Add(item);
+                        context.Entry(item).State = EntityState.Added;
+                        CollectionViewSource.GetDefaultView(ModelJobPriceTemplates).Refresh();
+                    });
+                    var dialog = new Views.NewPriceTemplateDialog
                     {
                         DataContext = vm,
                         Owner = Application.Current.MainWindow
                     };
-                    if (dialog.ShowDialog() == true)
-                    {
-                        CreateNewModelJobPriceTemplate(vm);
-                    }
                 });
             }
         }
-
-        private void CreateNewModelJobPriceTemplate(NewPriceTemplateVm vm)
-        {
-            var item = new ModelJobPriceTemplate
-            {
-                Price = vm.NewPrice,
-                Customers_Id = 1,
-                ModelJobs_Id = vm.SelectedModelJob.Id,
-                IsPriceFrom = true
-            };
-            _modelJobPriceTemplates.Add(item);
-            context.Entry(item).State = EntityState.Added;
-            CollectionViewSource.GetDefaultView(ModelJobPriceTemplates).Refresh();
-        }
-
-        private object _currentRow;
-
-        public object CurrentRow
-        {
-            get { return _currentRow; }
-            set { _currentRow = value; RaisePropertyChanged(nameof(CurrentRow)); }
-        }
-
 
         public ICommand ModelJobDropDownLoadedCommand
         {
@@ -260,6 +219,8 @@ namespace JetFrames.AppleJobs.Editor
             }
         }
 
+        #endregion
+
         public bool DeleteEntity(object entity, bool promt)
         {
             if (entity != null && (entity.GetType().IsPublic || entity is IEnumerable))
@@ -291,11 +252,21 @@ namespace JetFrames.AppleJobs.Editor
             }
         }
 
-        public void AddEntity(object entity)
+        public void AddEntity(object newItem)
         {
-            if (entity != null)
+            if (newItem != null)
             {
-                context.Entry(entity).State = EntityState.Added;
+                if (newItem is Order)
+                {
+                    var mjpt = (Order)newItem;
+                    mjpt.Customers_Id = 1;
+                }
+                if (newItem is ModelJobPriceTemplate)
+                {
+                    var mjpt = (ModelJobPriceTemplate)newItem;
+                    mjpt.Customers_Id = 1;
+                }
+                context.Entry(newItem).State = EntityState.Added;
             }
         }
 
@@ -330,5 +301,16 @@ namespace JetFrames.AppleJobs.Editor
         }
 
         #endregion
+
+        private static IEnumerable<T> GetSingleton<T>(ref List<T> entities, IQueryable<T> query) where T : class
+        {
+            if (entities != null) return entities;
+            entities = query.ToList();
+
+            var view = CollectionViewSource.GetDefaultView(entities) as IEditableCollectionView;
+            if (view != null) view.NewItemPlaceholderPosition = NewItemPlaceholderPosition.AtBeginning;
+
+            return entities;
+        }
     }
 }

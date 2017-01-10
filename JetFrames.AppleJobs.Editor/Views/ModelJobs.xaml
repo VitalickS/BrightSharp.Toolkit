@@ -7,16 +7,16 @@
              mc:Ignorable="d" d:DataContext="{StaticResource ViewModelLocator}"
              d:DesignHeight="300" d:DesignWidth="527">
     <Grid>
-        <DataGrid CommandManager.PreviewCanExecute="DataGrid_PreviewCanExecute" ItemsSource="{Binding Editor.ModelJobs}"
-                              InitializingNewItem="DataGrid_InitializingNewItem"
+        <DataGrid x:Name="dg" ItemsSource="{Binding Editor.ModelJobs}"
                               AlternatingRowBackground="{DynamicResource AlternatingRowBackgroundBrush}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Название" Width="150" />
 
                 <DataGridComboBoxColumn SelectedValueBinding="{Binding Model}" 
-                                                    ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.Models}" 
-                                                    DisplayMemberPath="Name" Header="Модель" Width="120" SortMemberPath="Model.Name"
-                                                    EditingElementStyle="{StaticResource {x:Type ComboBox}}"/>
+                                        ClipboardContentBinding="{Binding Model.Name}"        
+                                        ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.Models}" 
+                                        DisplayMemberPath="Name" Header="Модель" Width="120" SortMemberPath="Model.Name"
+                                        EditingElementStyle="{StaticResource {x:Type ComboBox}}"/>
                 <DataGridTextColumn Binding="{Binding Description}" Header="Описание" Width="200" />
 
             </DataGrid.Columns>

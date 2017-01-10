@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AppleJobs.Data.Models.Common;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppleJobs.Data.Models.ModelsJobs
 {
+    [TsModel]
     public class ModelJobPriceTemplate
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

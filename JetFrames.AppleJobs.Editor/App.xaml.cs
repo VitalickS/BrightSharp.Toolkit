@@ -13,12 +13,6 @@ namespace JetFrames.AppleJobs.Editor
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
-        {
-
-            base.OnStartup(e);
-        }
-
         public static ViewModelLocator Locator { get { return (ViewModelLocator)Current.TryFindResource("ViewModelLocator"); } }
     }
 }

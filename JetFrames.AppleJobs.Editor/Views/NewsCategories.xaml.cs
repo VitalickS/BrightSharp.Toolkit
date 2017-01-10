@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace JetFrames.AppleJobs.Editor.Views
 {
     /// <summary>
-    /// Interaction logic for Models.xaml
+    /// Interaction logic for NewsCategories.xaml
     /// </summary>
-    public partial class Models : UserControl
+    public partial class NewsCategories : UserControl
     {
-        public Models()
+        public NewsCategories()
         {
             InitializeComponent();
-            EditorViewModel.InitGrid(dg);
         }
     }
 }

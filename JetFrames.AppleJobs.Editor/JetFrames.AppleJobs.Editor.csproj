@@ -82,11 +82,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\ModelFilterConverter.cs" />
     <Compile Include="EditorViewModel.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="ViewModels\NewPriceTemplateVm.cs" />
+    <Compile Include="Views\Accessories.xaml.cs">
+      <DependentUpon>Accessories.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ModelCategories.xaml.cs">
       <DependentUpon>ModelCategories.xaml</DependentUpon>
     </Compile>
@@ -101,6 +102,12 @@
     </Compile>
     <Compile Include="Views\NewPriceTemplateDialog.xaml.cs">
       <DependentUpon>NewPriceTemplateDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\News.xaml.cs">
+      <DependentUpon>News.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewsCategories.xaml.cs">
+      <DependentUpon>NewsCategories.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Orders.xaml.cs">
       <DependentUpon>Orders.xaml</DependentUpon>
@@ -117,6 +124,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Accessories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ModelCategories.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -134,6 +145,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NewPriceTemplateDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\News.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewsCategories.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,7 +199,9 @@
       <Name>BrightSharp</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Converters\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

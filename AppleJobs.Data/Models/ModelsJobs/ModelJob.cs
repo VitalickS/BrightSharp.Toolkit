@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppleJobs.Data.Models.ModelsJobs
 {
+    [TsModel]
     public class ModelJob
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

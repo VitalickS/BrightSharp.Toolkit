@@ -17,7 +17,8 @@ namespace BrightSharp.Behaviors
         {
             timer.Tick += Timer_Tick;
             FilterDelay = TimeSpan.FromSeconds(1);
-            IgnoreCase = null;
+            IgnoreCase = null; //Case sensitive if any char upper case
+            FilterStringPropertyName = "FilterString";
         }
 
 
@@ -36,7 +37,7 @@ namespace BrightSharp.Behaviors
             }
         }
 
-
+        public string FilterStringPropertyName { get; set; }
 
         public bool HasFilterText
         {
@@ -59,12 +60,12 @@ namespace BrightSharp.Behaviors
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(FilterDefaultViewTextBoxBehavior), new PropertyMetadata(null));
 
-        
+
         public bool? IgnoreCase { get; set; }
         private Predicate<object> GetDefaultFilter(Type filterItemType)
         {
             Func<object, string> dataFunc;
-            var pInfo = filterItemType.GetProperty("FilterString");
+            var pInfo = filterItemType.GetProperty(FilterStringPropertyName);
             if (pInfo == null)
             {
                 dataFunc = (x) => string.Join(",", filterItemType.GetProperties().Where(p => !p.Name.EndsWith("Id")).Select(p => (p.GetValue(x, null) ?? string.Empty).ToString()));

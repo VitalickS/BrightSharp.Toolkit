@@ -5,26 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JetFrames.AppleJobs.Editor.Views"
              mc:Ignorable="d" d:DataContext="{StaticResource ViewModelLocator}"
-             d:DesignHeight="300" d:DesignWidth="1084">
+             d:DesignHeight="300" d:DesignWidth="1204">
     <Grid>
-        <DataGrid CommandManager.PreviewCanExecute="DataGrid_PreviewCanExecute" ItemsSource="{Binding Editor.Orders}"
-                  InitializingNewItem="DataGrid_InitializingNewItem"
-                  AlternatingRowBackground="{DynamicResource AlternatingRowBackgroundBrush}">
+        <DataGrid x:Name="dg" ItemsSource="{Binding Editor.Orders}"
+                              AlternatingRowBackground="{DynamicResource AlternatingRowBackgroundBrush}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Contact}" Header="Контакт" Width="200" />
                 <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.OrderStatuses}" 
+                                        
                                         SelectedValueBinding="{Binding OrderStatus}" 
-                                        DisplayMemberPath="Name" SortMemberPath="OrderStatus.Name" ClipboardContentBinding="{Binding Name}"
+                                        DisplayMemberPath="Name" SortMemberPath="OrderStatus.Name" ClipboardContentBinding="{Binding OrderStatus.Name}"
                                         EditingElementStyle="{StaticResource {x:Type ComboBox}}" Header="Статус" Width="80" />
                 <DataGridComboBoxColumn SelectedValueBinding="{Binding Model, UpdateSourceTrigger=PropertyChanged}" 
                                         ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.Models}" 
+                                        ClipboardContentBinding="{Binding Model.Name}"
                                         DisplayMemberPath="Name" Header="Модель" Width="120" SortMemberPath="Model.Name"
                                         EditingElementStyle="{StaticResource {x:Type ComboBox}}"/>
                 <DataGridTextColumn Binding="{Binding Comment}" Header="Коментарий" Width="100" />
                 <DataGridCheckBoxColumn Binding="{Binding IsFast}" Header="Быстро" Width="60" />
                 <DataGridCheckBoxColumn Binding="{Binding IsDrive}" Header="Доставка" Width="60" />
                 <DataGridTextColumn Binding="{Binding Price}" Header="Цена" Width="80" />
-                <DataGridTemplateColumn Header="Работа" Width="80" ClipboardContentBinding="{Binding JobModel.Name}" SortMemberPath="JobModel.Name">
+                <DataGridTemplateColumn Header="Работа" Width="150" ClipboardContentBinding="{Binding JobModel.Name}" SortMemberPath="JobModel.Name">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding JobModel.Name}" />
@@ -42,12 +43,40 @@
                 <DataGridComboBoxColumn SelectedValueBinding="{Binding Accessories}"
                                         ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.Accessories}" 
                                         DisplayMemberPath="Name" SortMemberPath="Accessories.Name"
-                                        EditingElementStyle="{StaticResource {x:Type ComboBox}}" Header="Инвентарь" Width="80" />
+                                        ClipboardContentBinding="{Binding Accessories.Name}"
+                                        EditingElementStyle="{StaticResource {x:Type ComboBox}}" Header="Инвентарь" Width="120" />
                 <DataGridComboBoxColumn SelectedValueBinding="{Binding Employee}"
                                         ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.Employees}"
                                         DisplayMemberPath="Name" SortMemberPath="Employee.Name"
+                                        ClipboardContentBinding="{Binding Employee.Name}"
                                         EditingElementStyle="{StaticResource {x:Type ComboBox}}"
-                                        Header="Мастер" Width="80" />
+                                        Header="Мастер" Width="120" />
+                <DataGridTextColumn Binding="{Binding DateCreated}" Header="Дата создания" IsReadOnly="True" />
+                <DataGridTemplateColumn Header="Дата закрытия" SortMemberPath="DateClosed" ClipboardContentBinding="{Binding DateClosed}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DateClosed, StringFormat='MM/dd/yyyy'}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DateClosed}">
+                                <DatePicker.Resources>
+                                    <Style TargetType="{x:Type DatePickerTextBox}">
+                                        <Setter Property="Control.Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <TextBox x:Name="PART_TextBox"
+                                     Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}, StringFormat=M/d/yyyy}" />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DatePicker.Resources>
+                            </DatePicker>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 

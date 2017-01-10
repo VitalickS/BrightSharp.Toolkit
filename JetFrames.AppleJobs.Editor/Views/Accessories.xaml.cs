@@ -15,15 +15,13 @@ using System.Windows.Shapes;
 
 namespace JetFrames.AppleJobs.Editor.Views
 {
-    /// <summary>
-    /// Interaction logic for Models.xaml
-    /// </summary>
-    public partial class Models : UserControl
+    public partial class Accessories : UserControl
     {
-        public Models()
+        public Accessories()
         {
             InitializeComponent();
             EditorViewModel.InitGrid(dg);
         }
+        
     }
 }

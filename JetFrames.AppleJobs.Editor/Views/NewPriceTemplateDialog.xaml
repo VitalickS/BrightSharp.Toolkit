@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JetFrames.AppleJobs.Editor.Views"
-             WindowStartupLocation="CenterScreen"
+             WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
              mc:Ignorable="d" WindowStyle="ToolWindow" ShowInTaskbar="False" Title="Новая расценка"
              Height="239" Width="324">
     <Grid>

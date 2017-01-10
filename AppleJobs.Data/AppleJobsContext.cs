@@ -1,8 +1,10 @@
-﻿using AppleJobs.Data.Models;
+﻿using AppleJobs.Data.Models.Articles;
+using AppleJobs.Data.Models.Common;
+using AppleJobs.Data.Models.Inventory;
 using AppleJobs.Data.Models.ModelsJobs;
+using AppleJobs.Data.Models.Orders;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MySql.Data.Entity;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
 namespace AppleJobs.Data
@@ -38,6 +40,13 @@ namespace AppleJobs.Data
         public DbSet<ModelJob> ModelJobs { get; set; }
         public DbSet<ModelCategory> ModelCategories { get; set; }
         public DbSet<ModelJobPriceTemplate> ModelJobPriceTemplates { get; set; }
+
+        #endregion
+
+        #region Articles / News
+
+        public DbSet<News> News { get; set; }
+        public DbSet<NewsCategory> NewsCategories { get; set; }
 
         #endregion
 

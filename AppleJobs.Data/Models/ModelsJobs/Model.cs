@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AppleJobs.Data.Models.ModelsJobs
 {
+    [TsModel]
     public class Model
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

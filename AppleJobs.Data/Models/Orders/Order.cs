@@ -1,9 +1,11 @@
-﻿using AppleJobs.Data.Models.ModelsJobs;
+﻿using AppleJobs.Data.Models.Common;
+using AppleJobs.Data.Models.Inventory;
+using AppleJobs.Data.Models.ModelsJobs;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AppleJobs.Data.Models
+namespace AppleJobs.Data.Models.Orders
 {
     [TsModel]
     public class OrderView
@@ -60,12 +62,14 @@ namespace AppleJobs.Data.Models
         public bool? IsDrive { get; set; }
         public int? Price { get; set; }
 
+        #region ForeignKeys
         public int OrderStatuses_Id { get; set; }
         public int Models_Id { get; set; }
         public int? ModelJobs_Id { get; set; }
         public int Customers_Id { get; set; }
         public int? Accessories_Id { get; set; }
         public int? Employees_Id { get; set; }
+        #endregion
 
 
         [ForeignKey(nameof(OrderStatuses_Id))]
@@ -90,14 +94,8 @@ namespace AppleJobs.Data.Models
         {
             get
             {
-                return string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10}",
-                        Contact, Comment, DateCreated, DateClosed, DateUpdated,
-                        OrderStatus?.Name,
-                        Model.FilterString,
-                        JobModel.FilterString,
-                        Customer?.Name,
-                        Accessories?.Name,
-                        Employee?.Name);
+                return string.Join(",", Contact, Comment, DateCreated, DateClosed, DateUpdated,
+                        OrderStatus?.Name, Model.FilterString, JobModel.FilterString, Customer?.Name, Accessories?.Name, Employee?.Name, Price);
             }
         }
     }

@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DataContext="{StaticResource ViewModelLocator}"
              d:DesignHeight="300" d:DesignWidth="774">
     <Grid>
-        <DataGrid CommandManager.PreviewCanExecute="DataGrid_PreviewCanExecute" ItemsSource="{Binding Editor.ModelJobPriceTemplates}"
+        <DataGrid x:Name="dg" ItemsSource="{Binding Editor.ModelJobPriceTemplates}"
                               CanUserAddRows="False" AlternatingRowBackground="{DynamicResource AlternatingRowBackgroundBrush}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ModelJob.Name}" Header="Работа" Width="120"  SortMemberPath="ModelJob.Name"
@@ -21,7 +21,7 @@
                                     ClipboardContentBinding="{Binding ModelJob.Model.ModelCategory.Name}" />
                 <DataGridTextColumn Binding="{Binding Price, TargetNullValue=''}" Header="Цена" Width="100" ClipboardContentBinding="{Binding Price}" />
                 <DataGridCheckBoxColumn Binding="{Binding IsPriceFrom}" Header="Цена от" Width="80" 
-                                        EditingElementStyle="{StaticResource {x:Type CheckBox}}" ClipboardContentBinding="{Binding IsPriceFrom}" />
+                                        ClipboardContentBinding="{Binding IsPriceFrom}" />
             </DataGrid.Columns>
         </DataGrid>
 

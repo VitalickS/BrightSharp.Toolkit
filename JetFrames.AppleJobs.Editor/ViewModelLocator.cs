@@ -27,7 +27,6 @@ namespace JetFrames.AppleJobs.Editor
         }
 
         public EditorViewModel Editor { get; private set; }
-
-        public Properties.Settings Settings { get { return Properties.Settings.Default; } }
+        
     }
 }

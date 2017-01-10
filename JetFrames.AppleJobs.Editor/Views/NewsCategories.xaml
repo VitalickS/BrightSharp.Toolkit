@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="JetFrames.AppleJobs.Editor.Views.ModelCategories"
+﻿<UserControl x:Class="JetFrames.AppleJobs.Editor.Views.NewsCategories"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,10 +7,12 @@
              mc:Ignorable="d" d:DataContext="{StaticResource ViewModelLocator}"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid x:Name="dg" ItemsSource="{Binding Editor.Categories}"
+
+        <DataGrid x:Name="dg" ItemsSource="{Binding Editor.NewsCategories}"
                               AlternatingRowBackground="{DynamicResource AlternatingRowBackgroundBrush}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name, ValidatesOnNotifyDataErrors=True}" Header="Название" Width="100" />
+                <DataGridTextColumn Binding="{Binding CategoryName, ValidatesOnNotifyDataErrors=True}" Header="Категория" Width="100" />
+                <DataGridTextColumn Binding="{Binding CategoryDescription, ValidatesOnNotifyDataErrors=True}" Header="Название" Width="200" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

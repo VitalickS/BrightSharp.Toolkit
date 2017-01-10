@@ -4,11 +4,11 @@ using System.Windows.Input;
 namespace JetFrames.AppleJobs.Editor.Views
 {
     /// <summary>
-    /// Interaction logic for ModelCategories.xaml
+    /// Interaction logic for News.xaml
     /// </summary>
-    public partial class ModelCategories : UserControl
+    public partial class News : UserControl
     {
-        public ModelCategories()
+        public News()
         {
             InitializeComponent();
             EditorViewModel.InitGrid(dg);

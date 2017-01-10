@@ -77,8 +77,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppleJobsContext.cs" />
+    <Compile Include="Models\Articles\NewsCategory.cs" />
+    <Compile Include="Models\Articles\News.cs" />
     <Compile Include="Models\Inventory\Accessories.cs" />
-    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Common\Customer.cs" />
     <Compile Include="Models\Inventory\Employee.cs" />
     <Compile Include="Models\ModelsJobs\Model.cs" />
     <Compile Include="Models\ModelsJobs\ModelJobPriceTemplate.cs" />

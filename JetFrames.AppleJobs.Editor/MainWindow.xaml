@@ -5,33 +5,162 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:int="http://schemas.microsoft.com/expression/2010/interactions"
-        xmlns:conv="clr-namespace:JetFrames.AppleJobs.Editor.Converters"
         xmlns:view="clr-namespace:JetFrames.AppleJobs.Editor.Views"
         xmlns:local="clr-namespace:JetFrames.AppleJobs.Editor"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:bs="http://schemas.brightsharp.com/developer" 
-        mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1000">
+        mc:Ignorable="d" DataContext="{Binding Editor, Source={StaticResource ViewModelLocator}}"
+        Title="MainWindow" Height="700" d:DesignWidth="2000">
     <Window.Resources>
-        <conv:ModelFilterConverter x:Key="ModelFilterConverter" />
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <ObjectDataProvider x:Key="themes" MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="bs:ColorThemes"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <TabItem Header="Модели" x:Key="ModelsViewTab">
+            <TabItem.ContentTemplate>
+                <DataTemplate>
+                    <Grid DataContext="{StaticResource ViewModelLocator}">
+                        <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200" Margin="0,5,0,0">
+                            <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
+                            <i:Interaction.Behaviors>
+                                <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Path=Editor.Models}" />
+                            </i:Interaction.Behaviors>
+                        </TextBox>
+                        <view:Models Margin="0,30,0,0" />
+                    </Grid>
+                </DataTemplate>
+            </TabItem.ContentTemplate>
+        </TabItem>
+        <TabItem Header="Категории моделей" x:Key="ModelCategoriesViewTab">
+            <TabItem.ContentTemplate>
+                <DataTemplate>
+                    <Grid DataContext="{StaticResource ViewModelLocator}">
+                        <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200" Margin="0,5,0,0">
+                            <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
+                            <i:Interaction.Behaviors>
+                                <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Editor.Categories}" />
+                            </i:Interaction.Behaviors>
+                        </TextBox>
+                        <view:ModelCategories Margin="0,30,0,0" />
+                    </Grid>
+                </DataTemplate>
+            </TabItem.ContentTemplate>
+        </TabItem>
+        <TabItem Header="Виды работ" x:Key="ModelJobsViewTab">
+            <TabItem.ContentTemplate>
+                <DataTemplate>
+                    <Grid DataContext="{StaticResource ViewModelLocator}">
+                        <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200" Margin="0,5,0,0">
+                            <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
+                            <i:Interaction.Behaviors>
+                                <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Path=Editor.ModelJobs}" />
+                            </i:Interaction.Behaviors>
+                        </TextBox>
+                        <view:ModelJobs Margin="0,30,0,0" />
+                    </Grid>
+                </DataTemplate>
+            </TabItem.ContentTemplate>
+        </TabItem>
+        <TabItem Header="Расценки" x:Key="ModelJobPricesViewTab">
+            <TabItem.ContentTemplate>
+                <DataTemplate>
+                    <Grid DataContext="{StaticResource ViewModelLocator}">
+                        <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200" Margin="0,5,0,0">
+                            <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
+                            <i:Interaction.Behaviors>
+                                <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Path=Editor.ModelJobPriceTemplates}" />
+                            </i:Interaction.Behaviors>
+                        </TextBox>
+                        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.AddNewPriceTemplateCommand}" Margin="0,3,0,0">
+                            <Path Fill="Blue">
+                                <Path.Data>
+                                    <CombinedGeometry>
+                                        <CombinedGeometry.Geometry1>
+                                            <RectangleGeometry Rect="0,5,12,2" />
+                                        </CombinedGeometry.Geometry1>
+                                        <CombinedGeometry.Geometry2>
+                                            <RectangleGeometry Rect="5,0,2,12" />
+                                        </CombinedGeometry.Geometry2>
+                                    </CombinedGeometry>
+                                </Path.Data>
+                            </Path>
+                        </Button>
+                        <view:ModelJobPriceTemplates Margin="0,30,0,0" />
+                    </Grid>
+                </DataTemplate>
+            </TabItem.ContentTemplate>
+        </TabItem>
+        <TabItem Header="Инвентарь" x:Key="AccessoriesViewTab">
+            <TabItem.ContentTemplate>
+                <DataTemplate>
+                    <Grid DataContext="{StaticResource ViewModelLocator}">
+                        <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200" Margin="0,5,0,0">
+                            <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
+                            <i:Interaction.Behaviors>
+                                <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Path=Editor.Accessories}" />
+                            </i:Interaction.Behaviors>
+                        </TextBox>
+                        <view:Accessories Margin="0,30,0,0" />
+                    </Grid>
+                </DataTemplate>
+            </TabItem.ContentTemplate>
+        </TabItem>
+        <TabItem Header="Заказы" x:Key="OrdersViewTab">
+            <TabItem.ContentTemplate>
+                <DataTemplate>
+                    <Grid DataContext="{StaticResource ViewModelLocator}">
+                        <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200" Margin="0,5,0,0">
+                            <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
+                            <i:Interaction.Behaviors>
+                                <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Path=Editor.Orders}" />
+                            </i:Interaction.Behaviors>
+                        </TextBox>
+                        <view:Orders Margin="0,30,0,0" />
+                    </Grid>
+                </DataTemplate>
+            </TabItem.ContentTemplate>
+        </TabItem>
+        <TabItem Header="Статьи" x:Key="NewsViewTab">
+            <TabItem.ContentTemplate>
+                <DataTemplate>
+                    <Grid DataContext="{StaticResource ViewModelLocator}">
+                        <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200" Margin="0,5,0,0">
+                            <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
+                            <i:Interaction.Behaviors>
+                                <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Path=Editor.News}" />
+                            </i:Interaction.Behaviors>
+                        </TextBox>
+                        <view:News Margin="0,30,0,0" />
+                    </Grid>
+                </DataTemplate>
+            </TabItem.ContentTemplate>
+        </TabItem>
+
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Menu VerticalAlignment="Top">
+        <Menu VerticalAlignment="Top" Grid.ColumnSpan="2">
             <MenuItem Header="Данные">
-                <MenuItem Header="Обновить" Command="{Binding Editor.RefreshCommand}" />
+                <MenuItem Header="Обновить" Command="{Binding RefreshCommand}" />
             </MenuItem>
             <MenuItem Header="Сайт"></MenuItem>
-            <MenuItem Header="Сохранить" Command="{Binding Editor.SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"></MenuItem>
-            <TextBlock IsHitTestVisible="False" Text="{Binding Editor.Message}" Foreground="{Binding Editor.MessageForeground}" Opacity="0">
+            <MenuItem Header="Вид" ItemsSource="{Binding Source={StaticResource themes}}" MenuItem.Click="MenuItem_Click" />
+
+            <MenuItem Header="Сохранить" Command="{Binding SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"></MenuItem>
+            <TextBlock IsHitTestVisible="False" Text="{Binding Message}" Foreground="{Binding MessageForeground}" Opacity="0">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Editor.MessageAnimationState}" Value="New">
+                            <DataTrigger Binding="{Binding MessageAnimationState}" Value="New">
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard Name="NewAnimation">
                                         <Storyboard>
@@ -54,63 +183,29 @@
                 </TextBlock.Style>
             </TextBlock>
         </Menu>
-        <TabControl Grid.Row="1" SelectionChanged="TabControl_SelectionChanged" DataContext="{x:Null}">
-            <TabItem Header="Категории моделей">
-                <Grid>
-                    <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200">
-                        <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
-                        <i:Interaction.Behaviors>
-                            <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.Categories}" />
-                        </i:Interaction.Behaviors>
-                    </TextBox>
-                    <view:ModelCategories Margin="0,50,0,0" />
-                </Grid>
-            </TabItem>
-            <TabItem Header="Модели">
-                <Grid>
-                    <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200">
-                        <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
-                        <i:Interaction.Behaviors>
-                            <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.Models}" />
-                        </i:Interaction.Behaviors>
-                    </TextBox>
-                    <view:Models Margin="0,50,0,0" />
-                </Grid>
-            </TabItem>
-            <TabItem Header="Виды работ">
-                <Grid>
-                    <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200">
-                        <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
-                        <i:Interaction.Behaviors>
-                            <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.ModelJobs}" />
-                        </i:Interaction.Behaviors>
-                    </TextBox>
-                    <view:ModelJobs Margin="0,50,0,0" />
-                </Grid>
-            </TabItem>
-            <TabItem Header="Расценки">
-                <Grid>
-                    <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200">
-                        <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
-                        <i:Interaction.Behaviors>
-                            <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.ModelJobPriceTemplates}" />
-                        </i:Interaction.Behaviors>
-                    </TextBox>
-                    <Button VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.AddNewPriceTemplateCommand}">+Добавить</Button>
-                    <view:ModelJobPriceTemplates Margin="0,50,0,0" />
-                </Grid>
-            </TabItem>
-            <TabItem Header="Заказы">
-                <Grid>
-                    <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200">
-                        <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
-                        <i:Interaction.Behaviors>
-                            <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.Orders}" />
-                        </i:Interaction.Behaviors>
-                    </TextBox>
-                    <view:Orders Margin="0,50,0,0" />
-                </Grid>
-            </TabItem>
+        <TreeView Grid.Row="1" SelectedItemChanged="TreeView_SelectedItemChanged">
+            <TreeViewItem Header="Модели и расценки">
+                <TreeViewItem Header="Модели" Tag="{StaticResource ModelsViewTab}" />
+                <TreeViewItem Header="Категории моделей" Tag="{StaticResource ModelCategoriesViewTab}" />
+                <TreeViewItem Header="Виды работ" Tag="{StaticResource ModelJobsViewTab}"/>
+                <TreeViewItem Header="Расценки" Tag="{StaticResource ModelJobPricesViewTab}" />
+            </TreeViewItem>
+
+            <TreeViewItem Header="Ресурсы">
+                <TreeViewItem Header="Инвентарь" Tag="{StaticResource AccessoriesViewTab}" />
+                <!--TODO-->
+                <TreeViewItem Header="Специалисты" />
+            </TreeViewItem>
+            <TreeViewItem Header="Заказы" Tag="{StaticResource OrdersViewTab}" />
+            <TreeViewItem Header="Статьи (новости)">
+                <TreeViewItem Header="Статьи" Tag="{StaticResource NewsViewTab}" />
+                <!--TODO-->
+                <TreeViewItem Header="Категории статей" />
+            </TreeViewItem>
+
+        </TreeView>
+        <TabControl x:Name="tabs" Grid.Column="1" Grid.Row="1">
+            <!--<StaticResource ResourceKey="ModelsViewTab" />-->
         </TabControl>
     </Grid>
 </Window>

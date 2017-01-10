@@ -9,10 +9,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Diagrams/Resources/DesignerItem.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
-    <sys:Boolean x:Key="IsInverseTheme">False</sys:Boolean>
-
-
     <CornerRadius x:Key="DefaultRadiusSmall">1</CornerRadius>
     <CornerRadius x:Key="DefaultRadiusNormal">3</CornerRadius>
 

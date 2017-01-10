@@ -1,50 +1,34 @@
-﻿using AppleJobs.Data.Models.ModelsJobs;
-using System.ComponentModel;
+﻿using BrightSharp;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace JetFrames.AppleJobs.Editor
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
-            DataContext = App.Locator;
             InitializeComponent();
-            Loaded += (s, e) => App.Locator.Editor.OnLoaded();
         }
 
-        private void DataGrid_PreviewCanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            var dg = (DataGrid)sender;
 
-            if (e.Command == DataGrid.DeleteCommand)
-                e.Handled = App.Locator.Editor.DeleteEntity(dg.SelectedValue, true);
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ThemeManager.Theme = (ColorThemes)((FrameworkElement)e.OriginalSource).DataContext;
         }
 
-        private void DataGrid_InitializingNewItem(object sender, InitializingNewItemEventArgs e)
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (e.NewItem is ModelJobPriceTemplate)
+            var item = (TreeViewItem)e.NewValue;
+            var tabitem = (TabItem)item.Tag;
+            if (tabitem != null)
             {
-                var mjpt = (ModelJobPriceTemplate)e.NewItem;
-                mjpt.Customers_Id = 1;
+                if (!tabs.Items.Contains(tabitem))
+                {
+                    tabs.Items.Add(tabitem);
+                }
+                tabs.SelectedItem = tabitem;
             }
-            App.Locator.Editor.AddEntity(e.NewItem);
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            Properties.Settings.Default.Save();
-            base.OnClosing(e);
-        }
-
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ((TabItem)((TabControl)sender).SelectedItem).DataContext = App.Locator;
         }
     }
 }
