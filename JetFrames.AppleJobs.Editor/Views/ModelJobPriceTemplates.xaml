@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DataContext="{StaticResource ViewModelLocator}"
              d:DesignHeight="300" d:DesignWidth="774">
     <Grid>
-        <DataGrid x:Name="dg" ItemsSource="{Binding Editor.ModelJobPriceTemplates}"
+        <DataGrid x:Name="dg" ItemsSource="{Binding Editor.ModelJobPriceTemplates}" 
                               CanUserAddRows="False" AlternatingRowBackground="{DynamicResource AlternatingRowBackgroundBrush}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ModelJob.Name}" Header="Работа" Width="120"  SortMemberPath="ModelJob.Name"

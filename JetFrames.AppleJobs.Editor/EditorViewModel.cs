@@ -16,6 +16,7 @@ using AppleJobs.Data.Models.Articles;
 using AppleJobs.Data.Models.Orders;
 using AppleJobs.Data.Models.Inventory;
 using System.ComponentModel;
+using System;
 
 namespace JetFrames.AppleJobs.Editor
 {
@@ -43,12 +44,12 @@ namespace JetFrames.AppleJobs.Editor
         {
             get
             {
-                context.ModelJobs.Count();
+                ModelJobs.Count();
                 return GetSingleton(ref _modelJobPriceTemplates, context.ModelJobPriceTemplates);
             }
         }
         List<ModelJob> _modelJobs;
-        public IEnumerable<ModelJob> ModelJobs { get { return GetSingleton(ref _modelJobs, context.ModelJobs); } }
+        public IEnumerable<ModelJob> ModelJobs { get { context.Models.Load(); return GetSingleton(ref _modelJobs, context.ModelJobs); } }
         List<Order> _orders;
         public IEnumerable<Order> Orders { get { return GetSingleton(ref _orders, context.Orders.OrderByDescending(o => o.DateCreated).Take(2000)); } }
         List<OrderStatus> _orderStatuses;
@@ -184,6 +185,7 @@ namespace JetFrames.AppleJobs.Editor
                         DataContext = vm,
                         Owner = Application.Current.MainWindow
                     };
+                    dialog.ShowDialog();
                 });
             }
         }
@@ -305,10 +307,11 @@ namespace JetFrames.AppleJobs.Editor
         private static IEnumerable<T> GetSingleton<T>(ref List<T> entities, IQueryable<T> query) where T : class
         {
             if (entities != null) return entities;
+
             entities = query.ToList();
 
-            var view = CollectionViewSource.GetDefaultView(entities) as IEditableCollectionView;
-            if (view != null) view.NewItemPlaceholderPosition = NewItemPlaceholderPosition.AtBeginning;
+            //var view = CollectionViewSource.GetDefaultView(entities) as IEditableCollectionView;
+            //if (view != null) view.NewItemPlaceholderPosition = NewItemPlaceholderPosition.AtBeginning;
 
             return entities;
         }

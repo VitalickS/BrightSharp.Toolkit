@@ -9,8 +9,9 @@
         xmlns:local="clr-namespace:JetFrames.AppleJobs.Editor"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:bs="http://schemas.brightsharp.com/developer" 
+        Background="{DynamicResource WindowBackgroundBrush}"
         mc:Ignorable="d" DataContext="{Binding Editor, Source={StaticResource ViewModelLocator}}"
-        Title="MainWindow" Height="700" d:DesignWidth="2000">
+        Title="Редактор AppleJobs" Height="600" d:DesignWidth="800" Icon="appleicon.ico">
     <Window.Resources>
         <ObjectDataProvider x:Key="themes" MethodName="GetValues"
                             ObjectType="{x:Type sys:Enum}">
@@ -18,6 +19,21 @@
                 <x:Type TypeName="bs:ColorThemes"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+        <TabItem Header="Категории статей" x:Key="NewsCategoriesViewTab">
+            <TabItem.ContentTemplate>
+                <DataTemplate>
+                    <Grid DataContext="{StaticResource ViewModelLocator}">
+                        <TextBox VerticalAlignment="Top" HorizontalAlignment="Right" Width="200" Margin="0,5,0,0">
+                            <bs:MarkupExtensionProperties.Header>Фильтрация</bs:MarkupExtensionProperties.Header>
+                            <i:Interaction.Behaviors>
+                                <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Path=Editor.NewsCategories}" />
+                            </i:Interaction.Behaviors>
+                        </TextBox>
+                        <view:NewsCategories Margin="0,30,0,0" />
+                    </Grid>
+                </DataTemplate>
+            </TabItem.ContentTemplate>
+        </TabItem>
         <TabItem Header="Модели" x:Key="ModelsViewTab">
             <TabItem.ContentTemplate>
                 <DataTemplate>
@@ -73,7 +89,7 @@
                                 <bs:FilterDefaultViewTextBoxBehavior ItemsSource="{Binding Path=Editor.ModelJobPriceTemplates}" />
                             </i:Interaction.Behaviors>
                         </TextBox>
-                        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.AddNewPriceTemplateCommand}" Margin="0,3,0,0">
+                        <Button bs:MarkupExtensionProperties.CornerRadius="0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding Source={StaticResource ViewModelLocator}, Path=Editor.AddNewPriceTemplateCommand}" Margin="0,3,0,0">
                             <Path Fill="Blue">
                                 <Path.Data>
                                     <CombinedGeometry>
@@ -200,7 +216,7 @@
             <TreeViewItem Header="Статьи (новости)">
                 <TreeViewItem Header="Статьи" Tag="{StaticResource NewsViewTab}" />
                 <!--TODO-->
-                <TreeViewItem Header="Категории статей" />
+                <TreeViewItem Header="Категории статей" Tag="{StaticResource NewsCategoriesViewTab}" />
             </TreeViewItem>
 
         </TreeView>
