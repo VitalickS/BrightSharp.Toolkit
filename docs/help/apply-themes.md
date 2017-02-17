@@ -11,9 +11,9 @@
 </ResourceDictionary>
 ```
 
-# Apply themes by ThemeManager
+# Change themes by ThemeManager
 
-Use enumeration at singleton
+Change by static property
 ```c#
     ThemeManager.CurrentTheme = ColorThemes.Classic;
 ```
