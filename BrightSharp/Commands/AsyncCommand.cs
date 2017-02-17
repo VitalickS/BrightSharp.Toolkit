@@ -12,6 +12,10 @@ namespace BrightSharp.Commands
         private Action<Exception> _onFail;
         private bool _isExecuting;
 
+        public AsyncCommand(Func<Task> execute) : this(p => execute?.Invoke())
+        {
+        }
+
         public AsyncCommand(Func<object, Task> execute) : this(execute, o => true)
         {
         }

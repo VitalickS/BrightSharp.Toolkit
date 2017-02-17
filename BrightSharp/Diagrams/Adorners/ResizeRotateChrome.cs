@@ -1,8 +1,10 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Diagrams
 {
+    [ToolboxItem(false)]
     public class ResizeRotateChrome : Control
     {
         static ResizeRotateChrome()

@@ -5,9 +5,8 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using BrightSharp.Diagrams;
 
-namespace BrightSharp
+namespace Diagrams
 {
 
     public partial class ZoomControl : ItemsControl
@@ -15,13 +14,14 @@ namespace BrightSharp
         public ZoomControl()
         {
             Loaded += ZoomControl_Loaded;
+
         }
 
         private void ZoomControl_Loaded(object sender, RoutedEventArgs e)
         {
             SelectionBehavior.Attach(this);
         }
-
+        
         public ContentControl SelectedControl
         {
             get { return (ContentControl)GetValue(SelectedControlProperty); }
@@ -206,5 +206,6 @@ namespace BrightSharp
                 BeginAnimation(TranslateYProperty, null);
             }
         }
+
     }
 }

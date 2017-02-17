@@ -4,135 +4,227 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrightSharp.Ui.Tests"
         xmlns:viewModel="clr-namespace:BrightSharp.Ui.Tests"
-        xmlns:ex="clr-namespace:BrightSharp.Extensions;assembly=BrightSharp"
-        xmlns:BrightSharp="clr-namespace:BrightSharp;assembly=BrightSharp" x:Class="BrightSharp.Ui.Tests.MainWindow"
+        Style="{DynamicResource TestWindowStyle}"
+        ResizeMode="CanResizeWithGrip"
+        xmlns:ex="http://schemas.brightsharp.com/developer"
+        xmlns:bsDiag="http://schemas.brightsharp.com/diagrams"
+        x:Class="BrightSharp.Ui.Tests.MainWindow"
         mc:Ignorable="d" Background="{DynamicResource WindowBackgroundBrush}"
-        Title="BrightSharp.Ui.Tests" Height="600" Width="1200">
+        ex:MarkupExtensionProperties.HeaderHorizontalAlignment="Center"
+        Title="BrightSharp.Ui.Tests" Height="750" Width="1600">
     <Window.Resources>
+        <ex:StringHelpConverter x:Key="StringHelpConverter" />
         <x:Array x:Key="coll" Type="{x:Type viewModel:CustomerViewModel}">
-            <viewModel:CustomerViewModel CustomerID="ALFKI" CompanyName="Alfreds Futterkiste" ContactName="Maria Anders" ContactTitle="Sales Representative" Address="Obere Str. 57" City="Berlin" PostalCode="12209" Country="Germany" Phone="030-0074321" Fax="030-0076545" />
-            <viewModel:CustomerViewModel CustomerID="ANATR" CompanyName="Ana Trujillo Emparedados y helados" ContactName="Ana Trujillo" ContactTitle="Owner" Address="Avda. de la Constitución 2222" City="México D.F." PostalCode="05021" Country="Mexico" Phone="(5) 555-4729" Fax="(5) 555-3745" />
-            <viewModel:CustomerViewModel CustomerID="ANTON" CompanyName="Antonio Moreno Taquería" ContactName="Antonio Moreno" ContactTitle="Owner" Address="Mataderos  2312" City="México D.F." PostalCode="05023" Country="Mexico" Phone="(5) 555-3932" />
-            <viewModel:CustomerViewModel CustomerID="AROUT" CompanyName="Around the Horn" ContactName="Thomas Hardy" ContactTitle="Sales Representative" Address="120 Hanover Sq." City="London" PostalCode="WA1 1DP" Country="UK" Phone="(171) 555-7788" Fax="(171) 555-6750" />
-            <viewModel:CustomerViewModel CustomerID="BERGS" CompanyName="Berglunds snabbköp" ContactName="Christina Berglund" ContactTitle="Order Administrator" Address="Berguvsvägen  8" City="Luleå" PostalCode="S-958 22" Country="Sweden" Phone="0921-12 34 65" Fax="0921-12 34 67" />
-            <viewModel:CustomerViewModel CustomerID="BLAUS" CompanyName="Blauer See Delikatessen" ContactName="Hanna Moos" ContactTitle="Sales Representative" Address="Forsterstr. 57" City="Mannheim" PostalCode="68306" Country="Germany" Phone="0621-08460" Fax="0621-08924" />
-            <viewModel:CustomerViewModel CustomerID="BLONP" CompanyName="Blondesddsl père et fils" ContactName="Frédérique Citeaux" ContactTitle="Marketing Manager" Address="24, place Kléber" City="Strasbourg" PostalCode="67000" Country="France" Phone="88.60.15.31" Fax="88.60.15.32" />
-            <viewModel:CustomerViewModel CustomerID="BOLID" CompanyName="Bólido Comidas preparadas" ContactName="Martín Sommer" ContactTitle="Owner" Address="C/ Araquil, 67" City="Madrid" PostalCode="28023" Country="Spain" Phone="(91) 555 22 82" Fax="(91) 555 91 99" />
+            <viewModel:CustomerViewModel CustomerID="ALFKI" CompanyName="Alfreds Futterkiste" ContactNameCN="Maria Anders" ContactTitle="Sales Representative" Address="Obere Str. 57" City="Berlin" PostalCode="12209" Country="Germany" Phone="030-0074321" Fax="030-0076545" />
+            <viewModel:CustomerViewModel CustomerID="ANATR" CompanyName="Ana Trujillo Emparedados y helados" ContactNameCN="Ana Trujillo" ContactTitle="Owner" Address="Avda. de la Constitución 2222" City="México D.F." PostalCode="05021" Country="Mexico" Phone="(5) 555-4729" Fax="(5) 555-3745" />
+            <viewModel:CustomerViewModel CustomerID="ANTON" CompanyName="Antonio Moreno Taquería" ContactNameCN="Antonio Moreno" ContactTitle="Owner" Address="Mataderos  2312" City="México D.F." PostalCode="05023" Country="Mexico" Phone="(5) 555-3932" />
+            <viewModel:CustomerViewModel CustomerID="AROUT" CompanyName="Around the Horn" ContactNameCN="Thomas Hardy" ContactTitle="Sales Representative" Address="120 Hanover Sq." City="London" PostalCode="WA1 1DP" Country="UK" Phone="(171) 555-7788" Fax="(171) 555-6750" />
+            <viewModel:CustomerViewModel CustomerID="BERGS" CompanyName="Berglunds snabbköp" ContactNameCN="Christina Berglund" ContactTitle="Order Administrator" Address="Berguvsvägen  8" City="Luleå" PostalCode="S-958 22" Country="Sweden" Phone="0921-12 34 65" Fax="0921-12 34 67" />
+            <viewModel:CustomerViewModel CustomerID="BLAUS" CompanyName="Blauer See Delikatessen" ContactNameCN="Hanna Moos" ContactTitle="Sales Representative" Address="Forsterstr. 57" City="Mannheim" PostalCode="68306" Country="Germany" Phone="0621-08460" Fax="0621-08924" />
+            <viewModel:CustomerViewModel CustomerID="BLONP" CompanyName="Blondesddsl père et fils" ContactNameCN="Frédérique Citeaux" ContactTitle="Marketing Manager" Address="24, place Kléber" City="Strasbourg" PostalCode="67000" Country="France" Phone="88.60.15.31" Fax="88.60.15.32" />
+            <viewModel:CustomerViewModel CustomerID="BOLID" CompanyName="Bólido Comidas preparadas" ContactNameCN="Martín Sommer" ContactTitle="Owner" Address="C/ Araquil, 67" City="Madrid" PostalCode="28023" Country="Spain" Phone="(91) 555 22 82" Fax="(91) 555 91 99" />
         </x:Array>
         <CollectionViewSource Source="{StaticResource coll}" x:Key="coll1" />
         <CollectionViewSource Source="{StaticResource coll}" x:Key="coll2" />
     </Window.Resources>
     <Grid>
-
-        <BrightSharp:ZoomControl x:Name="zc" Margin="10" UseAnimation="True">
-
-
-            <ContentControl Style="{StaticResource DesignerItemStyle}" 
-                            Canvas.Left="10" Canvas.Top="20" Width="300" Height="473">
-                <GroupBox Header="Common">
-                    <Grid>
-                        <Button IsDefault="True" Content="Change Theme" Click="Button_Click" HorizontalAlignment="Left" Width="108" Height="32" VerticalAlignment="Top" Margin="10,10,0,0"/>
-                        <ToggleButton Content="Toggle" HorizontalAlignment="Left" Width="108" Height="32" VerticalAlignment="Top" Margin="10,47,0,0"/>
-                        <CheckBox Margin="10,84,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">CheckBox</CheckBox>
-                        <CheckBox IsThreeState="True" ex:MarkupExtensionProperties.Docking="Right" Margin="10,105,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">CheckBox Right Allign</CheckBox>
-                        <CheckBox HorizontalContentAlignment="Center" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Top" Margin="151,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="137">CheckBox Top Allign</CheckBox>
-                        <RadioButton IsChecked="True" Margin="10,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">RadioButton</RadioButton>
-                        <RadioButton Margin="10,151,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">RadioButton</RadioButton>
-                        <TextBox x:Name="tb" Canvas.Left="10" Canvas.Top="269" Margin="151,10,10,0" VerticalAlignment="Top" />
-                        <TabControl Margin="151,72,10,0" Height="122" VerticalAlignment="Top">
-                            <TabItem Header="Tab1" />
-                            <TabItem Header="Tab2" />
-                            <TabItem Header="Tab3" />
-                        </TabControl>
-                        <CheckBox HorizontalAlignment="Left" Style="{StaticResource SwitchCheckBoxStyle}" Margin="19,0,0,10" Content="SwitchCheckBoxStyle" Width="250" RenderTransformOrigin="0.5,0.5" Height="27" VerticalAlignment="Bottom" />
-
-                        <Calendar Margin="10,199,10,0" VerticalAlignment="Top">
-                            <ex:MarkupExtensionProperties.TrailingElement>
-                                <TextBlock HorizontalAlignment="Center" Foreground="DarkRed">Trailing</TextBlock>
-                            </ex:MarkupExtensionProperties.TrailingElement>
-                            <ex:MarkupExtensionProperties.LeadingElement>
-                                <TextBlock HorizontalAlignment="Center" Foreground="DarkBlue">Leading</TextBlock>
-                            </ex:MarkupExtensionProperties.LeadingElement>
-                        </Calendar>
-                        <ComboBox IsEditable="True" Margin="10,172,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedIndex="0" Width="136">
-                            <ComboBoxItem>Item 1</ComboBoxItem>
-                            <ComboBoxItem>Item 2</ComboBoxItem>
-                            <ComboBoxItem>Item 3</ComboBoxItem>
-                            <Separator />
-                            <ComboBoxItem>Item 4</ComboBoxItem>
-                            <ComboBoxItem>Item 5</ComboBoxItem>
-                        </ComboBox>
-                    </Grid>
-                </GroupBox>
-            </ContentControl>
-
-
-            <ContentControl Style="{StaticResource DesignerItemStyle}"
-                      Height="474" Width="405"
-                      Padding="2,27,2,2"
-                      Canvas.Left="350"
-                      Canvas.Top="20">
-                <GroupBox Margin="0,-25,0,0" Style="{StaticResource ExpandrStyleGroupBox}" >
-                    <GroupBox.Header>
-                        <Label>Collections</Label>
-                    </GroupBox.Header>
-                    <Grid x:Name="innerCanvas" Background="Transparent" ClipToBounds="True" >
-                        <Menu VerticalAlignment="Top">
-                            <MenuItem Header="File">
-                                <MenuItem Header="New..."/>
-                                <MenuItem Header="Open..."/>
-                                <MenuItem Header="Save" />
-                                <MenuItem Header="Save as..."/>
-                            </MenuItem>
-                            <MenuItem Header="Edit">
-                                <MenuItem Header="Copy" />
-                                <MenuItem Header="Paste" />
-                                <MenuItem Header="Cut" />
-                            </MenuItem>
-                            <MenuItem Header="View"></MenuItem>
-                            <MenuItem Header="Help">
-                                <MenuItem Header="About..."></MenuItem>
-                            </MenuItem>
-                        </Menu>
-                        <ListView ItemsSource="{Binding Source={StaticResource coll1}}" SelectedIndex="5" Margin="2,52,10,190">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Customer" Width="100" DisplayMemberBinding="{Binding CustomerID}" />
-                                    <GridViewColumn Header="Company" Width="180" DisplayMemberBinding="{Binding CompanyName}" />
-                                    <GridViewColumn Header="Country" Width="100" DisplayMemberBinding="{Binding Country}" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                        <ListBox Margin="10,258,0,10" HorizontalAlignment="Left" Width="180">
-                            <ListBoxItem Content="123"/>
-                            <ListBoxItem Content="456"/>
-                            <ListBoxItem Content="789"/>
-                        </ListBox>
-                        <TreeView Margin="204,258,10,10">
-                            <TreeViewItem Header="1">
-                                <TreeViewItem Header="12">
-                                    <TreeViewItem Header="123"/>
-                                    <TreeViewItem Header="123"/>
-                                    <TreeViewItem Header="123"/>
+        <Grid Margin="2" ClipToBounds="True">
+            <bsDiag:ZoomControl x:Name="zc" UseAnimation="True" ClipToBounds="False">
+                <ContentControl Style="{StaticResource DesignerItemStyle}" 
+                    Canvas.Left="10" Canvas.Top="20" Width="330">
+                    <GroupBox Header="Common">
+                        <Grid>
+                            <Button IsDefault="True" Content="Change Theme" Click="Button_Click" HorizontalAlignment="Left" Width="108" Height="32" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                            <ToggleButton Content="Toggle" HorizontalAlignment="Left" Width="108" Height="32" VerticalAlignment="Top" Margin="10,47,0,0"/>
+                            <CheckBox Margin="10,84,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="CheckBox"/>
+                            <CheckBox IsThreeState="True" ex:MarkupExtensionProperties.Docking="Right" Margin="10,105,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="CheckBox Right Allign"/>
+                            <CheckBox HorizontalContentAlignment="Center" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Top" Margin="151,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="137" Content="CheckBox Top Allign"/>
+                            <RadioButton IsChecked="True" Margin="10,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="RadioButton"/>
+                            <RadioButton Margin="10,151,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="RadioButton"/>
+                            <TextBox x:Name="tb" Canvas.Left="10" Canvas.Top="269" Margin="151,10,10,0" VerticalAlignment="Top" />
+                            <TabControl BorderThickness="1" Margin="151,72,10,0" Height="122" VerticalAlignment="Top">
+                                <TabItem Header="Tab1" />
+                                <TabItem Header="Tab2" />
+                                <TabItem Header="Tab3" />
+                            </TabControl>
+                            <CheckBox HorizontalAlignment="Left" Style="{StaticResource SwitchCheckBoxStyle}" VerticalAlignment="Top" Margin="37,204,0,0" Content="SwitchCheckBoxStyle" Width="213" RenderTransformOrigin="0.5,0.5" Height="Auto" />
+                            <TextBox Margin="35,236,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="246">
+                                <ex:MarkupExtensionProperties.LeadingElement>L.El.</ex:MarkupExtensionProperties.LeadingElement>
+                                <ex:MarkupExtensionProperties.TrailingElement>T.El.</ex:MarkupExtensionProperties.TrailingElement>
+                                <ex:MarkupExtensionProperties.Header>Watermark</ex:MarkupExtensionProperties.Header>
+                            </TextBox>
+                            <Button Content="Test Custom Window" Margin="93,266,0,0" HorizontalAlignment="Left" Width="134" Height="25" VerticalAlignment="Top" Click="Button_Click_ShowCustomWindow"></Button>
+                            <Calendar Margin="10,295,10,0" VerticalAlignment="Top" Loaded="Calendar_Loaded">
+                                <ex:MarkupExtensionProperties.TrailingElement>
+                                    <TextBlock HorizontalAlignment="Center" Foreground="DarkRed"><Run Text="Trailing Region"/></TextBlock>
+                                </ex:MarkupExtensionProperties.TrailingElement>
+                                <ex:MarkupExtensionProperties.LeadingElement>
+                                    <TextBlock HorizontalAlignment="Center" Foreground="DarkBlue"><Run Text="Leading Region"/></TextBlock>
+                                </ex:MarkupExtensionProperties.LeadingElement>
+                            </Calendar>
+                            <ComboBox IsEditable="True" Margin="10,172,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedIndex="0" Width="136">
+                                <ComboBoxItem Content="Item 1"/>
+                                <ComboBoxItem Content="Item 2"/>
+                                <ComboBoxItem Content="Item 3"/>
+                                <Separator />
+                                <ComboBoxItem Content="Item 4"/>
+                                <ComboBoxItem Content="Item 5"/>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+                </ContentControl>
+                <ContentControl Style="{StaticResource DesignerItemStyle}"
+                    Height="474" Width="442"
+                    Padding="2,27,2,2"
+                    Canvas.Left="350"
+                    Canvas.Top="20">
+                    <GroupBox Margin="0,-25,0,0" Style="{StaticResource ExpandrStyleGroupBox}" >
+                        <GroupBox.Header>
+                            <Label Content="Collections"/>
+                        </GroupBox.Header>
+                        <Grid x:Name="innerCanvas" Background="Transparent" ClipToBounds="True" >
+                            <Menu VerticalAlignment="Top">
+                                <MenuItem Header="File">
+                                    <MenuItem Header="New..."/>
+                                    <MenuItem Header="Open..."/>
+                                    <MenuItem Header="Save" />
+                                    <MenuItem Header="Save as..."/>
+                                    <Separator />
+                                    <MenuItem Command="ApplicationCommands.Close" />
+                                </MenuItem>
+                                <MenuItem Header="Edit">
+                                    <MenuItem Command="ApplicationCommands.Copy" />
+                                    <MenuItem Command="ApplicationCommands.Paste" />
+                                    <MenuItem Command="ApplicationCommands.Cut" />
+                                </MenuItem>
+                                <MenuItem Header="View"/>
+                                <MenuItem Header="Help">
+                                    <MenuItem Header="About..."/>
+                                </MenuItem>
+                            </Menu>
+                            <ListView ItemsSource="{Binding Source={StaticResource coll1}}" SelectedIndex="5" Margin="2,52,10,190">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Customer" Width="100" DisplayMemberBinding="{Binding CustomerID}" />
+                                        <GridViewColumn Header="Company" Width="180" DisplayMemberBinding="{Binding CompanyName}" />
+                                        <GridViewColumn Header="Country" Width="100" DisplayMemberBinding="{Binding Country}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <ListBox Margin="10,0,0,10" HorizontalAlignment="Left" Width="180" Height="175" VerticalAlignment="Bottom">
+                                <ListBoxItem Content="123"/>
+                                <ListBoxItem Content="456"/>
+                                <ListBoxItem Content="789"/>
+                            </ListBox>
+                            <TreeView Margin="204,0,10,10" Height="175" VerticalAlignment="Bottom">
+                                <TreeViewItem Header="1">
+                                    <TreeViewItem Header="12">
+                                        <TreeViewItem Header="123"/>
+                                        <TreeViewItem Header="123"/>
+                                        <TreeViewItem Header="123"/>
+                                    </TreeViewItem>
                                 </TreeViewItem>
-                            </TreeViewItem>
-                        </TreeView>
-                    </Grid>
-                </GroupBox>
-            </ContentControl>
-            <ContentControl Style="{StaticResource DesignerItemStyle}"
-                      Height="155" Width="405"
-                      Padding="2,27,2,2"
-                      Canvas.Left="450"
-                      Canvas.Top="400">
-                <GroupBox Margin="0,-25,0,0" Style="{StaticResource ExpandrStyleGroupBox}" >
-                    <GroupBox.Header>
-                        <Label>Grid</Label>
-                    </GroupBox.Header>
-                    <DataGrid SelectedIndex="2" Margin="2" AlternatingRowBackground="{DynamicResource AlternatingRowBackgroundBrush}" ItemsSource="{Binding Source={StaticResource coll2}}" />
-                </GroupBox>
-            </ContentControl>
-        </BrightSharp:ZoomControl>
+                            </TreeView>
+                        </Grid>
+                    </GroupBox>
+                </ContentControl>
+                <ContentControl Style="{StaticResource DesignerItemStyle}"
+                    Padding="2,27,2,2"
+                    Canvas.Left="850"
+                    Canvas.Top="20" Width="733" Height="475">
+                    <GroupBox Margin="0,-25,0,0" Style="{StaticResource ExpandrStyleGroupBox}" >
+                        <GroupBox.Header>
+                            <Label Content="Xaml RichTextBox"/>
+                        </GroupBox.Header>
+                        <RichTextBox VerticalScrollBarVisibility="Auto">
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run FontWeight="Bold" FontSize="14" Text="What is Lorem Ipsum?"/>
+                                </Paragraph>
+                                <Paragraph TextAlignment="Justify">
+                                    <Run Text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."/>
+                                    <Run Text=" "/>
+                                    <Figure HorizontalAnchor="ColumnRight" Width="205">
+                                        <BlockUIContainer>
+                                            <Image UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                                                <Image.Source>
+                                                    <BitmapImage CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="http://minionomaniya.ru/wp-content/uploads/2016/01/%D0%BC%D0%B8%D0%BD%D1%8C%D0%BE%D0%BD%D1%8B-%D0%BF%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D1%8B-%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8.jpg"/>
+                                                </Image.Source>
+                                            </Image>
+                                        </BlockUIContainer>
+                                    </Figure>
+                                    <Run Text=" "/>
+                                    <Figure HorizontalAnchor="ColumnRight" Width="230">
+                                        <BlockUIContainer>
+                                            <Image UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                                                <Image.Source>
+                                                    <BitmapImage CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="http://www.radionetplus.ru/uploads/posts/2013-12/1386011570_dogs-wallpaper-2.jpg"/>
+                                                </Image.Source>
+                                            </Image>
+                                        </BlockUIContainer>
+                                    </Figure>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run FontWeight="Bold" FontSize="14" Text="Why do we use it?"/>
+                                </Paragraph>
+                                <Paragraph TextAlignment="Justify">
+                                    <Run Text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run FontWeight="Bold" FontSize="14" Text="Where does it come from?"/>
+                                </Paragraph>
+                                <Paragraph TextAlignment="Justify">
+                                    <Run Text="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32."/>
+                                </Paragraph>
+                                <Paragraph TextAlignment="Justify">
+                                    <Run Text="The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."/>
+                                </Paragraph>
+                                <Paragraph>
+                                    <Run FontWeight="Bold" FontSize="14" Text="Where can I get some?"/>
+                                </Paragraph>
+                                <Paragraph TextAlignment="Justify">
+                                    <Run Text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc."/>
+                                </Paragraph>
+
+                            </FlowDocument>
+                        </RichTextBox>
+                    </GroupBox>
+                </ContentControl>
+                <ContentControl Style="{StaticResource DesignerItemStyle}"
+                    MaxHeight="300" Width="440" MaxWidth="700"
+                    Padding="2,27,2,2"
+                    Canvas.Left="350"
+                    Canvas.Top="550">
+                    <Expander Margin="0,-25,0,0">
+                        <Expander.Header>
+                            <Label Background="Transparent" Content="Grid (MaxWidth,MaxHeight)"/>
+                        </Expander.Header>
+                        <DataGrid SelectedIndex="2" Margin="2" AlternatingRowBackground="{DynamicResource AlternatingRowBackgroundBrush}" AutoGenerateColumns="True" ItemsSource="{Binding Source={StaticResource coll2}}" AutoGeneratedColumns="DataGrid_AutoGeneratedColumns" />
+                    </Expander>
+                </ContentControl>
+
+                <ContentControl  Width="294" Height="133" Background="Pink" Canvas.Left="1050" Canvas.Top="550" Style="{StaticResource DesignerItemStyle}">
+                    <Border>
+                        <StackPanel>
+                            <TextBlock FontStyle="Italic">(Some elements hidden by LODZoom extension)</TextBlock>
+                            <Separator />
+                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom=" A1-5">1. Element use LODZoom Functionality A1-5</TextBlock>
+                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="A -5.1">2. Element use LODZoom Functionality A -5.1</TextBlock>
+                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="a 2-8.3">3. Element use LODZoom Functionality a 2-8.3</TextBlock>
+                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="a 1.5-">4. Element use LODZoom Functionality a 1.5-</TextBlock>
+                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="1-5">5. Element use LODZoom Functionality 1-5</TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                </ContentControl>
+
+            </bsDiag:ZoomControl>
+            <CheckBox VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,20" IsChecked="{Binding ElementName=zc, Path=UseAnimation}">UseAnimation</CheckBox>
+            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                <Run>RenderZoom: </Run><Run Text="{Binding ElementName=zc, Path=RenderZoom}" />
+            </TextBlock>
+        </Grid>
+
 
     </Grid>
 </Window>

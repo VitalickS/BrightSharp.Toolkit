@@ -39,10 +39,10 @@ namespace BrightSharp.Ui.Tests
             set { _companyName = value; RaisePropertyChanged(nameof(CompanyName)); }
         }
 
-        public string ContactName
+        public string ContactNameCN
         {
             get { return _contactName; }
-            set { _contactName = value; RaisePropertyChanged(nameof(ContactName)); }
+            set { _contactName = value; RaisePropertyChanged(nameof(ContactNameCN)); }
         }
 
         public string ContactTitle

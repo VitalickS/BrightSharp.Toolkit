@@ -58,3 +58,8 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("http://schemas.brightsharp.com/developer", "BrightSharp")]
 [assembly: XmlnsDefinition("http://schemas.brightsharp.com/developer", "BrightSharp.Extensions")]
 [assembly: XmlnsDefinition("http://schemas.brightsharp.com/developer", "BrightSharp.Behaviors")]
+[assembly: XmlnsDefinition("http://schemas.brightsharp.com/developer", "BrightSharp.Converters")]
+
+
+[assembly: XmlnsPrefix("http://schemas.brightsharp.com/diagrams", "bsDiag")]
+[assembly: XmlnsDefinition("http://schemas.brightsharp.com/diagrams", "Diagrams")]

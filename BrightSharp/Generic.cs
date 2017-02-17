@@ -9,7 +9,6 @@ namespace BrightSharp
 {
     internal partial class Generic
     {
-        private const string StyleDictionaryPattern = @"(?<=.+style\.)(.*?)(?=\.xaml)";
         public void CalendarPreviewMouseUp(object sender, MouseEventArgs e)
         {
             if (Mouse.Captured is CalendarItem) { Mouse.Capture(null); }
@@ -22,5 +21,25 @@ namespace BrightSharp
                 child = VisualTreeHelper.GetParent(child) ?? LogicalTreeHelper.GetParent(child);
             if (((AdornerDecorator)child)?.Child is Calendar) ((AdornerDecorator)child).Child = null;
         }
+
+
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow((DependencyObject)sender);
+            window.Close();
+        }
+
+        private void maximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow((DependencyObject)sender);
+            window.WindowState = window.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+        }
+
+        private void minimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow((DependencyObject)sender);
+            window.WindowState = WindowState.Minimized;
+        }
+        
     }
 }

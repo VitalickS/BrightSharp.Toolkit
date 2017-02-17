@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System;
 
-namespace BrightSharp.Diagrams
+namespace Diagrams
 {
     public static class SelectionBehavior
     {

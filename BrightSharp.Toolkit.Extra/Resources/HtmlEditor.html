@@ -1,0 +1,33 @@
+﻿<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.ckeditor.com/4.6.0/$$PACKAGE/ckeditor.js"></script>
+</head>
+<body>
+    <div id="editor">$$CONTENT</div>
+    <script>
+        (function (ckeditor, config) {
+            var lockChanges = false;
+            // Add override CSS styles for inside editable contents area.
+            ckeditor.addCss('.cke_editable { font-size: 14px; } @media screen and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio:0) { .cke_editable { font-size: 16px !important; } }');
+            ckeditor.on('instanceReady',
+                function (evt) {
+                    evt.editor.execCommand('maximize');
+                });
+            var editor = ckeditor.replace('editor', config);
+
+            editor.on("change",
+                function () {
+                    if (!lockChanges)
+                        window.$$OBJ.setupContent(editor.getData());
+                });
+
+            window.setData = function (newData) {
+                lockChanges = true;
+                editor.setData(newData);
+                lockChanges = false;
+            };
+        })(CKEDITOR, $$CONFIG);
+    </script>
+</body>
+</html>

@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightSharp", "BrightSharp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightSharp.Ui.Tests", "BrightSharp.Ui.Tests\BrightSharp.Ui.Tests.csproj", "{0D6E1828-8D07-4701-B98A-65DBF1604D3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetFrames.AppleJobs.Editor", "JetFrames.AppleJobs.Editor\JetFrames.AppleJobs.Editor.csproj", "{FD3E36B5-444A-4115-B288-6C924BEA0BD3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppleJobs.Data", "AppleJobs.Data\AppleJobs.Data.csproj", "{B4695C76-31FF-4BF1-9DC6-1BC62D374091}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +21,6 @@ Global
 		{0D6E1828-8D07-4701-B98A-65DBF1604D3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D6E1828-8D07-4701-B98A-65DBF1604D3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D6E1828-8D07-4701-B98A-65DBF1604D3F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FD3E36B5-444A-4115-B288-6C924BEA0BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD3E36B5-444A-4115-B288-6C924BEA0BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FD3E36B5-444A-4115-B288-6C924BEA0BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FD3E36B5-444A-4115-B288-6C924BEA0BD3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4695C76-31FF-4BF1-9DC6-1BC62D374091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4695C76-31FF-4BF1-9DC6-1BC62D374091}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4695C76-31FF-4BF1-9DC6-1BC62D374091}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4695C76-31FF-4BF1-9DC6-1BC62D374091}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

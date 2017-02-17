@@ -59,11 +59,7 @@ namespace BrightSharp.Mvvm
 
         protected virtual void RaisePropertyChanged<T>(Expression<Func<T>> propertyExpression)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if(handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(GetPropertyName(propertyExpression)));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(GetPropertyName(propertyExpression)));
         }
 
         protected Boolean Set<T>(Expression<Func<T>> propertyExpression, ref T field, T newValue)

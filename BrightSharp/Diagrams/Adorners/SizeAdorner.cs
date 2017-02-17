@@ -1,10 +1,12 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace Diagrams
 {
+    [ToolboxItem(false)]
     public class SizeAdorner : Adorner
     {
         private SizeChrome chrome;

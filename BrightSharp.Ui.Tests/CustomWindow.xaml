@@ -1,0 +1,20 @@
+﻿<Window x:Class="BrightSharp.Ui.Tests.CustomWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:bs="http://schemas.brightsharp.com/developer"
+        xmlns:local="clr-namespace:BrightSharp.Ui.Tests"
+        mc:Ignorable="d" ResizeMode="CanResizeWithGrip"
+        Height="640" Width="1000" Style="{DynamicResource TestWindowStyle}">
+    <bs:MarkupExtensionProperties.Header>
+        <Grid>
+            <Label>Custom WINDOW (In Progress)</Label>
+        </Grid>
+    </bs:MarkupExtensionProperties.Header>
+    <Window.Resources>
+    </Window.Resources>
+    <Label>
+        TEST (Dev) WINDOW STYLE (CONTENT)
+    </Label>
+</Window>

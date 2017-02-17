@@ -8,9 +8,11 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.ComponentModel;
 
 namespace Diagrams
 {
+    [ToolboxItem(false)]
     public class DesignerItemDecorator : Control
     {
         private Adorner adorner;
