@@ -1,6 +1,6 @@
 ## Brushes List
 
-![brushes](docs/BrushesList.png)
+![brushes](../BrushesList.png)
 
 ## List of names
 
