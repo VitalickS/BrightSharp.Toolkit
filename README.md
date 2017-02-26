@@ -27,7 +27,7 @@ In future we will add many different controls, that use HTML5 technologies. Extr
 3. [Brushes/Colors List](docs/help/brushes.md)
 
 ## Classic Theme
-![CKEditor](docs/classic-theme.png)
+![classic-theme](docs/classic-theme.png)
 
 
 ## HtmlEditor (CKEditor) Screenshot (Extra package)
