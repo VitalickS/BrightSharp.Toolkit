@@ -23,7 +23,8 @@ In future we will add many different controls, that use HTML5 technologies. Extr
 ## How To
 
 1. [How to Apply Themes](docs/help/apply-themes.md)
-3. [How to Use HtmlEditor](docs/help/htmleditor.md)
+2. [How to Use HtmlEditor](docs/help/htmleditor.md)
+3. [Brushes/Colors List](docs/help/brushes.md)
 
 ## Classic Theme
 ![CKEditor](docs/classic-theme.png)
