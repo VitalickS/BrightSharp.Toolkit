@@ -18,5 +18,18 @@ Change by static property
     ThemeManager.CurrentTheme = ColorThemes.Classic;
 ```
 
+# Change themes by ResourceDictionary
+
+Also you can change theme by adding resource dictionary after generic.xaml. Use one of them:
+```xml
+<ResourceDictionary Source="/brightsharp;component/style.devlab.xaml" />
+or
+<ResourceDictionary Source="/brightsharp;component/style.blue.xaml" />
+or
+<ResourceDictionary Source="/brightsharp;component/style.darkblue.xaml" />
+or
+<ResourceDictionary Source="/brightsharp;component/style.silver.xaml" />
+```
+
 ## NOTE
 It is recommended use `Background="{DynamicResource WindowBackgroundBrush}"` for Window markup
