@@ -33,6 +33,17 @@ namespace Diagrams
         }
         #endregion
 
+        public static bool GetCanRotate(DependencyObject obj) {
+            return (bool)obj.GetValue(CanRotateProperty);
+        }
+
+        public static void SetCanRotate(DependencyObject obj, bool value) {
+            obj.SetValue(CanRotateProperty, value);
+        }
+
+        public static readonly DependencyProperty CanRotateProperty =
+            DependencyProperty.RegisterAttached("CanRotate", typeof(bool), typeof(VisualExtensions), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.Inherits));
+
         private static void OnChangeLODZoomProperty(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var element = d as FrameworkElement;

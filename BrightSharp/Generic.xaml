@@ -21,21 +21,17 @@
 
     <Color x:Key="ValidationErrorColor">Red</Color>
 
-    <SolidColorBrush x:Key="RowBackgroundBrush" Color="#FFF7F7F7"/>
+    <SolidColorBrush x:Key="RowBackgroundBrush" Color="White"/>
     <LinearGradientBrush x:Key="AlternatingRowBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0">
         <GradientStop Color="White"/>
         <GradientStop Color="White" Offset="1"/>
-        <GradientStop Color="#FFDAEBFF" Offset="0.736"/>
-        <GradientStop Color="#FFD2E3FF" Offset="0.205"/>
+        <GradientStop Color="#FFECF5FF" Offset="0.8"/>
+        <GradientStop Color="#FFECF5FF" Offset="0.2"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
-        <GradientBrush.GradientStops>
-            <GradientStopCollection>
-                <GradientStop Color="#FFF" Offset="0.0"/>
-                <GradientStop Color="#CCC" Offset="1.0"/>
-            </GradientStopCollection>
-        </GradientBrush.GradientStops>
+        <GradientStop Color="#FFF" Offset="0.0"/>
+        <GradientStop Color="#CCC" Offset="1.0"/>
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="VerticalNormalBrush" StartPoint="0,0" EndPoint="1,0">
         <GradientBrush.GradientStops>
@@ -247,7 +243,7 @@
     </LinearGradientBrush>
     <Color x:Key="WindowBackgroundHoverColor">#FFF</Color>
 
-    <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#FFABB9E1" />
+    <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#FFC0C9E4" />
     <SolidColorBrush x:Key="GlyphBrush" Color="#444" />
     <SolidColorBrush x:Key="LightColorBrush" Color="#DDD" />
 
@@ -274,7 +270,7 @@
     <Color x:Key="UiForegroundColor">Black</Color>
     <SolidColorBrush x:Key="UiForegroundBrush" Color="{DynamicResource UiForegroundColor}" />
 
-    <Color x:Key="SelectedBackgroundColor">SkyBlue</Color>
+    <Color x:Key="SelectedBackgroundColor">#E7E9FC</Color>
     <Color x:Key="SelectedUnfocusedColor">#FFB6B6B6</Color>
     <Color x:Key="ControlLightColor">#FFFFFFFF</Color>
     <Color x:Key="ControlMediumColor">#FFC5C5C5</Color>
@@ -1200,6 +1196,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <Style x:Key="SwitchCheckBoxStyle" TargetType="{x:Type CheckBox}">
         <Setter Property="Foreground" Value="{DynamicResource OnWindowForegroundBrush}"/>
         <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>
@@ -1470,8 +1467,6 @@
     <Style TargetType="DataGridRow">
         <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource OnWindowForegroundBrush}" />
-        <Setter Property="Height" Value="22" />
-        <Setter Property="MaxHeight" Value="22" />
     </Style>
     <Style TargetType="DataGridColumnHeader">
         <Style.Resources>
@@ -1484,7 +1479,7 @@
         <Setter Property="SeparatorBrush" Value="{DynamicResource NormalBorderBrush}" />
         <Setter Property="Background" Value="{DynamicResource LightBrush}" />
         <Setter Property="Padding" Value="4" />
-        
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="DataGridColumnHeader">
@@ -1573,6 +1568,9 @@
 
     </Style>
     <Style TargetType="{x:Type DataGridCell}">
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="2,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
@@ -1580,7 +1578,11 @@
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" />
                         <Border x:Name="HighlightFocused_Border" Opacity="0" 
                                 BorderBrush="{DynamicResource UiForegroundBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True" />
-                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="{TemplateBinding Padding}" />
+                        <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="{TemplateBinding Padding}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
@@ -1855,16 +1857,23 @@
         <Border
     		x:Name="Border"
     		Background="Transparent" Padding="7,0,0,0">
-            <Path
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Path
     			x:Name="Arrow"
     			Fill="{DynamicResource GlyphBrush}"
     			HorizontalAlignment="Left"
     			VerticalAlignment="Center"
     			Data="M 0 0 L 4 4 L 8 0 Z M 0 4 L 4 8 L 8 4 Z"/>
+                <ContentPresenter Grid.Column="1" />
+            </Grid>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource DarkBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource DarkBrush}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource PressedBrush}" />
@@ -1900,22 +1909,13 @@
 							BorderBrush="{DynamicResource NormalBorderBrush}"
 							BorderThickness="1" 
 							CornerRadius="{TemplateBinding bs:MarkupExtensionProperties.CornerRadius}" >
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <ToggleButton Grid.ColumnSpan="2" HorizontalAlignment="Left"
+                            <ToggleButton
 									IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-									OverridesDefaultStyle="True" Opacity="0.7"
+									OverridesDefaultStyle="True"
 									Template="{DynamicResource ExpanderToggleButton}" 
-									Background="{DynamicResource NormalBrush}" />
-                                <ContentPresenter
-									Grid.Column="1"
-									Margin="4" IsHitTestVisible="False"
-									ContentSource="Header"
-									RecognizesAccessKey="True" />
-                            </Grid>
+									Background="{DynamicResource NormalBrush}">
+                                <ContentPresenter Margin="4" ContentSource="Header" RecognizesAccessKey="True" />
+                            </ToggleButton>
                         </Border>
                         <Border 
 							x:Name="Content" 
@@ -3088,13 +3088,20 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Menu}">
-                    <Border
+                    <Border Padding="{TemplateBinding Padding}"
 						Background="{TemplateBinding Background}"
 						BorderBrush="{DynamicResource NormalBorderBrush}"
 						BorderThickness="{TemplateBinding BorderThickness}">
                         <ItemsPresenter ClipToBounds="True" />
                     </Border>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch" />
+                </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
     </Style>
@@ -3622,7 +3629,7 @@
                                        Fill="{DynamicResource ProgressBarIndeterminateRootBrush}"/>
 
                             <Grid Margin="2,1" ClipToBounds="True">
-                                <Rectangle Margin="-20,0" x:Name="IndeterminateGradientFill" StrokeThickness="1" RadiusX="2" RadiusY="2" Opacity="0.7"
+                                <Rectangle Margin="-20,0" x:Name="IndeterminateGradientFill" StrokeThickness="1" RadiusX="2" RadiusY="2"
                                        Fill="{DynamicResource ProgressBarIndeterminateFillBrush}">
                                     <Rectangle.RenderTransform>
                                         <TranslateTransform />
@@ -4674,7 +4681,8 @@
                             <ColumnDefinition x:Name="col3" Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <DockPanel x:Name="HeaderPanel" Grid.Row="0" Grid.Column="1" Panel.ZIndex="1" Margin="0,0,0,-1" >
-                            <ContentControl x:Name="trailElem" DockPanel.Dock="Right" Content="{TemplateBinding bs:MarkupExtensionProperties.TrailingElement}" />
+                            <ContentControl Focusable="False" x:Name="trailElem" DockPanel.Dock="Right" Content="{TemplateBinding bs:MarkupExtensionProperties.TrailingElement}" />
+                            <ContentControl Focusable="False" x:Name="leadElem" DockPanel.Dock="Left" Content="{TemplateBinding bs:MarkupExtensionProperties.LeadingElement}" />
                             <TabPanel x:Name="HeaderContentPanel" IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="Transparent" />
                         </DockPanel>
 
@@ -4710,6 +4718,7 @@
                             <Setter TargetName="HeaderPanel" Property="Grid.Column" Value="0" />
                             <Setter TargetName="HeaderPanel" Property="Margin" Value="0,4,-1,0" />
                             <Setter TargetName="trailElem" Property="DockPanel.Dock" Value="Bottom" />
+                            <Setter TargetName="leadElem" Property="DockPanel.Dock" Value="Top" />
 
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
@@ -4719,6 +4728,7 @@
                             <Setter TargetName="HeaderPanel" Property="Grid.Column" Value="2" />
                             <Setter TargetName="HeaderPanel" Property="Margin" Value="-1,0,0,0" />
                             <Setter TargetName="trailElem" Property="DockPanel.Dock" Value="Bottom" />
+                            <Setter TargetName="leadElem" Property="DockPanel.Dock" Value="Top" />
 
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -5488,6 +5498,10 @@
                     </ControlTemplate.Resources>
                     <Grid UseLayoutRounding="True"
 						Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="14" Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         <Path x:Name="ExpandPath"
 							HorizontalAlignment="Center" 
 							VerticalAlignment="Center"
@@ -5500,6 +5514,7 @@
                                 <RotateTransform x:Name="toggleRotation" />
                             </Path.RenderTransform>
                         </Path>
+                        <ContentPresenter Grid.Column="1" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked"
@@ -5536,39 +5551,34 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition MinWidth="14" Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Border x:Name="Border" Margin="-50000,0,0,0"
-							Background="{TemplateBinding Background}"
-							Grid.ColumnSpan="2">
+							Background="{TemplateBinding Background}" Grid.ColumnSpan="2">
                         </Border>
                         <!--<Rectangle Name="FocusRect" Grid.Column="1" Stroke="#60000000" StrokeDashArray="1 2" Visibility="Hidden"/>-->
-                        <ToggleButton 
+                        <ToggleButton
 							x:Name="Expander"
 							Style="{DynamicResource ExpandCollapseToggleStyle}"
 							IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
-							ClickMode="Press"/>
-                        <Grid Grid.Column="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <ContentControl Focusable="False" Content="{TemplateBinding bs:MarkupExtensionProperties.Icon}" />
-                            <Border Padding="{TemplateBinding Padding}" Grid.Column="1">
-                                <ContentPresenter
+							ClickMode="Press">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <ContentControl Focusable="False" Content="{TemplateBinding bs:MarkupExtensionProperties.Icon}" />
+                                <Border Padding="{TemplateBinding Padding}" Grid.Column="1">
+                                    <ContentPresenter
 								x:Name="PART_Header"
 								ContentSource="Header" Margin="{TemplateBinding Padding}"
 								HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                            </Border>
-
-                        </Grid>
+                                </Border>
+                            </Grid>
+                        </ToggleButton>
 
 
                         <ItemsPresenter
@@ -5648,14 +5658,23 @@
     <!-- Window (Experimental) Style -->
 
     <LinearGradientBrush x:Key="WindowSolidBrush" EndPoint="0,1">
-        <GradientStop Color="White" />
-        <GradientStop Color="#FFE0E0E0" Offset="0.2" />
-        <GradientStop Color="#FFECECEC" Offset="0.7" />
-        <GradientStop Color="#FFC3E0FF" Offset="1" />
+        <GradientStop Color="#EFD3D3" />
+        <GradientStop Color="#FFB5BBC6" Offset="0.2" />
+        <GradientStop Color="#FFDDDDF7" Offset="0.8" />
+        <GradientStop Color="#FF93B1CE" Offset="1" />
     </LinearGradientBrush>
 
-    <Style x:Key="TestWindowStyle" TargetType="{x:Type Window}">
+    <Style x:Key="BrightSharpWindowStyle" TargetType="{x:Type Window}">
         <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="WindowStyle" Value="SingleBorderWindow" />
+        <Setter Property="bs:MarkupExtensionProperties.SpecialBrush">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#F0F0F0" Offset="1" />
+                    <GradientStop Color="White" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
         <Setter Property="BorderBrush" >
             <Setter.Value>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -5680,59 +5699,70 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30" />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Border Background="{DynamicResource WindowSolidBrush}">
-                                <DockPanel>
-                                    <Image Width="16" Height="16" Source="{TemplateBinding Icon}" Margin="8" VerticalAlignment="Top" DockPanel.Dock="Left" />
-                                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Top" Margin="2">
-                                        <Button VerticalAlignment="Center" Name="PART_MinimizeButton" Click="minimizeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="0" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings">
-                                            <Button.ToolTip>
-                                                <Label FontFamily="{TemplateBinding FontFamily}">Minimize</Label>
-                                            </Button.ToolTip>
-                                        </Button>
-                                        <Button VerticalAlignment="Center" Name="PART_MaximizeButton" Click="maximizeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="1" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings">
-                                            <Button.ToolTip>
-                                                <Label FontFamily="{TemplateBinding FontFamily}" Name="MaximizeBtnTooltip">Maximize</Label>
-                                            </Button.ToolTip>
-                                        </Button>
-                                        <Button Padding="6" Name="PART_CloseButton" Click="closeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="r" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings">
-                                            <Button.ToolTip>
-                                                <Label FontFamily="{TemplateBinding FontFamily}">Close (Alt+F4)</Label>
-                                            </Button.ToolTip>
-                                            <Button.Background>
-                                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                                    <GradientStop Color="#FFDEC3C3" Offset="0"/>
-                                                    <GradientStop Color="#FFCDA2A2" Offset="1"/>
+                        <Border BorderBrush="{TemplateBinding bs:MarkupExtensionProperties.SpecialBrush}" BorderThickness="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Border x:Name="HeaderBorder" Background="{DynamicResource WindowSolidBrush}">
+                                    <DockPanel>
+                                        <Image Width="16" Height="16" Source="{TemplateBinding Icon}" Margin="8" VerticalAlignment="Top" DockPanel.Dock="Left" />
+                                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Top" Margin="1">
+                                            <StackPanel.Resources>
+                                                <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
+                                                    <GradientStop Color="Transparent" Offset="0.0"/>
                                                 </LinearGradientBrush>
-                                            </Button.Background>
-                                            <Button.Resources>
-                                                <LinearGradientBrush x:Key="DarkBrush" EndPoint="0,1" StartPoint="0,0">
-                                                    <GradientStop Color="#FFFF8A8A" Offset="0"/>
-                                                    <GradientStop Color="#FFD14D4D" Offset="1"/>
+                                                <LinearGradientBrush x:Key="DarkBrush" StartPoint="0,0" EndPoint="0,1">
+                                                    <GradientStop Color="#FFE8E8E8" Offset="0.0"/>
                                                 </LinearGradientBrush>
-                                            </Button.Resources>
-                                        </Button>
-                                    </StackPanel>
-                                    <Label HorizontalContentAlignment="{TemplateBinding bs:MarkupExtensionProperties.HeaderHorizontalAlignment}" Content="{TemplateBinding bs:MarkupExtensionProperties.Header}" FontSize="15">
-                                        <Label.Effect>
-                                            <DropShadowEffect BlurRadius="2" ShadowDepth="2" Color="#7F4F5EA4" />
-                                        </Label.Effect>
-                                    </Label>
-                                </DockPanel>
-                            </Border>
-                            <AdornerDecorator Grid.Row="1" x:Name="Decorator" ClipToBounds="True">
-                                <ContentPresenter />
-                            </AdornerDecorator>
-                            <ResizeGrip WindowChrome.ResizeGripDirection="BottomRight" Grid.Row="3" x:Name="WindowResizeGrip" HorizontalAlignment="Right" IsTabStop="false" Visibility="Collapsed" VerticalAlignment="Bottom"/>
-                        </Grid>
+                                            </StackPanel.Resources>
+                                            <Button VerticalAlignment="Top" Name="PART_MinimizeButton" Click="minimizeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="0" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings">
+                                                <Button.ToolTip>
+                                                    <Label FontFamily="{TemplateBinding FontFamily}">Minimize</Label>
+                                                </Button.ToolTip>
+                                            </Button>
+                                            <Button VerticalAlignment="Top" Name="PART_MaximizeButton" Click="maximizeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="1" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings">
+                                                <Button.ToolTip>
+                                                    <Label FontFamily="{TemplateBinding FontFamily}" Name="MaximizeBtnTooltip">Maximize</Label>
+                                                </Button.ToolTip>
+                                            </Button>
+                                            <Button Padding="10,6" Name="PART_CloseButton" Click="closeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="r" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings">
+                                                <Button.ToolTip>
+                                                    <Label FontFamily="{TemplateBinding FontFamily}">Close (Alt+F4)</Label>
+                                                </Button.ToolTip>
+                                                <Button.Background>
+                                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                        <GradientStop Color="#FFDEC3C3" Offset="0"/>
+                                                        <GradientStop Color="#FFCDA2A2" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Button.Background>
+                                                <Button.Resources>
+                                                    <LinearGradientBrush x:Key="DarkBrush" EndPoint="0,1" StartPoint="0,0">
+                                                        <GradientStop Color="#FFFF8A8A" Offset="0"/>
+                                                        <GradientStop Color="#FFD14D4D" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Button.Resources>
+                                            </Button>
+                                        </StackPanel>
+                                        <Label Padding="0,5" Foreground="White" HorizontalContentAlignment="{TemplateBinding bs:MarkupExtensionProperties.HeaderHorizontalAlignment}" Content="{TemplateBinding bs:MarkupExtensionProperties.Header}" FontSize="14">
+                                            <Label.Effect>
+                                                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="Black" />
+                                            </Label.Effect>
+                                        </Label>
+                                    </DockPanel>
+                                </Border>
+                                <AdornerDecorator Grid.Row="1" x:Name="Decorator" ClipToBounds="True">
+                                    <ContentPresenter x:Name="ContentPresenter" />
+                                </AdornerDecorator>
+                                <ResizeGrip WindowChrome.ResizeGripDirection="BottomRight" Grid.Row="3" x:Name="WindowResizeGrip" HorizontalAlignment="Right" IsTabStop="false" Visibility="Collapsed" VerticalAlignment="Bottom"/>
+                            </Grid>
+                        </Border>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="PART_MaximizeButton" Property="Content" Value="2" />
+                            <Setter TargetName="ContentPresenter" Property="Margin" Value="2,0,4,4" />
                             <Setter TargetName="MaximizeBtnTooltip" Property="Content" Value="Normalize" />
                         </Trigger>
                         <MultiTrigger>
@@ -5745,10 +5775,13 @@
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter Property="Margin" TargetName="Decorator" Value="6,0,4,0" />
                         </Trigger>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter TargetName="HeaderBorder" Property="Background" Value="LightGray" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 </ResourceDictionary>

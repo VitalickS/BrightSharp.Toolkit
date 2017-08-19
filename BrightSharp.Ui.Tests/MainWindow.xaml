@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BrightSharp.Ui.Tests"
         xmlns:viewModel="clr-namespace:BrightSharp.Ui.Tests"
-        Style="{DynamicResource TestWindowStyle}"
+        Style="{DynamicResource BrightSharpWindowStyle}"
         ResizeMode="CanResizeWithGrip"
         xmlns:ex="http://schemas.brightsharp.com/developer"
         xmlns:bsDiag="http://schemas.brightsharp.com/diagrams"
@@ -36,7 +36,7 @@
                         <Grid>
                             <Button IsDefault="True" Content="Change Theme" Click="Button_Click" HorizontalAlignment="Left" Width="108" Height="32" VerticalAlignment="Top" Margin="10,10,0,0"/>
                             <ToggleButton Content="Toggle" HorizontalAlignment="Left" Width="108" Height="32" VerticalAlignment="Top" Margin="10,47,0,0"/>
-                            <CheckBox Margin="10,84,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="CheckBox"/>
+                            <CheckBox Margin="10,84,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}"/>
                             <CheckBox IsThreeState="True" ex:MarkupExtensionProperties.Docking="Right" Margin="10,105,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="CheckBox Right Allign"/>
                             <CheckBox HorizontalContentAlignment="Center" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Top" Margin="151,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="137" Content="CheckBox Top Allign"/>
                             <RadioButton IsChecked="True" Margin="10,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="RadioButton"/>
@@ -83,26 +83,32 @@
                             <Label Content="Collections"/>
                         </GroupBox.Header>
                         <Grid x:Name="innerCanvas" Background="Transparent" ClipToBounds="True" >
-                            <Menu VerticalAlignment="Top">
-                                <MenuItem Header="File">
-                                    <MenuItem Header="New..."/>
-                                    <MenuItem Header="Open..."/>
-                                    <MenuItem Header="Save" />
-                                    <MenuItem Header="Save as..."/>
-                                    <Separator />
-                                    <MenuItem Command="ApplicationCommands.Close" />
-                                </MenuItem>
-                                <MenuItem Header="Edit">
-                                    <MenuItem Command="ApplicationCommands.Copy" />
-                                    <MenuItem Command="ApplicationCommands.Paste" />
-                                    <MenuItem Command="ApplicationCommands.Cut" />
-                                </MenuItem>
-                                <MenuItem Header="View"/>
-                                <MenuItem Header="Help">
-                                    <MenuItem Header="About..."/>
-                                </MenuItem>
-                            </Menu>
-                            <ListView ItemsSource="{Binding Source={StaticResource coll1}}" SelectedIndex="5" Margin="2,52,10,190">
+                            <StackPanel VerticalAlignment="Top">
+                                <Menu>
+                                    <MenuItem Header="File">
+                                        <MenuItem Header="New..."/>
+                                        <MenuItem Header="Open..."/>
+                                        <MenuItem Header="Save" />
+                                        <MenuItem Header="Save as..."/>
+                                        <Separator />
+                                        <MenuItem Command="ApplicationCommands.Close" />
+                                    </MenuItem>
+                                    <MenuItem Header="Edit">
+                                        <MenuItem Command="ApplicationCommands.Copy" />
+                                        <MenuItem Command="ApplicationCommands.Paste" />
+                                        <MenuItem Command="ApplicationCommands.Cut" />
+                                    </MenuItem>
+                                    <MenuItem Header="View"/>
+                                    <MenuItem Header="Help">
+                                        <MenuItem Header="About..."/>
+                                    </MenuItem>
+                                </Menu>
+                                <ToolBar ToolBar.OverflowMode="Never">
+                                    <Button Content="EXEC" />
+                                    <Button Content="View" />
+                                </ToolBar>
+                            </StackPanel>
+                            <ListView ItemsSource="{Binding Source={StaticResource coll1}}" SelectedIndex="5" Margin="2,54,10,190">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Customer" Width="100" DisplayMemberBinding="{Binding CustomerID}" />
@@ -128,13 +134,13 @@
                         </Grid>
                     </GroupBox>
                 </ContentControl>
-                <ContentControl Style="{StaticResource DesignerItemStyle}"
+                <ContentControl Style="{StaticResource DesignerItemStyle}" bsDiag:VisualExtensions.CanRotate="False"
                     Padding="2,27,2,2"
                     Canvas.Left="850"
                     Canvas.Top="20" Width="733" Height="475">
                     <GroupBox Margin="0,-25,0,0" Style="{StaticResource ExpandrStyleGroupBox}" >
                         <GroupBox.Header>
-                            <Label Content="Xaml RichTextBox"/>
+                            <Label Content="Xaml RichTextBox (CanRotate=false)"/>
                         </GroupBox.Header>
                         <RichTextBox VerticalScrollBarVisibility="Auto">
                             <FlowDocument>

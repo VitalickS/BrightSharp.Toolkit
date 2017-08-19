@@ -6,10 +6,10 @@
         xmlns:bs="http://schemas.brightsharp.com/developer"
         xmlns:local="clr-namespace:BrightSharp.Ui.Tests"
         mc:Ignorable="d" ResizeMode="CanResizeWithGrip"
-        Height="640" Width="1000" Style="{DynamicResource TestWindowStyle}">
+        Height="640" Width="1000" Style="{DynamicResource BrightSharpWindowStyle}">
     <bs:MarkupExtensionProperties.Header>
         <Grid>
-            <Label>Custom WINDOW (In Progress)</Label>
+            <TextBlock>Custom WINDOW (BrightSharpWindowStyle)</TextBlock>
         </Grid>
     </bs:MarkupExtensionProperties.Header>
     <Window.Resources>

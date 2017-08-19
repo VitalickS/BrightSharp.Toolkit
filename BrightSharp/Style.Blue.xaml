@@ -108,7 +108,7 @@
                 <GradientStop Color="White" Offset="0.0"/>
                 <GradientStop Color="#FFD9E1F9" Offset="0.5"/>
                 <GradientStop Color="#FFDDDDFB" Offset="0.85"/>
-                <GradientStop Color="#FF9B9B9B" Offset="1.0"/>
+                <GradientStop Color="#FFAFBDE2" Offset="1.0"/>
             </GradientStopCollection>
         </GradientBrush.GradientStops>
     </LinearGradientBrush>

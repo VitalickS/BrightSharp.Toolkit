@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\FiterGridTextBoxBehavior.cs" />
+    <Compile Include="Behaviors\SelectAllTextOnFocusBehavior.cs" />
     <Compile Include="Commands\AsyncCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\StringHelpConverter.cs" />

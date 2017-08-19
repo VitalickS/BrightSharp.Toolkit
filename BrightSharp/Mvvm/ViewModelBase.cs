@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace BrightSharp.Mvvm
@@ -84,13 +85,13 @@ namespace BrightSharp.Mvvm
             return true;
         }
 
-        protected void RaisePropertyChanged(string propertyName)
+        protected void RaisePropertyChanged([CallerMemberName]string propertyName = null)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if(handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        protected void RaisePropertyChangedAll()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(null));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
