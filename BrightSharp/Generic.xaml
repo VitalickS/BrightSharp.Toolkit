@@ -4869,9 +4869,29 @@
         <Setter Property="Validation.ErrorTemplate">
             <Setter.Value>
                 <ControlTemplate>
-                    <Grid>
-                        <AdornedElementPlaceholder Name="MyAdorner"/>
-                        <Border Opacity="0" VerticalAlignment="Center" Width="14" Height="14" HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="7" Margin="0,0,4,0"
+                    <Grid MaxWidth="{Binding ElementName=MyAdorner, Path=ActualWidth}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <AdornedElementPlaceholder Name="MyAdorner" Grid.Row="1"/>
+                        <Label Margin="0,0,0,2" Visibility="{Binding ElementName=MyAdorner, Path=AdornedElement.IsFocused, Converter={StaticResource btvc}}" MaxWidth="250" Foreground="White" BorderBrush="DarkGray" BorderThickness="1" Background="#8F00" VerticalAlignment="Top" HorizontalAlignment="Right" IsHitTestVisible="False" HorizontalContentAlignment="Right">
+                            <Label.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" Duration="0:0:.6">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <ExponentialEase />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Label.Triggers>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding ElementName=MyAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"></TextBlock>
+                        </Label>
+                        <Border Grid.Row="1" VerticalAlignment="Center" Width="15" Height="14" HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="7" Margin="0,0,4,0"
                                 ToolTip="{Binding ElementName=MyAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
                             <Border.Background>
                                 <SolidColorBrush Color="{DynamicResource ValidationErrorColor}" />
@@ -4880,7 +4900,7 @@
                                 <EventTrigger RoutedEvent="Loaded">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:.6">
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" Duration="0:0:.6">
                                                 <DoubleAnimation.EasingFunction>
                                                     <ExponentialEase />
                                                 </DoubleAnimation.EasingFunction>
@@ -5760,6 +5780,10 @@
                         </Border>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="WindowStyle" Value="ToolWindow">
+                            <Setter TargetName="PART_MaximizeButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_MinimizeButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="PART_MaximizeButton" Property="Content" Value="2" />
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="2,0,4,4" />

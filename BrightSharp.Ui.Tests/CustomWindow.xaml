@@ -6,6 +6,7 @@
         xmlns:bs="http://schemas.brightsharp.com/developer"
         xmlns:local="clr-namespace:BrightSharp.Ui.Tests"
         mc:Ignorable="d" ResizeMode="CanResizeWithGrip"
+        WindowStyle="ToolWindow"
         Height="640" Width="1000" Style="{DynamicResource BrightSharpWindowStyle}">
     <bs:MarkupExtensionProperties.Header>
         <Grid>

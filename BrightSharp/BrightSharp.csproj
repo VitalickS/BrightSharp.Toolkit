@@ -55,6 +55,7 @@
     <Compile Include="Behaviors\SelectAllTextOnFocusBehavior.cs" />
     <Compile Include="Commands\AsyncCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converters\InverseBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\StringHelpConverter.cs" />
     <Compile Include="Diagrams\Adorners\ResizeRotateAdorner.cs" />
     <Compile Include="Diagrams\Adorners\ResizeRotateChrome.cs" />

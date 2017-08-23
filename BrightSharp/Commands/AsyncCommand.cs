@@ -66,7 +66,7 @@ namespace BrightSharp.Commands
             }
         }
 
-        protected virtual void OnCanExecuteChanged()
+        public virtual void OnCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, new EventArgs());
         }
