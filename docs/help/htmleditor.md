@@ -1,6 +1,6 @@
 # CKEditor (HtmlEditor) usage example
 
-Documentation in progress... 
+Extra package contains first experimental HtmlEditor
 
 For more info see `BrightSharp.Demo` project. How to setup video https://youtu.be/fQvdY69fQDw
 

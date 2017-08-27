@@ -1,10 +1,10 @@
-﻿using BrightSharp.Mvvm;
-using System;
+﻿using System;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace BrightSharp.Ui.Tests
 {
-    public class CustomerViewModel : ObservableObject
+    public class CustomerViewModel : INotifyPropertyChanged
     {
         static Random rnd = new Random();
         private string _customerId;
@@ -19,6 +19,9 @@ namespace BrightSharp.Ui.Tests
         private string _phone;
         private string _fax;
         private string _color;
+        private int? _numberProperty;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public CustomerViewModel()
         {
@@ -30,57 +33,58 @@ namespace BrightSharp.Ui.Tests
         public string CustomerID
         {
             get { return _customerId; }
-            set { _customerId = value; RaisePropertyChanged(nameof(CustomerID)); }
+            set { _customerId = value; RaisePropertyChanged(); }
         }
+
 
         public string CompanyName
         {
             get { return _companyName; }
-            set { _companyName = value; RaisePropertyChanged(nameof(CompanyName)); }
+            set { _companyName = value; RaisePropertyChanged(); }
         }
 
         public string ContactNameCN
         {
             get { return _contactName; }
-            set { _contactName = value; RaisePropertyChanged(nameof(ContactNameCN)); }
+            set { _contactName = value; RaisePropertyChanged(); }
         }
 
         public string ContactTitle
         {
             get { return _contactTitle; }
-            set { _contactTitle = value; RaisePropertyChanged(nameof(ContactTitle)); }
+            set { _contactTitle = value; RaisePropertyChanged(); }
         }
         [Category("Location")]
         public string Address
         {
             get { return _address; }
-            set { _address = value; RaisePropertyChanged(nameof(Address)); }
+            set { _address = value; RaisePropertyChanged(); }
         }
         [Category("Location")]
         public string City
         {
             get { return _city; }
-            set { _city = value; RaisePropertyChanged(nameof(City)); }
+            set { _city = value; RaisePropertyChanged(); }
         }
         [Category("Location")]
         public string Region
         {
             get { return _region; }
-            set { _region = value; RaisePropertyChanged(nameof(Region)); }
+            set { _region = value; RaisePropertyChanged(); }
         }
         [Category("Contact Information")]
         [Description("Postal code for Customer")]
         public string PostalCode
         {
             get { return _postalCode; }
-            set { _postalCode = value; RaisePropertyChanged(nameof(PostalCode)); }
+            set { _postalCode = value; RaisePropertyChanged(); }
         }
         [Category("Location")]
         [Description("Country for Customer")]
         public string Country
         {
             get { return _country; }
-            set { _country = value; RaisePropertyChanged(nameof(Country)); }
+            set { _country = value; RaisePropertyChanged(); }
         }
 
         [Category("Contact Information")]
@@ -88,7 +92,7 @@ namespace BrightSharp.Ui.Tests
         public string Phone
         {
             get { return _phone; }
-            set { _phone = value; RaisePropertyChanged(nameof(Phone)); }
+            set { _phone = value; RaisePropertyChanged(); }
         }
 
         [Category("Contact Information")]
@@ -96,16 +100,21 @@ namespace BrightSharp.Ui.Tests
         public string Fax
         {
             get { return _fax; }
-            set { _fax = value; RaisePropertyChanged(nameof(Fax)); }
+            set { _fax = value; RaisePropertyChanged(); }
         }
         [Category("Appearance")]
         public string Color
         {
             get { return _color; }
-            set { _color = value; RaisePropertyChanged(nameof(Color)); }
+            set { _color = value; RaisePropertyChanged(); }
         }
 
-		public int NumberProperty { get; set; }
+        public int? NumberProperty
+        {
+            get { return _numberProperty; }
+            set { _numberProperty = value; RaisePropertyChanged(); }
+        }
+
         public double DoubleNumberProperty { get; set; }
 
 
@@ -117,5 +126,12 @@ namespace BrightSharp.Ui.Tests
         [Description("Indicates that Customer is has active state or it absent")]
         [DisplayName("Is Active Or Not Exists")]
         public bool? IsActiveOrEmpty { get; set; }
+
+
+
+
+        private void RaisePropertyChanged([CallerMemberName]string memeberName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(memeberName));
+        }
     }
 }

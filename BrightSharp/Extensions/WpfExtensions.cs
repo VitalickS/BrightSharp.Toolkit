@@ -9,6 +9,12 @@ namespace BrightSharp.Extensions
 {
     public static class WpfExtensions
     {
+        /// <summary>
+        /// Returns Parent item of DependencyObject
+        /// </summary>
+        /// <param name="obj">Child object</param>
+        /// <param name="useLogicalTree">Prefer LogicalTree when need.</param>
+        /// <returns>Found item</returns>
         public static DependencyObject GetParent(this DependencyObject obj, bool useLogicalTree = false)
         {
             if (!useLogicalTree && (obj is Visual || obj is Visual3D))
@@ -16,7 +22,8 @@ namespace BrightSharp.Extensions
             else
                 return LogicalTreeHelper.GetParent(obj);
         }
-        public static IEnumerable<T> Ancestors<T>(this DependencyObject obj, bool useLogicalTree = false) where T : DependencyObject
+
+        public static IEnumerable<T> GetAncestors<T>(this DependencyObject obj, bool useLogicalTree = false) where T : DependencyObject
         {
             if (obj == null) yield break;
 
@@ -30,7 +37,7 @@ namespace BrightSharp.Extensions
                 yield return x as T;
             else
                 yield break;
-            foreach (var item in Ancestors<T>(x, useLogicalTree))
+            foreach (var item in GetAncestors<T>(x, useLogicalTree))
             {
                 yield return item;
             }
@@ -38,34 +45,97 @@ namespace BrightSharp.Extensions
 
         public static T FindAncestor<T>(this DependencyObject obj) where T : DependencyObject
         {
-            return Ancestors<T>(obj).FirstOrDefault();
+            return GetAncestors<T>(obj).FirstOrDefault();
         }
+
+        /// <summary>
+        /// Try find ItemsPanel of ItemsControl
+        /// </summary>
+        /// <param name="itemsControl">Where to search</param>
+        /// <returns>Panel of ItemsControl</returns>
         public static Panel GetItemsPanel(DependencyObject itemsControl)
         {
             if (itemsControl is Panel) return (Panel)itemsControl;
-            ItemsPresenter itemsPresenter = GetVisualChild<ItemsPresenter>(itemsControl);
+            ItemsPresenter itemsPresenter = FindVisualChildren<ItemsPresenter>(itemsControl).FirstOrDefault();
+            if (itemsPresenter == null) return null;
             var itemsPanel = VisualTreeHelper.GetChild(itemsPresenter, 0) as Panel;
             return itemsPanel;
         }
-        public static T GetVisualChild<T>(DependencyObject parent) where T : Visual
-        {
-            T child = default(T);
 
-            int numVisuals = VisualTreeHelper.GetChildrenCount(parent);
-            for (int i = 0; i < numVisuals; i++)
-            {
-                Visual v = (Visual)VisualTreeHelper.GetChild(parent, i);
-                child = v as T;
-                if (child == null)
-                {
-                    child = GetVisualChild<T>(v);
+        /// <summary>
+        /// Check if object is valid (no errors found in logical children)
+        /// </summary>
+        /// <param name="obj">Object to search</param>
+        /// <returns>True if no errors found</returns>
+        public static bool IsValid(this DependencyObject obj) {
+            if (obj == null) return true;
+            if (Validation.GetHasError(obj)) return false;
+            foreach (var child in LogicalTreeHelper.GetChildren(obj).OfType<DependencyObject>()) {
+                if (child == null) continue;
+                if (child is UIElement ui) {
+                    if (!ui.IsVisible || !ui.IsEnabled) continue;
                 }
-                if (child != null)
-                {
-                    break;
+                if (!IsValid(child)) return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Search all textboxes to update invalid with UpdateSource(). For ex. when need update validation messages.
+        /// </summary>
+        /// <param name="obj">Object where to search TextBoxes</param>
+        public static void UpdateSources(this DependencyObject obj) {
+            if (obj == null) return;
+            if (Validation.GetHasError(obj)) {
+                //TODO Any types?
+                if (obj is TextBox tb) tb.GetBindingExpression(TextBox.TextProperty)?.UpdateSource();
+            }
+            foreach (var item in FindLogicalChildren<DependencyObject>(obj)) {
+                UpdateSources(item);
+            }
+        }
+
+        /// <summary>
+        /// Find all visual children of type T
+        /// </summary>
+        /// <typeparam name="T">Type to search</typeparam>
+        /// <param name="depObj">Object where to search</param>
+        /// <returns>Enumerator for items</returns>
+        public static IEnumerable<T> FindVisualChildren<T>(this DependencyObject depObj) where T : DependencyObject {
+            if (depObj != null && (depObj is Visual || depObj is Visual3D)) {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++) {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T) {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child)) {
+                        yield return childOfChild;
+                    }
                 }
             }
-            return child;
+        }
+
+        /// <summary>
+        /// Find all logical children of type T
+        /// </summary>
+        /// <typeparam name="T">Type to search</typeparam>
+        /// <param name="depObj">Object where to search</param>
+        /// <returns>Enumerator for items</returns>
+        public static IEnumerable<T> FindLogicalChildren<T>(this DependencyObject depObj) where T : DependencyObject {
+            if (depObj != null) {
+                foreach (object rawChild in LogicalTreeHelper.GetChildren(depObj)) {
+                    if (rawChild is DependencyObject child) {
+                        if (child is T) {
+                            yield return (T)child;
+                        }
+
+                        foreach (T childOfChild in FindLogicalChildren<T>(child)) {
+                            yield return childOfChild;
+                        }
+                    }
+                }
+            }
         }
     }
 

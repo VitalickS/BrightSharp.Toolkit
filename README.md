@@ -3,32 +3,46 @@
 ------------------------
 
 # BrightSharp.Toolkit
-## Free WPF Professional Themes and User Controls
 
-### version 1.0.0
+Professional WPF Themes and User Controls. It requires `.NET 4.5`. 
 
 
-### Install **basic** from nuget package manager (requires .NET 4.0 AnyCPU)
+### Current Version 2.0
+
+
+### Nuget
 ```batch
- PM > Install-Package BrightSharp.Toolkit
+ > Install-Package BrightSharp.Toolkit
 ```
-
-### Install **extra** from nuget package manager (requires .NET 4.5.2 - x86 or x64)
-```batch
- PM > Install-Package BrightSharp.Toolkit.Extra.64
-```
-NOTE: Extra controls use [CefSharp package](https://github.com/cefsharp/CefSharp) (x86 or x64 architecture required). 
-In future we will add many different controls, that use HTML5 technologies. Extra package does not depend on basic.
 
 ## How To
 
 1. [How to Apply Themes](docs/help/apply-themes.md)
 2. [How to Use HtmlEditor](docs/help/htmleditor.md)
-3. [Brushes/Colors List](docs/help/brushes.md)
+3. [Brushes List](docs/help/brushes.md)
 
-## Classic Theme
+## See presentation screenshots
+Classic:
+
 ![classic-theme](docs/classic-theme.png)
 
+DevLab:
 
-## HtmlEditor (CKEditor) Screenshot (Extra package)
-![CKEditor](docs/htmleditor.png)
+![classic-theme](docs/devlab-theme.png)
+
+Silver:
+
+![classic-theme](docs/silver-theme.png)
+
+Blue:
+
+![classic-theme](docs/blue-theme.png)
+
+DarkBlue:
+
+![classic-theme](docs/darkblue-theme.png)
+
+____________
+
+
+#### Created by Vitaly.S (Minsk, Skype)

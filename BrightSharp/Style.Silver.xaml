@@ -260,9 +260,14 @@
     </LinearGradientBrush>
 
     <SolidColorBrush x:Key="ScrollBarBackgroundBrush" Color="#F0F0F0" />
-    <SolidColorBrush x:Key="SynWindowBackgroundBrush" Color="#FFE4E4E4" />
+    <LinearGradientBrush x:Key="GradientWindowBackgroundBrush" EndPoint="1,1" StartPoint="0,0">
+        <GradientStop Color="White" Offset="0"/>
+        <GradientStop Color="#FFF8F8F8" Offset="0.2"/>
+        <GradientStop Color="#FFE3E3E3" Offset="0.75"/>
+        <GradientStop Color="White" Offset="1"/>
+    </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="HighLightForegroundBrush" Color="DarkRed" />
+    <SolidColorBrush x:Key="HighLightForegroundBrush" Color="#410000" />
 
     <Color x:Key="UiForegroundColor">Black</Color>
     <SolidColorBrush x:Key="UiForegroundBrush" Color="{DynamicResource UiForegroundColor}" />
@@ -270,13 +275,13 @@
 
 
 
-    <Color x:Key="SelectedBackgroundColor">SkyBlue</Color>
+    <Color x:Key="SelectedBackgroundColor">#DEDEDE</Color>
     <Color x:Key="SelectedUnfocusedColor">#FFB6B6B6</Color>
     <Color x:Key="ControlLightColor">#FFFFFFFF</Color>
     <Color x:Key="ControlMediumColor">#FFC5C5C5</Color>
     <Color x:Key="ControlDarkColor">#FF6B6B6B</Color>
 
-    <Color x:Key="ControlMouseOverColor">#FFA5A7BA</Color>
+    <Color x:Key="ControlMouseOverColor">#FFCED0E1</Color>
     <Color x:Key="ControlPressedColor">#FF47909B</Color>
 
 

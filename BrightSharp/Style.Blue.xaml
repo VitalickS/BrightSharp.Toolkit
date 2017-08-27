@@ -276,7 +276,7 @@
 
     <SolidColorBrush x:Key="ScrollBarBackgroundBrush" Color="#F0F0F0" />
     <SolidColorBrush x:Key="SynWindowBackgroundBrush" Color="#FFD1D1D1" />
-    <Color x:Key="SelectedBackgroundColor">#FFE6D745</Color>
+    <Color x:Key="SelectedBackgroundColor">#FFFFF8B8</Color>
     <SolidColorBrush x:Key="OnWindowForegroundBrush" Color="{DynamicResource OnWindowForegroundColor}" />
     <SolidColorBrush x:Key="HighLightForegroundBrush" Color="#FF500000" />
     <Color x:Key="UiForegroundColor">Black</Color>

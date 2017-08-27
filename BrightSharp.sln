@@ -1,11 +1,33 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightSharp", "BrightSharp\BrightSharp.csproj", "{ACC3C556-F8E4-4F2A-A23D-8E8749679A1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightSharp.Ui.Tests", "BrightSharp.Ui.Tests\BrightSharp.Ui.Tests.csproj", "{0D6E1828-8D07-4701-B98A-65DBF1604D3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Subitems", "Subitems", "{D7917F1F-55F7-440E-82BF-1F5ADE0AAD3C}"
+	ProjectSection(SolutionItems) = preProject
+		docs\logo-small.png = docs\logo-small.png
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{21BBA955-8560-43B2-8ED7-275861A2DF11}"
+	ProjectSection(SolutionItems) = preProject
+		docs\BrushesList.png = docs\BrushesList.png
+		docs\classic-theme.png = docs\classic-theme.png
+		docs\htmleditor.png = docs\htmleditor.png
+		docs\logo.png = docs\logo.png
+		docs\help\zoomcontrol.md = docs\help\zoomcontrol.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Help", "Help", "{8097BF6E-FB5B-4DF3-BB75-DCA1A7313D33}"
+	ProjectSection(SolutionItems) = preProject
+		docs\help\apply-themes.md = docs\help\apply-themes.md
+		docs\help\brushes.md = docs\help\brushes.md
+		docs\help\htmleditor.md = docs\help\htmleditor.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +46,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{21BBA955-8560-43B2-8ED7-275861A2DF11} = {D7917F1F-55F7-440E-82BF-1F5ADE0AAD3C}
+		{8097BF6E-FB5B-4DF3-BB75-DCA1A7313D33} = {21BBA955-8560-43B2-8ED7-275861A2DF11}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F1E742F-10FA-44EA-999B-66B79F991220}
 	EndGlobalSection
 EndGlobal

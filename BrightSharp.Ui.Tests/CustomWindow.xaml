@@ -4,18 +4,78 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:bs="http://schemas.brightsharp.com/developer"
+        xmlns:conv="http://schemas.brightsharp.com/developer"
         xmlns:local="clr-namespace:BrightSharp.Ui.Tests"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d" ResizeMode="CanResizeWithGrip"
-        WindowStyle="ToolWindow"
-        Height="640" Width="1000" Style="{DynamicResource BrightSharpWindowStyle}">
+        WindowStyle="ToolWindow" Title="Brushes Explorer"
+        Height="800" Width="600" Style="{DynamicResource BrightSharpWindowStyle}">
+    <Window.Resources>
+        <local:BrushesMapList x:Key="Brushes" />
+
+        <BooleanToVisibilityConverter x:Key="btvc" />
+        <conv:InverseBooleanToVisibilityConverter x:Key="ibtvc" />
+    </Window.Resources>
     <bs:MarkupExtensionProperties.Header>
         <Grid>
-            <TextBlock>Custom WINDOW (BrightSharpWindowStyle)</TextBlock>
+            <TextBlock>Brushes Explorer</TextBlock>
         </Grid>
     </bs:MarkupExtensionProperties.Header>
-    <Window.Resources>
-    </Window.Resources>
-    <Label>
-        TEST (Dev) WINDOW STYLE (CONTENT)
-    </Label>
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Source={StaticResource Brushes}}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Left" Margin="0,1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Stroke="#444" StrokeThickness="1"  Width="80" Height="24">
+                                <Rectangle.Fill>
+                                    <DrawingBrush TileMode="Tile" Viewport="0,0,30,30" 
+                                      ViewportUnits="Absolute">
+                                        <DrawingBrush.Drawing>
+                                            <GeometryDrawing Brush="#BDBDBD" 
+                    Geometry="M5,5 L0,5 0,10 5,10 5,5 10,5 10,0 5,0 Z"/>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <Rectangle Stroke="#444" StrokeThickness="1" Fill="{Binding Path=Value.Brush}" Visibility="{Binding Path=Value.IsBorder, Converter={StaticResource ibtvc}}" >
+                                <Rectangle.ToolTip>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Rectangle Margin="5" Fill="{Binding Path=Value.Brush}" Width="250" Height="50" Visibility="{Binding Path=Value.IsBorder, Converter={StaticResource ibtvc}}" />
+                                        
+                                    </StackPanel>
+                                </Rectangle.ToolTip>
+                            </Rectangle>
+                            <Rectangle Fill="#4444" StrokeThickness="2" Margin="3" Stroke="{Binding Path=Value.Brush}" Visibility="{Binding Path=Value.IsBorder, Converter={StaticResource btvc}}" >
+                                <Rectangle.ToolTip>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Rectangle Margin="5" Stroke="{Binding Path=Value.Brush}" Width="250" Height="50" Visibility="{Binding Path=Value.IsBorder, Converter={StaticResource btvc}}" />
+                                    </StackPanel>
+                                </Rectangle.ToolTip>
+                            </Rectangle>
+
+                            
+
+                            <TextBlock IsHitTestVisible="False" Margin="2,2,0,0" Foreground="{DynamicResource WindowBackgroundBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Value.Type}" />
+                            <TextBlock IsHitTestVisible="False" VerticalAlignment="Center" Foreground="{DynamicResource OnWindowForegroundBrush}" HorizontalAlignment="Center" Text="{Binding Path=Value.Type}" />
+                            <TextBox VerticalContentAlignment="Center" Grid.Column="1" Text="{Binding Path=Key, Mode=OneTime}" BorderThickness="0" Background="Transparent">
+                                <i:Interaction.Behaviors>
+                                    <bs:SelectAllTextOnFocusBehavior />
+                                </i:Interaction.Behaviors>
+                            </TextBox>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
 </Window>

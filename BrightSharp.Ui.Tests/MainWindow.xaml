@@ -2,18 +2,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BrightSharp.Ui.Tests"
         xmlns:viewModel="clr-namespace:BrightSharp.Ui.Tests"
-        Style="{DynamicResource BrightSharpWindowStyle}"
-        ResizeMode="CanResizeWithGrip"
         xmlns:ex="http://schemas.brightsharp.com/developer"
         xmlns:bsDiag="http://schemas.brightsharp.com/diagrams"
+        Style="{DynamicResource BrightSharpWindowStyle}"
+        ResizeMode="CanResizeWithGrip"
         x:Class="BrightSharp.Ui.Tests.MainWindow"
-        mc:Ignorable="d" Background="{DynamicResource WindowBackgroundBrush}"
+        mc:Ignorable="d"
         ex:MarkupExtensionProperties.HeaderHorizontalAlignment="Center"
-        Title="BrightSharp.Ui.Tests" Height="750" Width="1600">
+        Title="BrightSharp.Ui.Tests" Height="750" Width="1900">
     <Window.Resources>
-        <ex:StringHelpConverter x:Key="StringHelpConverter" />
         <x:Array x:Key="coll" Type="{x:Type viewModel:CustomerViewModel}">
             <viewModel:CustomerViewModel CustomerID="ALFKI" CompanyName="Alfreds Futterkiste" ContactNameCN="Maria Anders" ContactTitle="Sales Representative" Address="Obere Str. 57" City="Berlin" PostalCode="12209" Country="Germany" Phone="030-0074321" Fax="030-0076545" />
             <viewModel:CustomerViewModel CustomerID="ANATR" CompanyName="Ana Trujillo Emparedados y helados" ContactNameCN="Ana Trujillo" ContactTitle="Owner" Address="Avda. de la Constitución 2222" City="México D.F." PostalCode="05021" Country="Mexico" Phone="(5) 555-4729" Fax="(5) 555-3745" />
@@ -26,35 +24,73 @@
         </x:Array>
         <CollectionViewSource Source="{StaticResource coll}" x:Key="coll1" />
         <CollectionViewSource Source="{StaticResource coll}" x:Key="coll2" />
+
     </Window.Resources>
+    <ex:MarkupExtensionProperties.Header>
+        <StackPanel Orientation="Horizontal">
+            <Label Foreground="Red">❖</Label>
+            <Label Foreground="White">BrightSharp.Toolkit Presentation ver.2</Label>
+            <Label Foreground="Blue">❖</Label>
+        </StackPanel>
+    </ex:MarkupExtensionProperties.Header>
     <Grid>
+
         <Grid Margin="2" ClipToBounds="True">
             <bsDiag:ZoomControl x:Name="zc" UseAnimation="True" ClipToBounds="False">
                 <ContentControl Style="{StaticResource DesignerItemStyle}" 
+                    Canvas.Left="1600" Canvas.Top="20" Width="300">
+                    <GroupBox Style="{StaticResource ExpandrStyleGroupBox}">
+                        <GroupBox.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>Extended Frame</Label>
+                            </StackPanel>
+                        </GroupBox.Header>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="auto"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Slider Minimum="20" Maximum="50" Value="35" x:Name="FrameHeightSlider" />
+                            <Frame Source="TestPage.xaml" Style="{DynamicResource DevLabFrameStyle}" Grid.Row="1"
+                                   ex:MarkupExtensionProperties.HeaderHeight="{Binding ElementName=FrameHeightSlider, Path=Value}"
+                                   >
+                                <ex:MarkupExtensionProperties.Header>
+                                    <Label VerticalContentAlignment="Center">
+                                        Additional Header Content
+                                    </Label>
+                                </ex:MarkupExtensionProperties.Header>
+
+                            </Frame>
+                        </Grid>
+                    </GroupBox>
+                </ContentControl>
+                <ContentControl Style="{StaticResource DesignerItemStyle}" 
                     Canvas.Left="10" Canvas.Top="20" Width="330">
-                    <GroupBox Header="Common">
+                    <GroupBox Header="Common" Background="{DynamicResource GradientWindowBackgroundBrush}">
                         <Grid>
                             <Button IsDefault="True" Content="Change Theme" Click="Button_Click" HorizontalAlignment="Left" Width="108" Height="32" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                            <Button ex:MarkupExtensionProperties.CornerRadius="25" FocusVisualStyle="{DynamicResource ButtonEllipseFocusVisual}" Content="Round" HorizontalAlignment="Left" Width="50" Height="50" VerticalAlignment="Top" Margin="10,84,0,0"/>
+                            <ToggleButton IsChecked="True" ex:MarkupExtensionProperties.CornerRadius="25" FocusVisualStyle="{DynamicResource ButtonEllipseFocusVisual}" Content="Round" HorizontalAlignment="Left" Width="50" Height="50" VerticalAlignment="Top" Margin="70,84,0,0"/>
                             <ToggleButton Content="Toggle" HorizontalAlignment="Left" Width="108" Height="32" VerticalAlignment="Top" Margin="10,47,0,0"/>
-                            <CheckBox Margin="10,84,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}"/>
-                            <CheckBox IsThreeState="True" ex:MarkupExtensionProperties.Docking="Right" Margin="10,105,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="CheckBox Right Allign"/>
+                            <CheckBox Margin="10,140,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="CheckBox" IsThreeState="True" IsChecked="{x:Null}"/>
+                            <CheckBox IsThreeState="True" ex:MarkupExtensionProperties.Docking="Right" Margin="10,161,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="CheckBox Right Allign"/>
                             <CheckBox HorizontalContentAlignment="Center" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Top" Margin="151,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="137" Content="CheckBox Top Allign"/>
-                            <RadioButton IsChecked="True" Margin="10,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="RadioButton"/>
-                            <RadioButton Margin="10,151,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="RadioButton"/>
+                            <RadioButton IsChecked="True" Margin="10,183,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="RadioButton"/>
+                            <RadioButton Margin="10,204,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Content="RadioButton"/>
                             <TextBox x:Name="tb" Canvas.Left="10" Canvas.Top="269" Margin="151,10,10,0" VerticalAlignment="Top" />
                             <TabControl BorderThickness="1" Margin="151,72,10,0" Height="122" VerticalAlignment="Top">
-                                <TabItem Header="Tab1" />
-                                <TabItem Header="Tab2" />
-                                <TabItem Header="Tab3" />
+                                <TabItem Header="Tab1"/>
+                                <TabItem Header="Tab2"/>
+                                <TabItem Header="Tab3"/>
                             </TabControl>
-                            <CheckBox HorizontalAlignment="Left" Style="{StaticResource SwitchCheckBoxStyle}" VerticalAlignment="Top" Margin="37,204,0,0" Content="SwitchCheckBoxStyle" Width="213" RenderTransformOrigin="0.5,0.5" Height="Auto" />
-                            <TextBox Margin="35,236,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="246">
+                            <CheckBox HorizontalAlignment="Left" Style="{StaticResource SwitchCheckBoxStyle}" VerticalAlignment="Top" Margin="40,275,0,0" Content="SwitchCheckBoxStyle" Width="213" RenderTransformOrigin="0.5,0.5" Height="Auto" />
+                            <TextBox Margin="40,304,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="246" Padding="3">
                                 <ex:MarkupExtensionProperties.LeadingElement>L.El.</ex:MarkupExtensionProperties.LeadingElement>
                                 <ex:MarkupExtensionProperties.TrailingElement>T.El.</ex:MarkupExtensionProperties.TrailingElement>
                                 <ex:MarkupExtensionProperties.Header>Watermark</ex:MarkupExtensionProperties.Header>
                             </TextBox>
-                            <Button Content="Test Custom Window" Margin="93,266,0,0" HorizontalAlignment="Left" Width="134" Height="25" VerticalAlignment="Top" Click="Button_Click_ShowCustomWindow"></Button>
-                            <Calendar Margin="10,295,10,0" VerticalAlignment="Top" Loaded="Calendar_Loaded">
+                            <Button Content="Brushes Explorer" Margin="97,416,0,0" HorizontalAlignment="Left" Width="134" Height="25" VerticalAlignment="Top" Click="Button_Click_ShowCustomWindow"/>
+                            <Calendar Margin="10,441,10,0" VerticalAlignment="Top" Loaded="Calendar_Loaded">
                                 <ex:MarkupExtensionProperties.TrailingElement>
                                     <TextBlock HorizontalAlignment="Center" Foreground="DarkRed"><Run Text="Trailing Region"/></TextBlock>
                                 </ex:MarkupExtensionProperties.TrailingElement>
@@ -62,7 +98,7 @@
                                     <TextBlock HorizontalAlignment="Center" Foreground="DarkBlue"><Run Text="Leading Region"/></TextBlock>
                                 </ex:MarkupExtensionProperties.LeadingElement>
                             </Calendar>
-                            <ComboBox IsEditable="True" Margin="10,172,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedIndex="0" Width="136">
+                            <ComboBox IsEditable="True" Margin="10,225,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedIndex="0" Width="136">
                                 <ComboBoxItem Content="Item 1"/>
                                 <ComboBoxItem Content="Item 2"/>
                                 <ComboBoxItem Content="Item 3"/>
@@ -70,6 +106,54 @@
                                 <ComboBoxItem Content="Item 4"/>
                                 <ComboBoxItem Content="Item 5"/>
                             </ComboBox>
+                            <ComboBox ItemsSource="{Binding Source={StaticResource coll1}}" TextSearch.TextPath="ContactNameCN" IsEditable="True" Margin="10,250,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" SelectedIndex="0" Width="136">
+                                <ex:MarkupExtensionProperties.LeadingElement>
+                                    <ToolBar Style="{DynamicResource FlatToolBar}" Margin="0,2" ex:MarkupExtensionProperties.CornerRadius="3,3,0,0">
+                                        <Button Content="Press me" />
+                                        <Button Content="Press me" />
+                                    </ToolBar>
+                                </ex:MarkupExtensionProperties.LeadingElement>
+                                <ex:MarkupExtensionProperties.TrailingElement>
+                                    <Button HorizontalAlignment="Left" Content="Trailing"/>
+                                </ex:MarkupExtensionProperties.TrailingElement>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderThickness="0,0,0,1" BorderBrush="{DynamicResource SolidBorderBrush}" MinWidth="140">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding ContactNameCN}" FontWeight="DemiBold" />
+                                                <Label Background="White" BorderBrush="Black" BorderThickness="1" Padding="3,0" Margin="0,-14,3,0" HorizontalAlignment="Right">
+                                                    <Label.ToolTip>
+                                                        <StackPanel>
+                                                            <TextBlock Text="{Binding ContactNameCN}" FontWeight="DemiBold" />
+                                                            <TextBlock Text="{Binding Address}" FontStyle="Italic" />
+                                                            <TextBlock Text="{Binding City}" />
+                                                            <TextBlock Text="{Binding CompanyName}" />
+                                                            <TextBlock Text="{Binding ContactTitle}" />
+                                                            <TextBlock Text="{Binding Phone}" />
+                                                        </StackPanel>
+                                                    </Label.ToolTip>
+                                                    <TextBlock Foreground="Black"><Run Text="i"/></TextBlock>
+                                                </Label>
+
+                                                <TextBlock Text="{Binding Address}" FontStyle="Italic" MaxWidth="130" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" ToolTip="{Binding Address}" />
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Style="{DynamicResource GlassButtonStyle}" Content="GlassButton" HorizontalAlignment="Left" Width="70" Height="70" VerticalAlignment="Top" Margin="161,199,0,0"/>
+                            <Button Style="{DynamicResource GlassButtonStyle}" Content="Style" HorizontalAlignment="Left" Width="50" Height="50" VerticalAlignment="Top" Margin="248,209,0,0" Background="#FFFF6868"/>
+                            <TextBox Padding="3" Margin="40,332,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="246"
+                                     Text="{Binding Source={StaticResource coll}, Path=[0].NumberProperty, UpdateSourceTrigger=PropertyChanged}">
+                                <ex:MarkupExtensionProperties.LeadingElement>LD</ex:MarkupExtensionProperties.LeadingElement>
+                                <ex:MarkupExtensionProperties.TrailingElement>TR</ex:MarkupExtensionProperties.TrailingElement>
+                                <ex:MarkupExtensionProperties.Header>Check Validation Style (Number)</ex:MarkupExtensionProperties.Header>
+                            </TextBox>
+                            <PasswordBox Padding="3" Margin="40,375,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="246">
+                                <ex:MarkupExtensionProperties.LeadingElement>Password</ex:MarkupExtensionProperties.LeadingElement>
+                                <ex:MarkupExtensionProperties.TrailingElement>***</ex:MarkupExtensionProperties.TrailingElement>
+                                <ex:MarkupExtensionProperties.Header>Enter your password :)</ex:MarkupExtensionProperties.Header>
+                            </PasswordBox>
                         </Grid>
                     </GroupBox>
                 </ContentControl>
@@ -104,13 +188,29 @@
                                     </MenuItem>
                                 </Menu>
                                 <ToolBar ToolBar.OverflowMode="Never">
-                                    <Button Content="EXEC" />
-                                    <Button Content="View" />
+                                    <Button Content="BUTTON" />
+                                    <ToggleButton Margin="5,0,0,0" Content="TBUTTON" />
+                                    <Separator />
+                                    <Menu Background="Transparent" Foreground="{DynamicResource UiForegroundBrush}">
+                                        <MenuItem Header="Menu ▼">
+                                            <MenuItem Header="MenuItem1"/>
+                                            <MenuItem Header="MenuItem2"/>
+                                        </MenuItem>
+                                    </Menu>
+                                    <TextBox Margin="5,0,0,0" Width="60" />
+                                    <ComboBox Margin="5,0,0,0" Width="60" SelectedIndex="0">
+                                        <ComboBoxItem>1 Combobox Item</ComboBoxItem>
+                                        <ComboBoxItem>2 Combobox Item</ComboBoxItem>
+                                    </ComboBox>
+                                    <Separator />
+                                    <RadioButton Content="R1" IsChecked="True" />
+                                    <RadioButton Content="R2" />
+                                    <RadioButton Content="R3" />
                                 </ToolBar>
                             </StackPanel>
                             <ListView ItemsSource="{Binding Source={StaticResource coll1}}" SelectedIndex="5" Margin="2,54,10,190">
                                 <ListView.View>
-                                    <GridView>
+                                    <GridView >
                                         <GridViewColumn Header="Customer" Width="100" DisplayMemberBinding="{Binding CustomerID}" />
                                         <GridViewColumn Header="Company" Width="180" DisplayMemberBinding="{Binding CompanyName}" />
                                         <GridViewColumn Header="Country" Width="100" DisplayMemberBinding="{Binding Country}" />
@@ -123,11 +223,18 @@
                                 <ListBoxItem Content="789"/>
                             </ListBox>
                             <TreeView Margin="204,0,10,10" Height="175" VerticalAlignment="Bottom">
-                                <TreeViewItem Header="1">
-                                    <TreeViewItem Header="12">
-                                        <TreeViewItem Header="123"/>
-                                        <TreeViewItem Header="123"/>
-                                        <TreeViewItem Header="123"/>
+                                <TreeViewItem IsExpanded="True" Header="First" Foreground="Black" Background="AliceBlue">
+                                    <TreeViewItem Header="F-12" IsExpanded="True" Background="Pink">
+                                        <TreeViewItem Header="F-123" />
+                                        <TreeViewItem Header="F-123" IsSelected="True" />
+                                        <TreeViewItem Header="F-123" />
+                                    </TreeViewItem>
+                                </TreeViewItem>
+                                <TreeViewItem Header="Second">
+                                    <TreeViewItem Header="S-12" ex:MarkupExtensionProperties.SpecialWidth="50">
+                                        <TreeViewItem Header="S-123"/>
+                                        <TreeViewItem Header="S-123"/>
+                                        <TreeViewItem Header="S-123"/>
                                     </TreeViewItem>
                                 </TreeViewItem>
                             </TreeView>
@@ -137,7 +244,7 @@
                 <ContentControl Style="{StaticResource DesignerItemStyle}" bsDiag:VisualExtensions.CanRotate="False"
                     Padding="2,27,2,2"
                     Canvas.Left="850"
-                    Canvas.Top="20" Width="733" Height="475">
+                    Canvas.Top="20" Width="700" Height="450">
                     <GroupBox Margin="0,-25,0,0" Style="{StaticResource ExpandrStyleGroupBox}" >
                         <GroupBox.Header>
                             <Label Content="Xaml RichTextBox (CanRotate=false)"/>
@@ -150,6 +257,8 @@
                                 <Paragraph TextAlignment="Justify">
                                     <Run Text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."/>
                                     <Run Text=" "/>
+                                    <Run Text=" "/>
+                                    <Run Text=" "/>
                                     <Figure HorizontalAnchor="ColumnRight" Width="205">
                                         <BlockUIContainer>
                                             <Image UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
@@ -159,6 +268,8 @@
                                             </Image>
                                         </BlockUIContainer>
                                     </Figure>
+                                    <Run Text=" "/>
+                                    <Run Text=" "/>
                                     <Run Text=" "/>
                                     <Figure HorizontalAnchor="ColumnRight" Width="230">
                                         <BlockUIContainer>
@@ -201,7 +312,7 @@
                     Padding="2,27,2,2"
                     Canvas.Left="350"
                     Canvas.Top="550">
-                    <Expander Margin="0,-25,0,0">
+                    <Expander Margin="0,-25,0,0" IsExpanded="True">
                         <Expander.Header>
                             <Label Background="Transparent" Content="Grid (MaxWidth,MaxHeight)"/>
                         </Expander.Header>
@@ -209,26 +320,25 @@
                     </Expander>
                 </ContentControl>
 
-                <ContentControl  Width="294" Height="133" Background="Pink" Canvas.Left="1050" Canvas.Top="550" Style="{StaticResource DesignerItemStyle}">
+                <ContentControl  Width="294" Height="133" Background="{DynamicResource LightBrush}" Canvas.Left="850" Canvas.Top="550" Style="{StaticResource DesignerItemStyle}">
                     <Border>
                         <StackPanel>
-                            <TextBlock FontStyle="Italic">(Some elements hidden by LODZoom extension)</TextBlock>
+                            <TextBlock FontStyle="Italic"><Run Text="(Some elements hidden by LODZoom extension)"/></TextBlock>
                             <Separator />
-                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom=" A1-5">1. Element use LODZoom Functionality A1-5</TextBlock>
-                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="A -5.1">2. Element use LODZoom Functionality A -5.1</TextBlock>
-                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="a 2-8.3">3. Element use LODZoom Functionality a 2-8.3</TextBlock>
-                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="a 1.5-">4. Element use LODZoom Functionality a 1.5-</TextBlock>
-                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="1-5">5. Element use LODZoom Functionality 1-5</TextBlock>
+                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom=" A1-5"><Run Text="1. Element use LODZoom Functionality A1-5"/></TextBlock>
+                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="A -5.1"><Run Text="2. Element use LODZoom Functionality A -5.1"/></TextBlock>
+                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="a 2-8.3"><Run Text="3. Element use LODZoom Functionality a 2-8.3"/></TextBlock>
+                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="a 1.5-"><Run Text="4. Element use LODZoom Functionality a 1.5-"/></TextBlock>
+                            <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="1-5"><Run Text="5. Element use LODZoom Functionality 1-5"/></TextBlock>
                         </StackPanel>
                     </Border>
 
                 </ContentControl>
 
             </bsDiag:ZoomControl>
-            <CheckBox VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,20" IsChecked="{Binding ElementName=zc, Path=UseAnimation}">UseAnimation</CheckBox>
-            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left">
-                <Run>RenderZoom: </Run><Run Text="{Binding ElementName=zc, Path=RenderZoom}" />
-            </TextBlock>
+            <Label VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,40">Middle Mouse Button To Pan. Hold Ctrl to force zoom.</Label>
+            <CheckBox VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,20" IsChecked="{Binding UseAnimation, ElementName=zc}" Content="UseAnimation"/>
+            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left"><Run Text="RenderZoom:"/><Run Text="{Binding RenderZoom, ElementName=zc, StringFormat={}  {0:N2}}" /></TextBlock>
         </Grid>
 
 

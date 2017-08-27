@@ -123,9 +123,11 @@ namespace Diagrams
                 anim.EasingFunction = new SineEase() { EasingMode = EasingMode.EaseInOut };
                 this.BeginAnimation(ZoomControl.RenderZoomProperty, anim);
             }
-            else
+            else 
             {
-                RenderZoom = newValue;
+                DoubleAnimation anim = new DoubleAnimation(newValue, TimeSpan.FromSeconds(0));
+                anim.EasingFunction = new SineEase() { EasingMode = EasingMode.EaseInOut };
+                this.BeginAnimation(ZoomControl.RenderZoomProperty, anim);
             }
 
             RaiseZoomChangedEvent();
@@ -144,7 +146,13 @@ namespace Diagrams
             }
             else
             {
-                TranslateX = translateXTo; TranslateY = translateYTo;
+                DoubleAnimation anim = new DoubleAnimation(translateXTo, TimeSpan.FromSeconds(0));
+                anim.EasingFunction = new SineEase() { EasingMode = EasingMode.EaseInOut };
+                this.BeginAnimation(ZoomControl.TranslateXProperty, anim);
+
+                anim = new DoubleAnimation(translateYTo, TimeSpan.FromSeconds(0));
+                anim.EasingFunction = new SineEase() { EasingMode = EasingMode.EaseInOut };
+                this.BeginAnimation(ZoomControl.TranslateYProperty, anim);
             }
 
             e.Handled = true;

@@ -56,7 +56,6 @@
     <Compile Include="Commands\AsyncCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\InverseBooleanToVisibilityConverter.cs" />
-    <Compile Include="Converters\StringHelpConverter.cs" />
     <Compile Include="Diagrams\Adorners\ResizeRotateAdorner.cs" />
     <Compile Include="Diagrams\Adorners\ResizeRotateChrome.cs" />
     <Compile Include="Diagrams\Adorners\SizeAdorner.cs" />
@@ -68,7 +67,6 @@
     <Compile Include="Diagrams\Thumbs\ResizeThumb.cs" />
     <Compile Include="Diagrams\Thumbs\RotateThumb.cs" />
     <Compile Include="Extensions\WpfExtensions.cs" />
-    <Compile Include="Mvvm\ViewModelBase.cs" />
     <Compile Include="ThemeManager.cs" />
     <Compile Include="ZoomControl.cs">
       <SubType>Code</SubType>

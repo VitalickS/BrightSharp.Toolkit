@@ -20,7 +20,7 @@ namespace Diagrams
                 {
                     if (e.Source is DependencyObject)
                     {
-                        var clickedElement = ((DependencyObject)e.OriginalSource).Ancestors<ContentControl>().FirstOrDefault(el => el.Style == designerStyle && WpfExtensions.GetItemsPanel(el.GetParent(true)) == fe);
+                        var clickedElement = ((DependencyObject)e.OriginalSource).GetAncestors<ContentControl>().FirstOrDefault(el => el.Style == designerStyle && WpfExtensions.GetItemsPanel(el.GetParent(true)) == fe);
                         if (clickedElement == null)
                         {
                             foreach (DependencyObject item in fePanel.Children)
@@ -49,7 +49,7 @@ namespace Diagrams
                 {
                     if (e.Source is DependencyObject)
                     {
-                        var clickedElement = ((DependencyObject)e.Source).Ancestors<ContentControl>().FirstOrDefault(el => el.Style == designerStyle && el.Parent == fe);
+                        var clickedElement = ((DependencyObject)e.Source).GetAncestors<ContentControl>().FirstOrDefault(el => el.Style == designerStyle && el.Parent == fe);
                         if (clickedElement == null)
                         {
                             foreach (DependencyObject item in feItemsControl.Items)
