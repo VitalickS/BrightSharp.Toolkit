@@ -7,7 +7,7 @@
 Professional WPF Themes and User Controls. It requires `.NET 4.5`. 
 
 
-### Current Version 2.0
+### Current Version 2.1
 
 
 ### Nuget

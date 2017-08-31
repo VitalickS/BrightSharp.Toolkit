@@ -29,7 +29,7 @@
     <ex:MarkupExtensionProperties.Header>
         <StackPanel Orientation="Horizontal">
             <Label Foreground="Red">❖</Label>
-            <Label Foreground="White">BrightSharp.Toolkit Presentation ver.2</Label>
+            <Label Foreground="White">BrightSharp.Toolkit Presentation ver.2.1</Label>
             <Label Foreground="Blue">❖</Label>
         </StackPanel>
     </ex:MarkupExtensionProperties.Header>
@@ -37,9 +37,9 @@
 
         <Grid Margin="2" ClipToBounds="True">
             <bsDiag:ZoomControl x:Name="zc" UseAnimation="True" ClipToBounds="False">
-                <ContentControl Style="{StaticResource DesignerItemStyle}" 
+                <ContentControl Style="{DynamicResource DesignerItemStyle}" 
                     Canvas.Left="1600" Canvas.Top="20" Width="300">
-                    <GroupBox Style="{StaticResource ExpandrStyleGroupBox}">
+                    <GroupBox Style="{DynamicResource ExpandrStyleGroupBox}">
                         <GroupBox.Header>
                             <StackPanel Orientation="Horizontal">
                                 <Label>Extended Frame</Label>
@@ -64,7 +64,7 @@
                         </Grid>
                     </GroupBox>
                 </ContentControl>
-                <ContentControl Style="{StaticResource DesignerItemStyle}" 
+                <ContentControl Style="{DynamicResource DesignerItemStyle}" 
                     Canvas.Left="10" Canvas.Top="20" Width="330">
                     <GroupBox Header="Common" Background="{DynamicResource GradientWindowBackgroundBrush}">
                         <Grid>
@@ -83,7 +83,7 @@
                                 <TabItem Header="Tab2"/>
                                 <TabItem Header="Tab3"/>
                             </TabControl>
-                            <CheckBox HorizontalAlignment="Left" Style="{StaticResource SwitchCheckBoxStyle}" VerticalAlignment="Top" Margin="40,275,0,0" Content="SwitchCheckBoxStyle" Width="213" RenderTransformOrigin="0.5,0.5" Height="Auto" />
+                            <CheckBox HorizontalAlignment="Left" Style="{DynamicResource SwitchCheckBoxStyle}" VerticalAlignment="Top" Margin="40,275,0,0" Content="SwitchCheckBoxStyle" Width="213" RenderTransformOrigin="0.5,0.5" Height="Auto" />
                             <TextBox Margin="40,304,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="246" Padding="3">
                                 <ex:MarkupExtensionProperties.LeadingElement>L.El.</ex:MarkupExtensionProperties.LeadingElement>
                                 <ex:MarkupExtensionProperties.TrailingElement>T.El.</ex:MarkupExtensionProperties.TrailingElement>
@@ -157,12 +157,12 @@
                         </Grid>
                     </GroupBox>
                 </ContentControl>
-                <ContentControl Style="{StaticResource DesignerItemStyle}"
+                <ContentControl Style="{DynamicResource DesignerItemStyle}"
                     Height="474" Width="442"
                     Padding="2,27,2,2"
                     Canvas.Left="350"
                     Canvas.Top="20">
-                    <GroupBox Margin="0,-25,0,0" Style="{StaticResource ExpandrStyleGroupBox}" >
+                    <GroupBox Margin="0,-25,0,0" Style="{DynamicResource ExpandrStyleGroupBox}" >
                         <GroupBox.Header>
                             <Label Content="Collections"/>
                         </GroupBox.Header>
@@ -241,11 +241,11 @@
                         </Grid>
                     </GroupBox>
                 </ContentControl>
-                <ContentControl Style="{StaticResource DesignerItemStyle}" bsDiag:VisualExtensions.CanRotate="False"
+                <ContentControl Style="{DynamicResource DesignerItemStyle}" bsDiag:VisualExtensions.CanRotate="False"
                     Padding="2,27,2,2"
                     Canvas.Left="850"
                     Canvas.Top="20" Width="700" Height="450">
-                    <GroupBox Margin="0,-25,0,0" Style="{StaticResource ExpandrStyleGroupBox}" >
+                    <GroupBox Margin="0,-25,0,0" Style="{DynamicResource ExpandrStyleGroupBox}" >
                         <GroupBox.Header>
                             <Label Content="Xaml RichTextBox (CanRotate=false)"/>
                         </GroupBox.Header>
@@ -261,11 +261,7 @@
                                     <Run Text=" "/>
                                     <Figure HorizontalAnchor="ColumnRight" Width="205">
                                         <BlockUIContainer>
-                                            <Image UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
-                                                <Image.Source>
-                                                    <BitmapImage CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="http://minionomaniya.ru/wp-content/uploads/2016/01/%D0%BC%D0%B8%D0%BD%D1%8C%D0%BE%D0%BD%D1%8B-%D0%BF%D1%80%D0%B8%D0%BA%D0%BE%D0%BB%D1%8B-%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D0%B8.jpg"/>
-                                                </Image.Source>
-                                            </Image>
+                                            <Image UseLayoutRounding="True" d:DesignUseLayoutRounding="True" Source="pack://siteoforigin:,,,/pics/minjons.jpg"/>
                                         </BlockUIContainer>
                                     </Figure>
                                     <Run Text=" "/>
@@ -273,11 +269,7 @@
                                     <Run Text=" "/>
                                     <Figure HorizontalAnchor="ColumnRight" Width="230">
                                         <BlockUIContainer>
-                                            <Image UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
-                                                <Image.Source>
-                                                    <BitmapImage CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="http://www.radionetplus.ru/uploads/posts/2013-12/1386011570_dogs-wallpaper-2.jpg"/>
-                                                </Image.Source>
-                                            </Image>
+                                            <Image UseLayoutRounding="True" d:DesignUseLayoutRounding="True" Source="pack://siteoforigin:,,,/pics/dogs.jpg"/>
                                         </BlockUIContainer>
                                     </Figure>
                                 </Paragraph>
@@ -307,7 +299,7 @@
                         </RichTextBox>
                     </GroupBox>
                 </ContentControl>
-                <ContentControl Style="{StaticResource DesignerItemStyle}"
+                <ContentControl Style="{DynamicResource DesignerItemStyle}"
                     MaxHeight="300" Width="440" MaxWidth="700"
                     Padding="2,27,2,2"
                     Canvas.Left="350"
@@ -320,7 +312,7 @@
                     </Expander>
                 </ContentControl>
 
-                <ContentControl  Width="294" Height="133" Background="{DynamicResource LightBrush}" Canvas.Left="850" Canvas.Top="550" Style="{StaticResource DesignerItemStyle}">
+                <ContentControl  Width="294" Height="133" Background="{DynamicResource LightBrush}" Canvas.Left="850" Canvas.Top="550" Style="{DynamicResource DesignerItemStyle}">
                     <Border>
                         <StackPanel>
                             <TextBlock FontStyle="Italic"><Run Text="(Some elements hidden by LODZoom extension)"/></TextBlock>

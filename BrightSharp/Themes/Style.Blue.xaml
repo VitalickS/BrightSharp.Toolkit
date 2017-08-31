@@ -257,10 +257,7 @@
             <GradientStop Offset="1" Color="#EFF3F3F3" />
         </GradientStopCollection>
     </LinearGradientBrush>
-
     <Color x:Key="WindowBackgroundHoverColor">#FFF</Color>
-
-
     <LinearGradientBrush x:Key="SelectedBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientStop Color="#CC9ACBFF" Offset="0" />
         <GradientStop Color="#FF7DBAFF" Offset=".3" />
@@ -269,18 +266,63 @@
     </LinearGradientBrush>
     <SolidColorBrush x:Key="GlyphBrush" Color="#FF2B1717" />
     <SolidColorBrush x:Key="LightColorBrush" Color="#E9ECF8" />
-
     <Color x:Key="OnWindowForegroundColor">#FF1B140F</Color>
     <Color x:Key="SelectedUnfocusedColor">#FFB6B6B6</Color>
-
-
     <SolidColorBrush x:Key="ScrollBarBackgroundBrush" Color="#F0F0F0" />
     <SolidColorBrush x:Key="SynWindowBackgroundBrush" Color="#FFD1D1D1" />
     <Color x:Key="SelectedBackgroundColor">#FFFFF8B8</Color>
     <SolidColorBrush x:Key="OnWindowForegroundBrush" Color="{DynamicResource OnWindowForegroundColor}" />
     <SolidColorBrush x:Key="HighLightForegroundBrush" Color="#FF500000" />
     <Color x:Key="UiForegroundColor">Black</Color>
-    <SolidColorBrush x:Key="AlternatingRowBackgroundBrush" Color="White" />
+    <SolidColorBrush x:Key="AlternatingRowBackgroundBrush" Color="#F1EFFF" />
+    <SolidColorBrush x:Key="RowBackgroundBrush" Color="White"/>
     <SolidColorBrush x:Key="UiForegroundBrush" Color="{DynamicResource UiForegroundColor}" />
+    <Color x:Key="ControlLightColor">#FFFFFFFF</Color>
+    <Color x:Key="ControlMediumColor">#FFC5C5C5</Color>
+    <Color x:Key="ControlDarkColor">#FF6B6B6B</Color>
+    <Color x:Key="ControlMouseOverColor">#FFDADCEC</Color>
+    <Color x:Key="ControlPressedColor">#FF47909B</Color>
+    <Color x:Key="BorderLightColor">#D6D6D6</Color>
+    <Color x:Key="BorderMediumColor">#E6E6E6</Color>
+
+    <!--Window Brushes-->
+
+    <LinearGradientBrush x:Key="GradientWindowBackgroundBrush" EndPoint="1,1" StartPoint="0,0">
+        <GradientStop Color="#FFAFBAD6" Offset="0"/>
+        <GradientStop Color="White" Offset="1"/>
+        <GradientStop Color="#FFD1E3FF" Offset="0.766"/>
+        <GradientStop Color="#FFE2E8F8" Offset="0.238"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="WindowHeaderBrush" EndPoint="0,1">
+        <GradientStop Color="#EFD3D3" />
+        <GradientStop Color="#FFB5BBC6" Offset="0.2" />
+        <GradientStop Color="#FFDDDDF7" Offset="0.8" />
+        <GradientStop Color="#FF93B1CE" Offset="1" />
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="WindowHeaderInactiveBackgroundBrush" Color="#8888" />
+
+    <LinearGradientBrush x:Key="WindowHeaderInactiveBrush" EndPoint="0,1">
+        <GradientStop Color="#A5A5A5" />
+        <GradientStop Color="#FF616161" Offset="0.2" />
+        <GradientStop Color="#FF5C5C5C" Offset="0.8" />
+        <GradientStop Color="#FFBEC5CB" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="WindowBorderBrush" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#FF898989" Offset="0"/>
+        <GradientStop Color="#FF898989" Offset="1"/>
+        <GradientStop Color="LightGray" Offset="0.841"/>
+        <GradientStop Color="#FFCBCBCB" Offset="0.23"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="WindowInnerBorderBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#F0F0F0" Offset="1" />
+        <GradientStop Color="White" />
+    </LinearGradientBrush>
+
+
+
 
 </ResourceDictionary>

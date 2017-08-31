@@ -22,6 +22,8 @@
 
     <Color x:Key="ControlMouseOverColor"    >#FF414888</Color>
     <Color x:Key="ControlPressedColor"      >#FF47909B</Color>
+    <Color x:Key="BorderLightColor">#D6D6D6</Color>
+    <Color x:Key="BorderMediumColor">#E6E6E6</Color>
 
     <Color x:Key="ValidationErrorColor"     >#FF3333</Color>
 
@@ -80,6 +82,7 @@
     <SolidColorBrush x:Key="HighLightForegroundBrush" Color="Black" />
 
     <SolidColorBrush x:Key="AlternatingRowBackgroundBrush" Color="#555555" />
+    <SolidColorBrush x:Key="RowBackgroundBrush" Color="#6C6C6C" />
 
 
     <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
@@ -299,6 +302,6 @@
             </GradientStopCollection>
         </LinearGradientBrush.GradientStops>
     </LinearGradientBrush>
-
-
+    
+    <SolidColorBrush x:Key="WindowHeaderInactiveBackgroundBrush" Color="#8888" />
 </ResourceDictionary>

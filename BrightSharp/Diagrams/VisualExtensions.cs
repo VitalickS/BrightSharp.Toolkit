@@ -58,23 +58,10 @@ namespace BrightSharp.Diagrams
 
                 var zoomChangedHandler = new RoutedEventHandler((sender, args) =>
                 {
-                    var lodInfo = new LodInfo(GetLODZoom(element));
-
-                    var transform = element.TransformToVisual(window) as MatrixTransform;
-                    var scaleX = transform.Matrix.M11;
-
-                    var newOpacity = (scaleX >= lodInfo.StartRange && scaleX <= lodInfo.EndRange) ? 1 : 0;
-
-                    if (lodInfo.UseAnimation && args.RoutedEvent != FrameworkElement.LoadedEvent)
-                    {
-                        element.Visibility = Visibility.Visible;
-                        var animation = new DoubleAnimation(newOpacity, TimeSpan.FromSeconds(.5));
-                        element.BeginAnimation(UIElement.OpacityProperty, animation);
+                    try {
+                        ChangeVisibility(args, element, window);
                     }
-                    else
-                    {
-                        element.Visibility = newOpacity == 1 ? Visibility.Visible : Visibility.Hidden;
-                        element.Opacity = newOpacity;
+                    catch (Exception) {
                     }
                 });
 
@@ -90,6 +77,25 @@ namespace BrightSharp.Diagrams
                     zoomControl.ZoomChanged += zoomChangedHandler;
                     zoomControl.Loaded += zoomChangedHandler;
                 }
+            }
+        }
+
+        private static void ChangeVisibility(RoutedEventArgs args, FrameworkElement element, Window window) {
+            var lodInfo = new LodInfo(GetLODZoom(element));
+
+            var transform = element.TransformToVisual(window) as MatrixTransform;
+            var scaleX = transform.Matrix.M11;
+
+            var newOpacity = (scaleX >= lodInfo.StartRange && scaleX <= lodInfo.EndRange) ? 1 : 0;
+
+            if (lodInfo.UseAnimation && args.RoutedEvent != FrameworkElement.LoadedEvent) {
+                element.Visibility = Visibility.Visible;
+                var animation = new DoubleAnimation(newOpacity, TimeSpan.FromSeconds(.5));
+                element.BeginAnimation(UIElement.OpacityProperty, animation);
+            }
+            else {
+                element.Visibility = newOpacity == 1 ? Visibility.Visible : Visibility.Hidden;
+                element.Opacity = newOpacity;
             }
         }
 

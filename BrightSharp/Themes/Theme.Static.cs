@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
@@ -8,7 +9,7 @@ using System.Windows.Media;
 namespace BrightSharp.Themes
 {
 
-    internal partial class Theme
+    internal partial class ThemeStatic
     {
         public void CalendarPreviewMouseUp(object sender, MouseEventArgs e) {
             if (Mouse.Captured is CalendarItem) { Mouse.Capture(null); }

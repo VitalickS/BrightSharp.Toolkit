@@ -68,6 +68,9 @@
     <Compile Include="Diagrams\Thumbs\ResizeThumb.cs" />
     <Compile Include="Diagrams\Thumbs\RotateThumb.cs" />
     <Compile Include="Extensions\WpfExtensions.cs" />
+    <Compile Include="Themes\Theme.cs">
+      <DependentUpon>Theme.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Diagrams\ZoomControl.cs">
       <SubType>Code</SubType>
@@ -86,7 +89,9 @@
     </Page>
     <Compile Include="Converters\ThicknessConverter.cs" />
     <Compile Include="Extensions\MarkupExtensionProperties.cs" />
-    <Compile Include="Themes\Theme.cs" />
+    <None Include="Themes\Theme.Static.cs">
+      <DependentUpon>Theme.Static.xaml</DependentUpon>
+    </None>
     <Page Include="Themes\Diagrams\DesignerItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -103,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\Style.Classic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Style.DarkBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -116,9 +125,13 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <None Include="Themes\Theme.Static.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

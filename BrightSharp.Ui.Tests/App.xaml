@@ -5,6 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/brightsharp;component/themes/style.classic.xaml" />
                 <ResourceDictionary Source="/brightsharp;component/themes/theme.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

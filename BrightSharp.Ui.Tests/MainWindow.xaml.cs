@@ -23,13 +23,9 @@ namespace BrightSharp.Ui.Tests
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (Enum.IsDefined(typeof(ColorThemes), ThemeManager.Theme + 1))
-            {
                 ThemeManager.Theme = ThemeManager.Theme + 1;
-            }
             else
-            {
                 ThemeManager.Theme = ColorThemes.Classic;
-            }
             tb.Text = ThemeManager.Theme.ToString();
         }
 
