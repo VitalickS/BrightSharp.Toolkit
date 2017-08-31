@@ -9,7 +9,6 @@ namespace BrightSharp.Themes
 {
     public enum ColorThemes
     {
-        None,
         Classic,
         DevLab,
         Silver,
@@ -24,13 +23,13 @@ namespace BrightSharp.Themes
 
         static ColorThemes? _theme;
 
-        public static ColorThemes Theme
+        public static ColorThemes? Theme
         {
             get {
                 if (_theme.HasValue) return _theme.Value;
                 var curStyleRes = Resources.Where(r => r.Source != null &&
                     Regex.IsMatch(r.Source.OriginalString, StyleDictionaryPattern, RegexOptions.IgnoreCase)).FirstOrDefault();
-                if (curStyleRes == null) return ColorThemes.None;
+                if (curStyleRes == null) return null;
                 var match = Regex.Match(curStyleRes.Source.OriginalString, StyleDictionaryPattern, RegexOptions.IgnoreCase);
                 _theme = (ColorThemes)Enum.Parse(typeof(ColorThemes), match.Value, true);
                 return _theme.Value;
@@ -40,7 +39,7 @@ namespace BrightSharp.Themes
             }
         }
 
-        public static DispatcherOperation SetTheme(ColorThemes value, DispatcherPriority priority = DispatcherPriority.Background) {
+        public static DispatcherOperation SetTheme(ColorThemes? value, DispatcherPriority priority = DispatcherPriority.Background) {
             if (_theme == value) return Application.Current.Dispatcher.BeginInvoke(new Action(() => { }), priority);
             _theme = value;
             return Application.Current.Dispatcher.BeginInvoke(new Action(() =>
@@ -55,7 +54,7 @@ namespace BrightSharp.Themes
                     Resources.Remove(curThemeRes);
                 if (curStyleRes != null)
                     Resources.Remove(curStyleRes);
-                if (value == ColorThemes.None) return;
+                if (value == null) return;
                 Resources.Add(new ResourceDictionary() { Source = new Uri($"/brightsharp;component/themes/style.{value}.xaml", UriKind.RelativeOrAbsolute) });
                 if (curThemeRes != null)
                     Resources.Add(new ResourceDictionary() { Source = new Uri(StaticThemeDictionaryUri, UriKind.RelativeOrAbsolute) });
