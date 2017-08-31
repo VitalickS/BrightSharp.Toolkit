@@ -55,6 +55,7 @@
     <Compile Include="Behaviors\SelectAllTextOnFocusBehavior.cs" />
     <Compile Include="Commands\AsyncCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Controls\PropertyGrid.cs" />
     <Compile Include="Converters\InverseBooleanToVisibilityConverter.cs" />
     <Compile Include="Diagrams\Adorners\ResizeRotateAdorner.cs" />
     <Compile Include="Diagrams\Adorners\ResizeRotateChrome.cs" />
@@ -67,44 +68,56 @@
     <Compile Include="Diagrams\Thumbs\ResizeThumb.cs" />
     <Compile Include="Diagrams\Thumbs\RotateThumb.cs" />
     <Compile Include="Extensions\WpfExtensions.cs" />
-    <Compile Include="ThemeManager.cs" />
-    <Compile Include="ZoomControl.cs">
+    <Compile Include="Themes\ThemeManager.cs" />
+    <Compile Include="Diagrams\ZoomControl.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Generic.xaml">
+    <Page Include="Themes\Controls\PropertyGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Controls\ZoomControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="Converters\ThicknessConverter.cs" />
     <Compile Include="Extensions\MarkupExtensionProperties.cs" />
-    <Compile Include="Generic.cs" />
-    <Page Include="Diagrams\Resources\DesignerItem.xaml">
+    <Compile Include="Themes\Theme.cs" />
+    <Page Include="Themes\Diagrams\DesignerItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Diagrams\Resources\ResizeRotateChrome.xaml">
+    <Page Include="Themes\Diagrams\ResizeRotateChrome.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Diagrams\Resources\SizeChrome.xaml">
+    <Page Include="Themes\Diagrams\SizeChrome.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Style.Blue.xaml">
+    <Page Include="Themes\Style.Blue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Style.DarkBlue.xaml">
+    <Page Include="Themes\Style.DarkBlue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Style.Silver.xaml">
+    <Page Include="Themes\Style.Silver.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Style.DevLab.xaml">
+    <Page Include="Themes\Style.DevLab.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Theme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -132,14 +145,15 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons\app.png" />
+    <Resource Include="Themes\icons\app.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icons\copy.png" />
-    <Resource Include="icons\cut.png" />
-    <Resource Include="icons\paste.png" />
-    <Resource Include="icons\undo.png" />
+    <Resource Include="Themes\icons\copy.png" />
+    <Resource Include="Themes\icons\cut.png" />
+    <Resource Include="Themes\icons\paste.png" />
+    <Resource Include="Themes\icons\undo.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

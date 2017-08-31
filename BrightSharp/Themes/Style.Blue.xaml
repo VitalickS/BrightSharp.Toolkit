@@ -1,8 +1,8 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:s="clr-namespace:System;assembly=mscorlib"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <sys:Boolean x:Key="IsInverseTheme">False</sys:Boolean>
+    <s:Boolean x:Key="IsInverseTheme">False</s:Boolean>
 
     <CornerRadius x:Key="DefaultRadiusSmall">1</CornerRadius>
     <CornerRadius x:Key="DefaultRadiusNormal">3</CornerRadius>

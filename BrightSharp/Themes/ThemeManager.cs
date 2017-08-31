@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 
-namespace BrightSharp
+namespace BrightSharp.Themes
 {
     public enum ColorThemes
     {
@@ -38,7 +38,7 @@ namespace BrightSharp
                     return;
                 Resources.Add(new ResourceDictionary()
                 {
-                    Source = new Uri($"/brightsharp;component/style.{value}.xaml", UriKind.RelativeOrAbsolute)
+                    Source = new Uri($"/brightsharp;component/themes/style.{value}.xaml", UriKind.RelativeOrAbsolute)
                 });
             }
         }

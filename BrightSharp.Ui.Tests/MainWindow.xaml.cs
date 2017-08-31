@@ -1,4 +1,5 @@
 ﻿using BrightSharp.Diagrams;
+using BrightSharp.Themes;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows;
