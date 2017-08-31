@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace Diagrams
+namespace BrightSharp.Diagrams
 {
 
     [ToolboxItem(false)]
@@ -13,7 +13,7 @@ namespace Diagrams
     {
         static SizeChrome()
         {
-            FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(SizeChrome), new FrameworkPropertyMetadata(typeof(SizeChrome)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(SizeChrome), new FrameworkPropertyMetadata(typeof(SizeChrome)));
         }
     }
 

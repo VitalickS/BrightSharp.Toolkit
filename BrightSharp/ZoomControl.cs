@@ -6,7 +6,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
-namespace Diagrams
+namespace BrightSharp.Diagrams
 {
 
     public partial class ZoomControl : ItemsControl
@@ -121,13 +121,13 @@ namespace Diagrams
             {
                 DoubleAnimation anim = new DoubleAnimation(newValue, TimeSpan.FromSeconds(.3));
                 anim.EasingFunction = new SineEase() { EasingMode = EasingMode.EaseInOut };
-                this.BeginAnimation(ZoomControl.RenderZoomProperty, anim);
+                BeginAnimation(ZoomControl.RenderZoomProperty, anim);
             }
             else 
             {
                 DoubleAnimation anim = new DoubleAnimation(newValue, TimeSpan.FromSeconds(0));
                 anim.EasingFunction = new SineEase() { EasingMode = EasingMode.EaseInOut };
-                this.BeginAnimation(ZoomControl.RenderZoomProperty, anim);
+                BeginAnimation(ZoomControl.RenderZoomProperty, anim);
             }
 
             RaiseZoomChangedEvent();
@@ -138,21 +138,21 @@ namespace Diagrams
             {
                 DoubleAnimation anim = new DoubleAnimation(translateXTo, TimeSpan.FromSeconds(.3));
                 anim.EasingFunction = new SineEase() { EasingMode = EasingMode.EaseInOut };
-                this.BeginAnimation(ZoomControl.TranslateXProperty, anim);
+                BeginAnimation(ZoomControl.TranslateXProperty, anim);
 
                 anim = new DoubleAnimation(translateYTo, TimeSpan.FromSeconds(.3));
                 anim.EasingFunction = new SineEase() { EasingMode = EasingMode.EaseInOut };
-                this.BeginAnimation(ZoomControl.TranslateYProperty, anim);
+                BeginAnimation(ZoomControl.TranslateYProperty, anim);
             }
             else
             {
                 DoubleAnimation anim = new DoubleAnimation(translateXTo, TimeSpan.FromSeconds(0));
                 anim.EasingFunction = new SineEase() { EasingMode = EasingMode.EaseInOut };
-                this.BeginAnimation(ZoomControl.TranslateXProperty, anim);
+                BeginAnimation(ZoomControl.TranslateXProperty, anim);
 
                 anim = new DoubleAnimation(translateYTo, TimeSpan.FromSeconds(0));
                 anim.EasingFunction = new SineEase() { EasingMode = EasingMode.EaseInOut };
-                this.BeginAnimation(ZoomControl.TranslateYProperty, anim);
+                BeginAnimation(ZoomControl.TranslateYProperty, anim);
             }
 
             e.Handled = true;

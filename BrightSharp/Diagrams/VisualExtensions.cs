@@ -1,12 +1,11 @@
-﻿using BrightSharp;
-using BrightSharp.Extensions;
+﻿using BrightSharp.Extensions;
 using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace Diagrams
+namespace BrightSharp.Diagrams
 {
     /// <summary>
     /// If starts with a(A) then use animation,

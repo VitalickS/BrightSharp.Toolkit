@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.ComponentModel;
 
-namespace Diagrams
+namespace BrightSharp.Diagrams
 {
     [ToolboxItem(false)]
     public class DesignerItemDecorator : Control
@@ -29,63 +25,63 @@ namespace Diagrams
 
         public DesignerItemDecorator()
         {
-            Unloaded += new RoutedEventHandler(this.DesignerItemDecorator_Unloaded);
+            Unloaded += new RoutedEventHandler(DesignerItemDecorator_Unloaded);
         }
 
         private void HideAdorner()
         {
-            if (this.adorner != null)
+            if (adorner != null)
             {
-                this.adorner.Visibility = Visibility.Hidden;
+                adorner.Visibility = Visibility.Hidden;
             }
         }
 
         private void ShowAdorner()
         {
-            if (this.adorner == null)
+            if (adorner == null)
             {
                 AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this);
 
                 if (adornerLayer != null)
                 {
-                    ContentControl designerItem = this.DataContext as ContentControl;
+                    ContentControl designerItem = DataContext as ContentControl;
                     Canvas canvas = VisualTreeHelper.GetParent(designerItem) as Canvas;
-                    this.adorner = new ResizeRotateAdorner(designerItem);
-                    adornerLayer.Add(this.adorner);
+                    adorner = new ResizeRotateAdorner(designerItem);
+                    adornerLayer.Add(adorner);
 
-                    if (this.ShowDecorator)
+                    if (ShowDecorator)
                     {
-                        this.adorner.Visibility = Visibility.Visible;
+                        adorner.Visibility = Visibility.Visible;
 
                         var anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(.2));
-                        this.adorner.BeginAnimation(OpacityProperty, anim);
+                        adorner.BeginAnimation(OpacityProperty, anim);
                     }
                     else
                     {
-                        this.adorner.Visibility = Visibility.Hidden;
+                        adorner.Visibility = Visibility.Hidden;
                     }
                 }
             }
             else
             {
-                this.adorner.Visibility = Visibility.Visible;
+                adorner.Visibility = Visibility.Visible;
 
                 var anim = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(.2));
-                this.adorner.BeginAnimation(OpacityProperty, anim);
+                adorner.BeginAnimation(OpacityProperty, anim);
             }
         }
 
         private void DesignerItemDecorator_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (this.adorner != null)
+            if (adorner != null)
             {
                 AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this);
                 if (adornerLayer != null)
                 {
-                    adornerLayer.Remove(this.adorner);
+                    adornerLayer.Remove(adorner);
                 }
 
-                this.adorner = null;
+                adorner = null;
             }
         }
 

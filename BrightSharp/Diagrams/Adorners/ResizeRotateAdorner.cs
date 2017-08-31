@@ -2,10 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Diagrams
+namespace BrightSharp.Diagrams
 {
     [ToolboxItem(false)]
     public class ResizeRotateAdorner : Adorner
@@ -17,7 +16,7 @@ namespace Diagrams
         {
             get
             {
-                return this.visuals.Count;
+                return visuals.Count;
             }
         }
 
@@ -25,24 +24,24 @@ namespace Diagrams
             : base(designerItem)
         {
             SnapsToDevicePixels = true;
-            this.chrome = new ResizeRotateChrome();
-            this.chrome.DataContext = designerItem;
-            this.visuals = new VisualCollection(this);
-            this.visuals.Add(this.chrome);
-            this.Focusable = true;
+            chrome = new ResizeRotateChrome();
+            chrome.DataContext = designerItem;
+            visuals = new VisualCollection(this);
+            visuals.Add(chrome);
+            Focusable = true;
         }
 
 
 
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
-            this.chrome.Arrange(new Rect(arrangeBounds));
+            chrome.Arrange(new Rect(arrangeBounds));
             return arrangeBounds;
         }
 
         protected override Visual GetVisualChild(int index)
         {
-            return this.visuals[index];
+            return visuals[index];
         }
         
     }

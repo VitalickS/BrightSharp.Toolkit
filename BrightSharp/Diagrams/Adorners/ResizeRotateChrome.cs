@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Diagrams
+namespace BrightSharp.Diagrams
 {
     [ToolboxItem(false)]
     public class ResizeRotateChrome : Control

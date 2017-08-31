@@ -3,9 +3,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System;
 
-namespace Diagrams
+namespace BrightSharp.Diagrams
 {
     public static class SelectionBehavior
     {

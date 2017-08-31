@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
-namespace Diagrams
+namespace BrightSharp.Diagrams
 {
     [ToolboxItem(false)]
     public class MoveThumb : Thumb
@@ -25,10 +25,10 @@ namespace Diagrams
         }
 
         private void MoveThumb_DragStarted(object sender, DragStartedEventArgs e) {
-            this.designerItem = DataContext as ContentControl;
+            designerItem = DataContext as ContentControl;
 
-            if (this.designerItem != null) {
-                this.rotateTransform = this.designerItem.RenderTransform as RotateTransform;
+            if (designerItem != null) {
+                rotateTransform = designerItem.RenderTransform as RotateTransform;
                 if (designerItem.GetBindingExpression(Panel.ZIndexProperty) == null) {
                     zIndex = Math.Max(zIndex ?? 0, Panel.GetZIndex(designerItem));
                     Panel.SetZIndex(designerItem, zIndex.Value + 1);
@@ -37,17 +37,17 @@ namespace Diagrams
         }
 
         private void MoveThumb_DragDelta(object sender, DragDeltaEventArgs e) {
-            if (this.designerItem != null) {
+            if (designerItem != null) {
                 Point dragDelta = new Point(e.HorizontalChange, e.VerticalChange);
 
-                if (this.rotateTransform != null) {
-                    dragDelta = this.rotateTransform.Transform(dragDelta);
+                if (rotateTransform != null) {
+                    dragDelta = rotateTransform.Transform(dragDelta);
                 }
-                if (double.IsNaN(Canvas.GetLeft(this.designerItem))) Canvas.SetLeft(this.designerItem, 0);
-                if (double.IsNaN(Canvas.GetTop(this.designerItem))) Canvas.SetTop(this.designerItem, 0);
+                if (double.IsNaN(Canvas.GetLeft(designerItem))) Canvas.SetLeft(designerItem, 0);
+                if (double.IsNaN(Canvas.GetTop(designerItem))) Canvas.SetTop(designerItem, 0);
 
-                Canvas.SetLeft(this.designerItem, Canvas.GetLeft(this.designerItem) + dragDelta.X);
-                Canvas.SetTop(this.designerItem, Canvas.GetTop(this.designerItem) + dragDelta.Y);
+                Canvas.SetLeft(designerItem, Canvas.GetLeft(designerItem) + dragDelta.X);
+                Canvas.SetTop(designerItem, Canvas.GetTop(designerItem) + dragDelta.Y);
 
 
             }

@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-namespace Diagrams
+namespace BrightSharp.Diagrams
 {
     [ToolboxItem(false)]
     public class SizeAdorner : Adorner
@@ -17,29 +17,29 @@ namespace Diagrams
         {
             get
             {
-                return this.visuals.Count;
+                return visuals.Count;
             }
         }
 
         public SizeAdorner(ContentControl designerItem)
             : base(designerItem)
         {
-            this.SnapsToDevicePixels = true;
+            SnapsToDevicePixels = true;
             this.designerItem = designerItem;
-            this.chrome = new SizeChrome();
-            this.chrome.DataContext = designerItem;
-            this.visuals = new VisualCollection(this);
-            this.visuals.Add(this.chrome);
+            chrome = new SizeChrome();
+            chrome.DataContext = designerItem;
+            visuals = new VisualCollection(this);
+            visuals.Add(chrome);
         }
 
         protected override Visual GetVisualChild(int index)
         {
-            return this.visuals[index];
+            return visuals[index];
         }
 
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
-            this.chrome.Arrange(new Rect(new Point(0.0, 0.0), arrangeBounds));
+            chrome.Arrange(new Rect(new Point(0.0, 0.0), arrangeBounds));
             return arrangeBounds;
         }
     }
