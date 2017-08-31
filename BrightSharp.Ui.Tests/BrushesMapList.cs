@@ -8,7 +8,8 @@ namespace BrightSharp.Ui.Tests
     public class BrushesMapList : Dictionary<string, object>
     {
         public BrushesMapList() {
-            var dic = Application.Current.Resources.MergedDictionaries.First();
+            var dic = Application.Current.Resources.MergedDictionaries.FirstOrDefault(x => x.Source != null && x.Source.OriginalString.Contains("style."));
+            if (dic == null) return;
             foreach (string key in dic.Keys.OfType<string>().OrderBy(x => x)) {
                 var value = Application.Current.TryFindResource(key);
                 if (value != null) {
