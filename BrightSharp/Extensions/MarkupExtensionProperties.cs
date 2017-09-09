@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using BrightSharp.Behaviors;
+using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interactivity;
 using System.Windows.Media;
 
 namespace BrightSharp.Extensions
@@ -120,6 +124,16 @@ namespace BrightSharp.Extensions
             obj.SetValue(SpecialBrushProperty, value);
         }
 
+        public static bool GetUseMinMaxSizeBehavior(Window obj)
+        {
+            return (bool)obj.GetValue(UseMinMaxSizeBehaviorProperty);
+        }
+
+        public static void SetUseMinMaxSizeBehavior(Window obj, bool value)
+        {
+            obj.SetValue(UseMinMaxSizeBehaviorProperty, value);
+        }
+
         public static readonly DependencyProperty SpecialBrushProperty = DependencyProperty.RegisterAttached("SpecialBrush", typeof(Brush), typeof(MarkupExtensionProperties), new PropertyMetadata(null));
         public static readonly DependencyProperty IsDragHelperVisibleProperty = DependencyProperty.RegisterAttached("IsDragHelperVisible", typeof(bool), typeof(MarkupExtensionProperties), new FrameworkPropertyMetadata(true));
         public static readonly DependencyProperty HeaderPaddingProperty = DependencyProperty.RegisterAttached("HeaderPadding", typeof(Thickness), typeof(MarkupExtensionProperties), new PropertyMetadata(null));
@@ -134,7 +148,23 @@ namespace BrightSharp.Extensions
         public static readonly DependencyProperty HeaderHorizontalAlignmentProperty = DependencyProperty.RegisterAttached("HeaderHorizontalAlignment", typeof(HorizontalAlignment), typeof(MarkupExtensionProperties), new PropertyMetadata(HorizontalAlignment.Left));
         public static readonly DependencyProperty SpecialHeightProperty = DependencyProperty.RegisterAttached("SpecialHeight", typeof(double), typeof(MarkupExtensionProperties), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.Inherits | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure));
         public static readonly DependencyProperty SpecialWidthProperty = DependencyProperty.RegisterAttached("SpecialWidth", typeof(double), typeof(MarkupExtensionProperties), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.Inherits | FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure));
-        
+        public static readonly DependencyProperty UseMinMaxSizeBehaviorProperty = DependencyProperty.RegisterAttached("UseMinMaxSizeBehavior", typeof(bool), typeof(MarkupExtensionProperties), new PropertyMetadata(false, UseMinMaxSizeBehaviorChanged));
+
+
+        private static void UseMinMaxSizeBehaviorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var window = d as Window;
+            if (window == null) return;
+            if ((bool)e.NewValue)
+            {
+                Interaction.GetBehaviors(window).Add(new WindowMinMaxSizeBehavior());
+            }
+            else
+            {
+                var beh = Interaction.GetBehaviors(window).OfType<WindowMinMaxSizeBehavior>().FirstOrDefault();
+                if (beh != null) Interaction.GetBehaviors(window).Remove(beh);
+            }
+        }
     }
 
 }

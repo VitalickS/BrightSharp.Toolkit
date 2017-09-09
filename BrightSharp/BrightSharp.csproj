@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Behaviors\FiterGridTextBoxBehavior.cs" />
     <Compile Include="Behaviors\SelectAllTextOnFocusBehavior.cs" />
+    <Compile Include="Behaviors\WindowMinMaxSizeBehavior.cs" />
     <Compile Include="Commands\AsyncCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Controls\PropertyGrid.cs" />
@@ -68,6 +69,9 @@
     <Compile Include="Diagrams\Thumbs\ResizeThumb.cs" />
     <Compile Include="Diagrams\Thumbs\RotateThumb.cs" />
     <Compile Include="Extensions\WpfExtensions.cs" />
+    <Compile Include="Interop\Constants.cs" />
+    <Compile Include="Interop\NativeMethods.cs" />
+    <Compile Include="Interop\Structures.cs" />
     <Compile Include="Themes\Theme.cs">
       <DependentUpon>Theme.xaml</DependentUpon>
     </Compile>

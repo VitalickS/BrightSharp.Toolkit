@@ -5630,7 +5630,6 @@
 
     <Style x:Key="BrightSharpWindowStyle" TargetType="{x:Type Window}">
         <Setter Property="WindowStyle" Value="None" />
-        <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <Setter Property="bs:MarkupExtensionProperties.SpecialBrush" Value="{DynamicResource WindowInnerBorderBrush}"/>
 
         <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderBrush}">
@@ -5649,7 +5648,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
-                        <Border BorderBrush="{TemplateBinding bs:MarkupExtensionProperties.SpecialBrush}" BorderThickness="1">
+                        <Border x:Name="InnerBorder" BorderBrush="{TemplateBinding bs:MarkupExtensionProperties.SpecialBrush}" BorderThickness="1">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30" />
@@ -5658,7 +5657,7 @@
                                 <Border x:Name="HeaderBorder" Background="{DynamicResource WindowHeaderBrush}">
                                     <DockPanel>
                                         <Image Width="16" Height="16" Source="{TemplateBinding Icon}" Margin="8" VerticalAlignment="Top" DockPanel.Dock="Left" />
-                                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Top" Margin="1">
+                                        <StackPanel x:Name="ButtonPanel" DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Top" Margin="1">
                                             <StackPanel.Resources>
                                                 <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
                                                     <GradientStop Color="Transparent" Offset="0.0"/>
@@ -5705,7 +5704,13 @@
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="PART_MaximizeButton" Property="Content" Value="2" />
-                            <Setter TargetName="ContentPresenter" Property="Margin" Value="2,0,4,4" />
+                            <Setter TargetName="InnerBorder" Property="BorderThickness" Value="0" />
+                            <Setter Property="WindowChrome.WindowChrome">
+                                <Setter.Value>
+                                    <WindowChrome CaptionHeight="30" ResizeBorderThickness="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="ButtonPanel" Property="Margin" Value="-1" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -5714,9 +5719,6 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="Visibility" TargetName="WindowResizeGrip" Value="Visible"/>
                         </MultiTrigger>
-                        <Trigger Property="WindowState" Value="Maximized">
-                            <Setter Property="Margin" TargetName="Decorator" Value="6,0,4,0" />
-                        </Trigger>
                         <Trigger Property="IsActive" Value="False">
                             <Setter TargetName="HeaderBorder" Property="Background" Value="{DynamicResource WindowHeaderInactiveBackgroundBrush}" />
                         </Trigger>

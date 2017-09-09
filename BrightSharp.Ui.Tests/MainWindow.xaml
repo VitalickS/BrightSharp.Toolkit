@@ -5,6 +5,7 @@
         xmlns:viewModel="clr-namespace:BrightSharp.Ui.Tests"
         xmlns:ex="http://schemas.brightsharp.com/developer"
         xmlns:bsDiag="http://schemas.brightsharp.com/diagrams"
+        ex:MarkupExtensionProperties.UseMinMaxSizeBehavior="True"
         Style="{DynamicResource BrightSharpWindowStyle}"
         ResizeMode="CanResizeWithGrip"
         x:Class="BrightSharp.Ui.Tests.MainWindow"
