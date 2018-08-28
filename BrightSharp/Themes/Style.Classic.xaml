@@ -254,10 +254,8 @@
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="WindowHeaderBrush" EndPoint="0,1">
-        <GradientStop Color="#EFD3D3" />
-        <GradientStop Color="#FFB5BBC6" Offset="0.2" />
-        <GradientStop Color="#FFDDDDF7" Offset="0.8" />
-        <GradientStop Color="#FF93B1CE" Offset="1" />
+        <GradientStop Color="#FFEEEEEE" />
+        <GradientStop Color="#FFCCCCCC" Offset="1" />
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="WindowHeaderInactiveBrush" EndPoint="0,1">
