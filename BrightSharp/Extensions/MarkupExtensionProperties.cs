@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interactivity;
 using System.Windows.Media;
 
 namespace BrightSharp.Extensions
@@ -157,12 +156,11 @@ namespace BrightSharp.Extensions
             if (window == null) return;
             if ((bool)e.NewValue)
             {
-                Interaction.GetBehaviors(window).Add(new WindowMinMaxSizeBehavior());
+                new MinMaxSize_Logic(window).OnAttached();
             }
             else
             {
-                var beh = Interaction.GetBehaviors(window).OfType<WindowMinMaxSizeBehavior>().FirstOrDefault();
-                if (beh != null) Interaction.GetBehaviors(window).Remove(beh);
+                // Not supported yet
             }
         }
     }

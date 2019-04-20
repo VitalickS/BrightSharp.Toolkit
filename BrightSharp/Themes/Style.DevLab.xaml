@@ -239,16 +239,15 @@
     <SolidColorBrush x:Key="WindowHeaderInactiveBackgroundBrush" Color="#8888" />
     
     <LinearGradientBrush x:Key="GradientWindowBackgroundBrush" EndPoint="1,1" StartPoint="0,0">
-        <GradientStop Color="#FFD0D8EC" Offset="0"/>
+
         <GradientStop Color="White" Offset="1"/>
         <GradientStop Color="#FFE9F2FF" Offset="0.766"/>
         <GradientStop Color="#FFE2E8F8" Offset="0.238"/>
+        <GradientStop Color="#FFD0D8EC" Offset="0"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="WindowHeaderBrush" EndPoint="0,1">
         <GradientStop Color="#F4F4FF" />
-        <GradientStop Color="#FFB5BBC6" Offset="0.2" />
-        <GradientStop Color="#FFE7E7FC" Offset="0.8" />
         <GradientStop Color="#FFD4EAFF" Offset="1" />
     </LinearGradientBrush>
 

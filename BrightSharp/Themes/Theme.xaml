@@ -2491,6 +2491,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}" />
         <Setter Property="BorderThickness" Value="1,0,1,1" />
         <Setter Property="Padding" Value="2" />
+        <Setter Property="bs:MarkupExtensionProperties.HeaderPadding" Value="5,2" />
         <Setter Property="bs:MarkupExtensionProperties.SpecialBrush" Value="{DynamicResource LightBrush}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -2506,7 +2507,7 @@
 							BorderBrush="{DynamicResource NormalBorderBrush}"
 							BorderThickness="1" 
 							CornerRadius="2,2,0,0" VerticalAlignment="Top" >
-                            <ContentPresenter
+                            <ContentPresenter Margin="{TemplateBinding bs:MarkupExtensionProperties.HeaderPadding}"
 								ContentSource="Header" 
 								RecognizesAccessKey="True" />
                         </Border>
@@ -3016,13 +3017,11 @@
         <Border x:Name="Border">
             <Grid>
                 <Border x:Name="MenuBackground" IsHitTestVisible="False" Background="{DynamicResource TopLevelMenuBackgroundHover}" Opacity="0" />
-                <ContentPresenter 
-					Margin="6,3,6,3" TextBlock.Foreground="{DynamicResource MainMenuForegroundBrush}"
-					ContentSource="Header"
-					RecognizesAccessKey="True" />
                 <Popup
 					x:Name="Popup"
-					Placement="Bottom"
+                    Placement="Relative"
+                    VerticalOffset="{Binding ElementName=Border, Path=ActualHeight}"
+                    HorizontalOffset="{Binding ElementName=SubmenuBorder, Path=ActualWidth}"
 					IsOpen="{TemplateBinding IsSubmenuOpen}"
 					AllowsTransparency="True" 
 					Focusable="False"
@@ -3037,6 +3036,11 @@
 							KeyboardNavigation.DirectionalNavigation="Cycle" />
                     </Border>
                 </Popup>
+                <ContentPresenter
+					Margin="6,3,6,3" TextBlock.Foreground="{DynamicResource MainMenuForegroundBrush}"
+					ContentSource="Header"
+					RecognizesAccessKey="True" />
+                
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -3779,7 +3783,7 @@
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorder}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Padding" Value="4"/>
         <Setter Property="AllowDrop" Value="true"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
@@ -4711,7 +4715,7 @@
         <Setter Property="bs:MarkupExtensionProperties.CornerRadius" Value="0" />
         <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource SolidBorderBrush}" />
-        <Setter Property="Padding" Value="2,1" />
+        <Setter Property="Padding" Value="4" />
         <Setter Property="Foreground" Value="{DynamicResource OnWindowForegroundBrush}" />
         <Setter Property="ContextMenu" Value="{DynamicResource DecoTextBoxContextMenu}" />
         <Setter Property="CaretBrush" Value="{DynamicResource DisabledForegroundBrush}" />
@@ -5631,14 +5635,14 @@
     <Style x:Key="BrightSharpWindowStyle" TargetType="{x:Type Window}">
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="bs:MarkupExtensionProperties.SpecialBrush" Value="{DynamicResource WindowInnerBorderBrush}"/>
-
-        <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderBrush}">
-        </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderBrush}" />
+        <Setter Property="bs:MarkupExtensionProperties.UseMinMaxSizeBehavior" Value="True" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Icon" Value="icons/app.png" />
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CaptionHeight="30" ResizeBorderThickness="4" GlassFrameThickness="1" UseAeroCaptionButtons="False" />
+                <WindowChrome CaptionHeight="30" ResizeBorderThickness="4" CornerRadius="0" GlassFrameThickness="0" UseAeroCaptionButtons="False" />
             </Setter.Value>
         </Setter>
         <Setter Property="Foreground" Value="{DynamicResource OnWindowForegroundBrush}"/>
@@ -5663,16 +5667,15 @@
                                                     <GradientStop Color="Transparent" Offset="0.0"/>
                                                 </LinearGradientBrush>
                                                 <LinearGradientBrush x:Key="DarkBrush" StartPoint="0,0" EndPoint="0,1">
-                                                    <GradientStop Color="#FFE8E8E8" Offset="0.0"/>
+                                                    <GradientStop Color="WhiteSmoke" Offset="0.0"/>
                                                 </LinearGradientBrush>
                                             </StackPanel.Resources>
-                                            <Button VerticalAlignment="Top" Name="PART_MinimizeButton" Click="minimizeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="0" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings" />
-                                            <Button VerticalAlignment="Top" Name="PART_MaximizeButton" Click="maximizeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="1" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings" />
+                                            <Button Padding="10,6" VerticalAlignment="Top" Name="PART_MinimizeButton" Click="minimizeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="0" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings" />
+                                            <Button Padding="10,6" VerticalAlignment="Top" Name="PART_MaximizeButton" Click="maximizeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="1" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings" />
                                             <Button Padding="10,6" Name="PART_CloseButton" Click="closeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="r" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings">
                                                 <Button.Background>
                                                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                                        <GradientStop Color="#FFDEC3C3" Offset="0"/>
-                                                        <GradientStop Color="#FFCDA2A2" Offset="1"/>
+                                                        <GradientStop Color="Transparent" Offset="0.0"/>
                                                     </LinearGradientBrush>
                                                 </Button.Background>
                                                 <Button.Resources>
@@ -5683,7 +5686,7 @@
                                                 </Button.Resources>
                                             </Button>
                                         </StackPanel>
-                                        <Label Padding="0,3" Foreground="White" HorizontalContentAlignment="{TemplateBinding bs:MarkupExtensionProperties.HeaderHorizontalAlignment}" Content="{TemplateBinding bs:MarkupExtensionProperties.Header}" FontSize="14">
+                                        <Label Padding="0,5" Foreground="White" HorizontalContentAlignment="{TemplateBinding bs:MarkupExtensionProperties.HeaderHorizontalAlignment}" Content="{TemplateBinding bs:MarkupExtensionProperties.Header}" FontSize="14">
                                             <Label.Effect>
                                                 <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="Black" />
                                             </Label.Effect>
@@ -5707,7 +5710,7 @@
                             <Setter TargetName="InnerBorder" Property="BorderThickness" Value="0" />
                             <Setter Property="WindowChrome.WindowChrome">
                                 <Setter.Value>
-                                    <WindowChrome CaptionHeight="30" ResizeBorderThickness="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" />
+                                    <WindowChrome CaptionHeight="30" ResizeBorderThickness="0" GlassFrameThickness="0" UseAeroCaptionButtons="False" />
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="ButtonPanel" Property="Margin" Value="-1" />

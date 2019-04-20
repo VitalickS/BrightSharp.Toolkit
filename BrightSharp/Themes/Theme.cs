@@ -36,5 +36,7 @@ namespace BrightSharp.Themes
             var window = Window.GetWindow((DependencyObject)sender);
             window.WindowState = WindowState.Minimized;
         }
+
+        
     }
 }

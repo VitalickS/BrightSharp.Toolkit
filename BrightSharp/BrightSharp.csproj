@@ -37,7 +37,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>G:\repositories\Tps.Next\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -51,8 +53,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviors\FiterGridTextBoxBehavior.cs" />
+    <Compile Include="Behaviors\FilterDefaultViewTextBoxBehavior.cs" />
     <Compile Include="Behaviors\SelectAllTextOnFocusBehavior.cs" />
+    <Compile Include="Behaviors\MinMaxSize_Logic.cs" />
     <Compile Include="Behaviors\WindowMinMaxSizeBehavior.cs" />
     <Compile Include="Commands\AsyncCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
@@ -93,6 +96,7 @@
     </Page>
     <Compile Include="Converters\ThicknessConverter.cs" />
     <Compile Include="Extensions\MarkupExtensionProperties.cs" />
+    <None Include="packages.config" />
     <None Include="Themes\Theme.Static.cs">
       <DependentUpon>Theme.Static.xaml</DependentUpon>
     </None>
@@ -170,7 +174,9 @@
     <Resource Include="Themes\icons\paste.png" />
     <Resource Include="Themes\icons\undo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Docking\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
