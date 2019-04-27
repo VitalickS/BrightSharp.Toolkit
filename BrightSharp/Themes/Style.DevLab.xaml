@@ -17,7 +17,7 @@
 
     <Color x:Key="ValidationErrorColor">Red</Color>
 
-    <SolidColorBrush x:Key="NormalBrush" Color="#FFDFE1EF" />
+    <SolidColorBrush x:Key="NormalBrush" Color="#FFEDEFFF" />
     <SolidColorBrush x:Key="VerticalNormalBrush" Color="#FFDFE1EF" />
 
     <LinearGradientBrush x:Key="ProgressBarIndeterminateRootBrush" EndPoint="0.5,1" StartPoint="0.5,0">
