@@ -10,7 +10,7 @@ namespace BrightSharp.Diagrams
     {
         public static void Attach(FrameworkElement fe)
         {
-            ContentControl selectedControl = null;
+            FrameworkElement selectedControl = null;
             Style designerStyle = (Style)Application.Current.FindResource("DesignerItemStyle");
             if (fe is Panel)
             {
@@ -29,12 +29,15 @@ namespace BrightSharp.Diagrams
                             selectedControl = null;
                             return;
                         }
-                        foreach (var control in fePanel.Children.OfType<ContentControl>())
+                        foreach (var control in fePanel.Children.OfType<FrameworkElement>())
                         {
                             if (ProcessControl(control, clickedElement, ref selectedControl))
                             {
-                                e.Handled = selectedControl.Content is ButtonBase;
-                                return;
+                                if (selectedControl is ContentControl cc && cc.Content is ButtonBase)
+                                {
+                                    e.Handled = true;
+                                    return;
+                                }
                             }
                         }
 
@@ -58,12 +61,15 @@ namespace BrightSharp.Diagrams
                             selectedControl = null;
                             return;
                         }
-                        foreach (var control in feItemsControl.Items.OfType<ContentControl>())
+                        foreach (var control in feItemsControl.Items.OfType<FrameworkElement>())
                         {
                             if (ProcessControl(control, clickedElement, ref selectedControl))
                             {
-                                e.Handled = selectedControl.Content is ButtonBase;
-                                return;
+                                if (selectedControl is ContentControl cc && cc.Content is ButtonBase)
+                                {
+                                    e.Handled = true;
+                                    return;
+                                }
                             }
                         }
 
@@ -72,7 +78,7 @@ namespace BrightSharp.Diagrams
             }
         }
 
-        private static bool ProcessControl(ContentControl control, ContentControl clickedElement, ref ContentControl selectedControl)
+        private static bool ProcessControl(FrameworkElement control, FrameworkElement clickedElement, ref FrameworkElement selectedControl)
         {
             if (control == clickedElement && control != selectedControl)
             {

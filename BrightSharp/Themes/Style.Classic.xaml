@@ -212,7 +212,7 @@
     <LinearGradientBrush x:Key="WindowBackgroundBrush">
         <GradientStop Color="#EEE" />
     </LinearGradientBrush>
-    <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#FFC0C9E4" />
+    <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#FFDFE1E8" />
     <SolidColorBrush x:Key="GlyphBrush" Color="#444" />
     <SolidColorBrush x:Key="LightColorBrush" Color="#DDD" />
     <Color x:Key="OnWindowForegroundColor">Black</Color>
@@ -228,7 +228,7 @@
         </GradientBrush.GradientStops>
     </LinearGradientBrush>
     <SolidColorBrush x:Key="ScrollBarBackgroundBrush" Color="#F0F0F0" />
-    <SolidColorBrush x:Key="HighLightForegroundBrush" Color="#FF500000" />
+    <SolidColorBrush x:Key="HighLightForegroundBrush" Color="#FF2E2020" />
     <Color x:Key="UiForegroundColor">Black</Color>
     <SolidColorBrush x:Key="UiForegroundBrush" Color="{DynamicResource UiForegroundColor}" />
     <Color x:Key="SelectedBackgroundColor">#DEE4FF</Color>

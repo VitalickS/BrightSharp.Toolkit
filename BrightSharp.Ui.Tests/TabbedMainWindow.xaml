@@ -1,0 +1,210 @@
+﻿<Window x:Class="BrightSharp.Ui.Tests.TabbedMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ex="http://schemas.brightsharp.com/developer"
+        xmlns:viewModel="clr-namespace:BrightSharp.Ui.Tests"
+        xmlns:local="clr-namespace:BrightSharp.Ui.Tests"
+        ex:MarkupExtensionProperties.UseMinMaxSizeBehavior="True"
+        Style="{DynamicResource BrightSharpWindowStyle}"
+        ResizeMode="CanResizeWithGrip"
+        mc:Ignorable="d"
+        Title="BrightSharp In DevLab" Height="450" Width="800">
+    <Window.Resources>
+        <x:Array x:Key="coll" Type="{x:Type viewModel:CustomerViewModel}">
+            <viewModel:CustomerViewModel CustomerID="ALFKI" CompanyName="Alfreds Futterkiste" ContactNameCN="Maria Anders" ContactTitle="Sales Representative" Address="Obere Str. 57" City="Berlin" PostalCode="12209" Country="Germany" Phone="030-0074321" Fax="030-0076545" />
+            <viewModel:CustomerViewModel CustomerID="ANATR" CompanyName="Ana Trujillo Emparedados y helados" ContactNameCN="Ana Trujillo" ContactTitle="Owner" Address="Avda. de la Constitución 2222" City="México D.F." PostalCode="05021" Country="Mexico" Phone="(5) 555-4729" Fax="(5) 555-3745" />
+            <viewModel:CustomerViewModel CustomerID="ANTON" CompanyName="Antonio Moreno Taquería" ContactNameCN="Antonio Moreno" ContactTitle="Owner" Address="Mataderos  2312" City="México D.F." PostalCode="05023" Country="Mexico" Phone="(5) 555-3932" />
+            <viewModel:CustomerViewModel CustomerID="AROUT" CompanyName="Around the Horn" ContactNameCN="Thomas Hardy" ContactTitle="Sales Representative" Address="120 Hanover Sq." City="London" PostalCode="WA1 1DP" Country="UK" Phone="(171) 555-7788" Fax="(171) 555-6750" />
+            <viewModel:CustomerViewModel CustomerID="BERGS" CompanyName="Berglunds snabbköp" ContactNameCN="Christina Berglund" ContactTitle="Order Administrator" Address="Berguvsvägen  8" City="Luleå" PostalCode="S-958 22" Country="Sweden" Phone="0921-12 34 65" Fax="0921-12 34 67" />
+            <viewModel:CustomerViewModel CustomerID="BLAUS" CompanyName="Blauer See Delikatessen" ContactNameCN="Hanna Moos" ContactTitle="Sales Representative" Address="Forsterstr. 57" City="Mannheim" PostalCode="68306" Country="Germany" Phone="0621-08460" Fax="0621-08924" />
+            <viewModel:CustomerViewModel CustomerID="BLONP" CompanyName="Blondesddsl père et fils" ContactNameCN="Frédérique Citeaux" ContactTitle="Marketing Manager" Address="24, place Kléber" City="Strasbourg" PostalCode="67000" Country="France" Phone="88.60.15.31" Fax="88.60.15.32" />
+            <viewModel:CustomerViewModel CustomerID="BOLID" CompanyName="Bólido Comidas preparadas" ContactNameCN="Martín Sommer" ContactTitle="Owner" Address="C/ Araquil, 67" City="Madrid" PostalCode="28023" Country="Spain" Phone="(91) 555 22 82" Fax="(91) 555 91 99" />
+        </x:Array>
+        <CollectionViewSource Source="{StaticResource coll}" x:Key="coll1" />
+        <CollectionViewSource Source="{StaticResource coll}" x:Key="coll2" />
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="Create New">
+                    <MenuItem Header="File"></MenuItem>
+                    <MenuItem Header="Project"></MenuItem>
+                </MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Exit" InputGestureText="Alt+F4"  />
+            </MenuItem>
+            <MenuItem Header="Edit">
+
+            </MenuItem>
+            <MenuItem Header="View">
+
+            </MenuItem>
+            <MenuItem Header="Help">
+
+            </MenuItem>
+        </Menu>
+        <TabControl TabStripPlacement="Left" Grid.Row="1">
+            <TabItem Header="Basic Controls">
+                <WrapPanel ItemWidth="170" Orientation="Vertical">
+                    <Button Margin="5">Button</Button>
+                    <Button Margin="5" IsDefault="True">Button (Default)</Button>
+                    <ToggleButton Margin="5" IsChecked="True" ex:MarkupExtensionProperties.CornerRadius="25" FocusVisualStyle="{DynamicResource ButtonEllipseFocusVisual}" Content="Round" HorizontalAlignment="Left" Width="50" Height="50" VerticalAlignment="Top" />
+                    <ToggleButton Margin="5" Content="Toggle" HorizontalAlignment="Left" Width="108" Height="32" VerticalAlignment="Top" />
+
+                    <Button Style="{DynamicResource GlassButtonStyle}" Content="GlassButton" HorizontalAlignment="Left" Width="70" Height="70" VerticalAlignment="Top" />
+                    <Button Style="{DynamicResource GlassButtonStyle}" Content="Style" HorizontalAlignment="Left" Width="50" Height="50" VerticalAlignment="Top" Background="#FFFF6868"/>
+                    <Separator></Separator>
+                    <StackPanel>
+                        <CheckBox Margin="5" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Left"  Content="CheckBox Left Allign"/>
+                        <CheckBox Margin="5" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Right"  Content="CheckBox Right Allign"/>
+                        <CheckBox Margin="5" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Top"  Width="137" Content="CheckBox Top Allign"/>
+                        <CheckBox Margin="5" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Bottom"  Content="CheckBox Bottom Allign" />
+                    </StackPanel>
+                    <Separator></Separator>
+                    <StackPanel>
+                        <RadioButton Margin="5" IsChecked="True" Content="RadioButton"/>
+                        <RadioButton Margin="5" Content="RadioButton"/>
+
+                    </StackPanel>
+                    <Separator></Separator>
+                    <GroupBox Header="Default Style Group Box">
+                        <StackPanel>
+                            <RadioButton Margin="5" IsChecked="True" Content="RadioButton"/>
+                            <RadioButton Margin="5" Content="RadioButton"/>
+                            <RadioButton Margin="5" Content="RadioButton" IsEnabled="False"/>
+                            <RadioButton Margin="5" Content="RadioButton"/>
+                        </StackPanel>
+                    </GroupBox>
+                </WrapPanel>
+            </TabItem>
+            <TabItem Header="Text Editing">
+                <WrapPanel Orientation="Vertical" ItemWidth="200">
+                    <TextBox Margin="5" ex:MarkupExtensionProperties.Header="Default Focus Indicator"></TextBox>
+                    <TextBox Margin="5" ex:MarkupExtensionProperties.Header="Colorful Focus Indicator"
+                             ex:MarkupExtensionProperties.SpecialBrush="Green"></TextBox>
+
+                    <TextBox Margin="5" ex:MarkupExtensionProperties.Header="No Focus Indicator"
+                                ex:MarkupExtensionProperties.SpecialBrush="Transparent"></TextBox>
+                    <TextBox Margin="5" ex:MarkupExtensionProperties.LeadingElement="Lead"
+                                        ex:MarkupExtensionProperties.TrailingElement="Trail"/>
+                    <TextBox Margin="5" ex:MarkupExtensionProperties.CornerRadius="5" ex:MarkupExtensionProperties.Header="Has Radius (5)"/>
+                    <TextBox Margin="5" Background="lightgreen" ex:MarkupExtensionProperties.Header="green Background"></TextBox>
+                    <TextBox Margin="5" Background="lightgreen" ex:MarkupExtensionProperties.Header="green Background (static)">
+                        <TextBox.Resources>
+                            <Color x:Key="WindowBackgroundHoverColor">lightgreen</Color>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <TextBox Margin="5" Text="{Binding Source={StaticResource coll}, Path=[0].NumberProperty, UpdateSourceTrigger=PropertyChanged}">
+                        <ex:MarkupExtensionProperties.LeadingElement>LD</ex:MarkupExtensionProperties.LeadingElement>
+                        <ex:MarkupExtensionProperties.TrailingElement>TR</ex:MarkupExtensionProperties.TrailingElement>
+                        <ex:MarkupExtensionProperties.Header>Check Validation Style (Number)</ex:MarkupExtensionProperties.Header>
+                    </TextBox>
+                    <PasswordBox Margin="5" >
+                        <ex:MarkupExtensionProperties.LeadingElement>Password</ex:MarkupExtensionProperties.LeadingElement>
+                        <ex:MarkupExtensionProperties.TrailingElement>***</ex:MarkupExtensionProperties.TrailingElement>
+                        <ex:MarkupExtensionProperties.Header>Enter your password :)</ex:MarkupExtensionProperties.Header>
+                    </PasswordBox>
+                </WrapPanel>
+            </TabItem>
+            <TabItem Header="Lists">
+                <WrapPanel ItemWidth="200" ItemHeight="250">
+                    <ListBox Margin="5">
+                        <ListBoxItem Content="123"/>
+                        <ListBoxItem Content="456"/>
+                        <ListBoxItem Content="789"/>
+                        <ListBoxItem Content="123"/>
+                        <ListBoxItem Content="456"/>
+                        <ListBoxItem Content="789"/>
+                        <ListBoxItem Content="123"/>
+                        <ListBoxItem Content="456"/>
+                        <ListBoxItem Content="789"/>
+                        <ListBoxItem Content="123"/>
+                        <ListBoxItem Content="456"/>
+                        <ListBoxItem Content="789"/>
+                        <ListBoxItem Content="123"/>
+                        <ListBoxItem Content="456"/>
+                        <ListBoxItem Content="789"/>
+                        <ListBoxItem Content="123"/>
+                        <ListBoxItem Content="456"/>
+                        <ListBoxItem Content="789"/>
+                        <ListBoxItem Content="123"/>
+                        <ListBoxItem Content="456"/>
+                        <ListBoxItem Content="789"/>
+                    </ListBox>
+                    <TreeView Margin="5">
+                        <TreeViewItem IsExpanded="True" Header="First" Foreground="Black" Background="AliceBlue">
+                            <TreeViewItem Header="F-12" IsExpanded="True" Background="Pink">
+                                <TreeViewItem Header="F-123" />
+                                <TreeViewItem Header="F-123" IsSelected="True" />
+                                <TreeViewItem Header="F-123" />
+                            </TreeViewItem>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Second">
+                            <TreeViewItem Header="S-12" ex:MarkupExtensionProperties.SpecialWidth="50">
+                                <TreeViewItem Header="S-123"/>
+                                <TreeViewItem Header="S-123"/>
+                                <TreeViewItem Header="S-123"/>
+                            </TreeViewItem>
+                        </TreeViewItem>
+                    </TreeView>
+
+                    <ScrollViewer Margin="5" HorizontalScrollBarVisibility="Visible"
+                                  ex:MarkupExtensionProperties.SpecialWidth="10"
+                                  ex:MarkupExtensionProperties.SpecialHeight="10">
+                        <Rectangle Width="600" Height="600" Fill="DarkGreen" />
+                    </ScrollViewer>
+                    <ScrollViewer Margin="5" HorizontalScrollBarVisibility="Visible">
+                        <ex:MarkupExtensionProperties.TrailingElement>
+                            DEF
+                        </ex:MarkupExtensionProperties.TrailingElement>
+                        <Rectangle Width="600" Height="600" Fill="DarkGreen" />
+                    </ScrollViewer>
+                    <ScrollViewer Margin="5" HorizontalScrollBarVisibility="Visible"
+                                  ex:MarkupExtensionProperties.SpecialWidth="25"
+                                  ex:MarkupExtensionProperties.SpecialHeight="25">
+                        <ex:MarkupExtensionProperties.TrailingElement>
+                            25
+                        </ex:MarkupExtensionProperties.TrailingElement>
+                        <Rectangle Width="600" Height="600" Fill="DarkGreen" />
+                    </ScrollViewer>
+                </WrapPanel>
+            </TabItem>
+            <TabItem Header="Grids">
+
+            </TabItem>
+            <TabItem Header="Special Controls">
+                <WrapPanel>
+                    <Calendar  Loaded="Calendar_Loaded">
+                        <ex:MarkupExtensionProperties.TrailingElement>
+                            <TextBlock HorizontalAlignment="Center" Foreground="DarkRed"><Run Text="Trailing Region"/></TextBlock>
+                        </ex:MarkupExtensionProperties.TrailingElement>
+                        <ex:MarkupExtensionProperties.LeadingElement>
+                            <TextBlock HorizontalAlignment="Center" Foreground="DarkBlue"><Run Text="Leading Region"/></TextBlock>
+                        </ex:MarkupExtensionProperties.LeadingElement>
+                    </Calendar>
+                </WrapPanel>
+            </TabItem>
+        </TabControl>
+        <StatusBar Grid.Row="2">
+            <StatusBarItem>
+                Status Bar Item
+            </StatusBarItem>
+            <Separator></Separator>
+            <StatusBarItem>
+                <Button Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Click="ChangeStyleButton_Click">
+                    <TextBlock>
+                        <TextBlock>Change Style (</TextBlock><TextBlock x:Name="StyleNameTextBlock"></TextBlock><TextBlock>)</TextBlock>
+                    </TextBlock>
+                </Button>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

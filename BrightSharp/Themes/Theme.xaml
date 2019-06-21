@@ -83,6 +83,7 @@
         <Setter Property="bs:MarkupExtensionProperties.CornerRadius" Value="{DynamicResource DefaultRadiusNormal}" />
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -2501,7 +2502,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Border IsHitTestVisible="False"
+                        <Border
 							Grid.Row="0" 
 							Background="{TemplateBinding bs:MarkupExtensionProperties.SpecialBrush}"
 							BorderBrush="{DynamicResource NormalBorderBrush}"
@@ -2540,11 +2541,11 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Border 
+                        <Border
 							Grid.Row="0" 
 							Background="{TemplateBinding bs:MarkupExtensionProperties.SpecialBrush}"
 							BorderBrush="{DynamicResource NormalBorderBrush}"
-							BorderThickness="1" HorizontalAlignment="Left"
+							BorderThickness="1,1,1,0" HorizontalAlignment="Left"
 							CornerRadius="2,2,0,0" >
                             <ContentPresenter 
 								Margin="4" 
@@ -2637,6 +2638,7 @@
         <Setter Property="Margin" Value="0" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="bs:MarkupExtensionProperties.CornerRadius" Value="1" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -2654,6 +2656,7 @@
                         <Trigger Property="IsSelected" Value="true">
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource SelectedBackgroundBrush}"/>
                             <Setter Property="TextBlock.Foreground" Value="{DynamicResource HighLightForegroundBrush}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource LightBorderBrush}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="False">
                             <Setter Property="TextBlock.Foreground" Value="{DynamicResource OnWindowForegroundBrush}"/>
@@ -2950,7 +2953,7 @@
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <DockPanel HorizontalAlignment="Stretch" />
+                    <DockPanel HorizontalAlignment="Stretch" LastChildFill="False" />
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
@@ -3541,7 +3544,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
-                    <BulletDecorator Background="Transparent">
+                    <BulletDecorator Background="Transparent"
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                         <BulletDecorator.Bullet>
                             <Border>
                                 <Grid VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Width="13" Height="13">
@@ -4507,6 +4511,13 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch" LastChildFill="False" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <Style  TargetType="{x:Type TabControl}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -4721,6 +4732,7 @@
         <Setter Property="CaretBrush" Value="{DynamicResource DisabledForegroundBrush}" />
         <Setter Property="bs:MarkupExtensionProperties.SpecialBrush" Value="{DynamicResource PressedBorderBrush}" />
         <Setter Property="bs:MarkupExtensionProperties.SpecialWidth" Value="300" />
+        <Setter Property="bs:MarkupExtensionProperties.SpecialHeight" Value="2" />
         <Setter Property="Validation.ErrorTemplate">
             <Setter.Value>
                 <ControlTemplate>
@@ -4827,7 +4839,7 @@
                             </Grid>
                             <Line Grid.Column="1" x:Name="FocusedLineHelper" VerticalAlignment="Top"
                                   Margin="5,1"
-                                  X2="32" IsHitTestVisible="False" Stroke="{TemplateBinding bs:MarkupExtensionProperties.SpecialBrush}" StrokeThickness="2"
+                                  X2="48" IsHitTestVisible="False" Stroke="{TemplateBinding bs:MarkupExtensionProperties.SpecialBrush}" StrokeThickness="{TemplateBinding bs:MarkupExtensionProperties.SpecialHeight}"
                                   Visibility="Collapsed" StrokeEndLineCap="Triangle" StrokeStartLineCap="Triangle" />
 
                         </Grid>
@@ -4959,9 +4971,9 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="MinHeight" Value="10" />
-        <Setter Property="MinWidth" Value="20" />
-        <Setter Property="Padding" Value="5,3" />
+        <Setter Property="MinHeight" Value="16" />
+        <Setter Property="MinWidth" Value="16" />
+        <Setter Property="Padding" Value="2" />
         <Setter Property="bs:MarkupExtensionProperties.CornerRadius" Value="{DynamicResource DefaultRadiusNormal}" />
         <Setter Property="Template">
             <Setter.Value>

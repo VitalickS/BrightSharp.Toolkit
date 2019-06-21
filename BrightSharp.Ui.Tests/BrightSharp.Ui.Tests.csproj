@@ -63,6 +63,9 @@
     <Compile Include="ControlContainer.xaml.cs">
       <DependentUpon>ControlContainer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TabbedMainWindow.xaml.cs">
+      <DependentUpon>TabbedMainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestPage2.xaml.cs">
       <DependentUpon>TestPage2.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TabbedMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TestPage2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

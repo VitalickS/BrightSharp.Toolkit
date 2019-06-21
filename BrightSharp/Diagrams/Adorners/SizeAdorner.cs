@@ -11,7 +11,7 @@ namespace BrightSharp.Diagrams
     {
         private SizeChrome chrome;
         private VisualCollection visuals;
-        private ContentControl designerItem;
+        private FrameworkElement designerItem;
 
         protected override int VisualChildrenCount
         {
@@ -21,7 +21,7 @@ namespace BrightSharp.Diagrams
             }
         }
 
-        public SizeAdorner(ContentControl designerItem)
+        public SizeAdorner(FrameworkElement designerItem)
             : base(designerItem)
         {
             SnapsToDevicePixels = true;

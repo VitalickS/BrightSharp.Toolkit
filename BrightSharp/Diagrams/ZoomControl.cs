@@ -67,6 +67,15 @@ namespace BrightSharp.Diagrams
 
 
 
+        public double GridSize
+        {
+            get { return (double)GetValue(GridSizeProperty); }
+            set { SetValue(GridSizeProperty, value); }
+        }
+
+        public static readonly DependencyProperty GridSizeProperty =
+            DependencyProperty.Register("GridSize", typeof(double), typeof(ZoomControl), new PropertyMetadata(0.0));
+
         public double RenderZoom
         {
             get { return (double)GetValue(RenderZoomProperty); }
