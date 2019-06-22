@@ -7,7 +7,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Diagrams/DesignerItem.xaml" />
         <ResourceDictionary Source="Controls/ZoomControl.xaml" />
-        <ResourceDictionary Source="Controls/PropertyGrid.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 

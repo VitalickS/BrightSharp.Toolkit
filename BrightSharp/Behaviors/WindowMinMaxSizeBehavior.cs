@@ -6,7 +6,6 @@ namespace BrightSharp.Behaviors
 {
     public class WindowMinMaxSizeBehavior : Behavior<Window>
     {
-        private HwndSource hwndSource;
         private MinMaxSize_Logic logic;
         protected override void OnAttached()
         {

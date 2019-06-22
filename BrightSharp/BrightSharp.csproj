@@ -95,7 +95,6 @@
     <Compile Include="Behaviors\WindowMinMaxSizeBehavior.cs" />
     <Compile Include="Commands\AsyncCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Controls\PropertyGrid.cs" />
     <Compile Include="Converters\IntToValueConverter.cs" />
     <Compile Include="Converters\InverseBooleanToVisibilityConverter.cs" />
     <Compile Include="Diagrams\Adorners\ResizeRotateAdorner.cs" />
@@ -119,10 +118,6 @@
     <Compile Include="Diagrams\ZoomControl.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Themes\Controls\PropertyGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Themes\Controls\ZoomControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -211,9 +206,7 @@
     <Resource Include="Themes\icons\paste.png" />
     <Resource Include="Themes\icons\undo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Docking\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
