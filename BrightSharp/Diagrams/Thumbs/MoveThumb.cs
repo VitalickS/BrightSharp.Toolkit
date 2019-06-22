@@ -47,8 +47,10 @@ namespace BrightSharp.Diagrams
             {
                 Point dragDelta = new Point(e.HorizontalChange, e.VerticalChange);
 
-                var zoomControl = designerItem.Parent as dynamic;
-                double.TryParse(zoomControl.Tag as string, out var gridSize);
+                double gridSize = 0;
+
+                var zoomControl = designerItem.Parent as ZoomControl;
+                if (zoomControl != null) gridSize = zoomControl.GridSize;
 
                 if (rotateTransform != null)
                 {

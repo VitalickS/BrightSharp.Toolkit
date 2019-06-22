@@ -103,6 +103,7 @@ namespace BrightSharp.Diagrams
         {
             public LodInfo(string lod)
             {
+                lod = lod.TrimStart();
                 UseAnimation = lod.StartsWith("a", true, CultureInfo.InvariantCulture);
                 lod = lod.TrimStart('a', 'A').Trim();
 

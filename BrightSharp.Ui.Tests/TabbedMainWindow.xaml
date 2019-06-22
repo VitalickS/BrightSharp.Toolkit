@@ -6,11 +6,12 @@
         xmlns:ex="http://schemas.brightsharp.com/developer"
         xmlns:viewModel="clr-namespace:BrightSharp.Ui.Tests"
         xmlns:local="clr-namespace:BrightSharp.Ui.Tests"
+        xmlns:bsDiag="http://schemas.brightsharp.com/diagrams"
         ex:MarkupExtensionProperties.UseMinMaxSizeBehavior="True"
         Style="{DynamicResource BrightSharpWindowStyle}"
         ResizeMode="CanResizeWithGrip"
         mc:Ignorable="d"
-        Title="BrightSharp In DevLab" Height="450" Width="800">
+        Title="BrightSharp In DevLab" Height="555" Width="800">
     <Window.Resources>
         <x:Array x:Key="coll" Type="{x:Type viewModel:CustomerViewModel}">
             <viewModel:CustomerViewModel CustomerID="ALFKI" CompanyName="Alfreds Futterkiste" ContactNameCN="Maria Anders" ContactTitle="Sales Representative" Address="Obere Str. 57" City="Berlin" PostalCode="12209" Country="Germany" Phone="030-0074321" Fax="030-0076545" />
@@ -62,12 +63,15 @@
                     <Button Style="{DynamicResource GlassButtonStyle}" Content="GlassButton" HorizontalAlignment="Left" Width="70" Height="70" VerticalAlignment="Top" />
                     <Button Style="{DynamicResource GlassButtonStyle}" Content="Style" HorizontalAlignment="Left" Width="50" Height="50" VerticalAlignment="Top" Background="#FFFF6868"/>
                     <Separator></Separator>
-                    <StackPanel>
-                        <CheckBox Margin="5" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Left"  Content="CheckBox Left Allign"/>
-                        <CheckBox Margin="5" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Right"  Content="CheckBox Right Allign"/>
-                        <CheckBox Margin="5" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Top"  Width="137" Content="CheckBox Top Allign"/>
-                        <CheckBox Margin="5" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Bottom"  Content="CheckBox Bottom Allign" />
-                    </StackPanel>
+                    <GroupBox Style="{StaticResource ExpandrStyleGroupBox}" Header="ExpandrStyleGroupBox">
+                        <StackPanel>
+                            <CheckBox Margin="5" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Left"  Content="CheckBox Left Allign"/>
+                            <CheckBox Margin="5" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Right"  Content="CheckBox Right Allign"/>
+                            <CheckBox Margin="5" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Top"  Width="137" Content="CheckBox Top Allign"/>
+                            <CheckBox Margin="5" IsThreeState="True" ex:MarkupExtensionProperties.Docking="Bottom"  Content="CheckBox Bottom Allign" />
+                            <CheckBox Margin="5" Style="{StaticResource SwitchCheckBoxStyle}" Content="SwitchCheckBoxStyle" />
+                        </StackPanel>
+                    </GroupBox>
                     <Separator></Separator>
                     <StackPanel>
                         <RadioButton Margin="5" IsChecked="True" Content="RadioButton"/>
@@ -112,32 +116,20 @@
                         <ex:MarkupExtensionProperties.TrailingElement>***</ex:MarkupExtensionProperties.TrailingElement>
                         <ex:MarkupExtensionProperties.Header>Enter your password :)</ex:MarkupExtensionProperties.Header>
                     </PasswordBox>
+                    <RichTextBox Margin="5" Height="100" BorderThickness="1" BorderBrush="AliceBlue">
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run>
+                                    Rich Text Box
+                                </Run>
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox>
                 </WrapPanel>
             </TabItem>
             <TabItem Header="Lists">
                 <WrapPanel ItemWidth="200" ItemHeight="250">
-                    <ListBox Margin="5">
-                        <ListBoxItem Content="123"/>
-                        <ListBoxItem Content="456"/>
-                        <ListBoxItem Content="789"/>
-                        <ListBoxItem Content="123"/>
-                        <ListBoxItem Content="456"/>
-                        <ListBoxItem Content="789"/>
-                        <ListBoxItem Content="123"/>
-                        <ListBoxItem Content="456"/>
-                        <ListBoxItem Content="789"/>
-                        <ListBoxItem Content="123"/>
-                        <ListBoxItem Content="456"/>
-                        <ListBoxItem Content="789"/>
-                        <ListBoxItem Content="123"/>
-                        <ListBoxItem Content="456"/>
-                        <ListBoxItem Content="789"/>
-                        <ListBoxItem Content="123"/>
-                        <ListBoxItem Content="456"/>
-                        <ListBoxItem Content="789"/>
-                        <ListBoxItem Content="123"/>
-                        <ListBoxItem Content="456"/>
-                        <ListBoxItem Content="789"/>
+                    <ListBox Margin="5" ItemsSource="{Binding Source={StaticResource coll1}}" DisplayMemberPath="ContactNameCN">
                     </ListBox>
                     <TreeView Margin="5">
                         <TreeViewItem IsExpanded="True" Header="First" Foreground="Black" Background="AliceBlue">
@@ -178,7 +170,20 @@
                 </WrapPanel>
             </TabItem>
             <TabItem Header="Grids">
-
+                <WrapPanel Orientation="Vertical">
+                    <Label>ListView - GridView</Label>
+                    <ListView Margin="5" ItemsSource="{Binding Source={StaticResource coll1}}" SelectedIndex="5">
+                        <ListView.View>
+                            <GridView >
+                                <GridViewColumn Header="Customer" Width="100" DisplayMemberBinding="{Binding CustomerID}" />
+                                <GridViewColumn Header="Company" Width="180" DisplayMemberBinding="{Binding CompanyName}" />
+                                <GridViewColumn Header="Country" Width="100" DisplayMemberBinding="{Binding Country}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Label>DataGrid</Label>
+                    <DataGrid SelectedIndex="2" Margin="5" AlternatingRowBackground="{DynamicResource AlternatingRowBackgroundBrush}" AutoGenerateColumns="True" ItemsSource="{Binding Source={StaticResource coll2}}" AutoGeneratedColumns="DataGrid_AutoGeneratedColumns" />
+                </WrapPanel>
             </TabItem>
             <TabItem Header="Special Controls">
                 <WrapPanel>
@@ -190,6 +195,26 @@
                             <TextBlock HorizontalAlignment="Center" Foreground="DarkBlue"><Run Text="Leading Region"/></TextBlock>
                         </ex:MarkupExtensionProperties.LeadingElement>
                     </Calendar>
+                    <bsDiag:ZoomControl Margin="5" x:Name="zc" UseAnimation="True" ClipToBounds="True" Width="500" Height="500" Background="White" GridSize="5">
+                        <ContentControl Style="{DynamicResource DesignerItemStyle}">
+                            <Expander>
+                                <Expander.Header>
+                                    <Label Content="Diagram Item (Draggable, Resizable, Rotatable)"/>
+                                </Expander.Header>
+                                <StackPanel>
+                                    <TextBlock>Right Click on visual element - Reset to Auto size</TextBlock>
+                                    <TextBlock>Right Click on rotation element - Reset to 0 deg</TextBlock>
+                                    <TextBlock>bsDiag:VisualExtensions.LODZoom -  [A][From]-[To] (A - animation)</TextBlock>
+                                    
+                                    <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom=" A1-5"><Run Text="1. Element use LODZoom Functionality A1-5"/></TextBlock>
+                                    <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="A -5.1"><Run Text="2. Element use LODZoom Functionality A -5.1"/></TextBlock>
+                                    <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="a 2-8.3"><Run Text="3. Element use LODZoom Functionality a 2-8.3"/></TextBlock>
+                                    <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="a 1.5-"><Run Text="4. Element use LODZoom Functionality a 1.5-"/></TextBlock>
+                                    <TextBlock TextWrapping="Wrap" bsDiag:VisualExtensions.LODZoom="1-5"><Run Text="5. Element use LODZoom Functionality 1-5"/></TextBlock>
+                                </StackPanel>
+                            </Expander>
+                        </ContentControl>
+                    </bsDiag:ZoomControl>
                 </WrapPanel>
             </TabItem>
         </TabControl>
