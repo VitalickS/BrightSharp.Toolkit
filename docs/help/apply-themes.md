@@ -23,7 +23,7 @@ Change by `ThemeManager`
 # Change themes by ResourceDictionary
 
 As default we use Classic theme.
-You also can change theme by adding resource dictionary after generic.xaml. Use one of them:
+You can also use other theme by changing resource dictionary before `theme.xaml`. Currently available:
 ```xml
 <ResourceDictionary Source="/brightsharp;component/themes/style.classic.xaml" />
 <ResourceDictionary Source="/brightsharp;component/themes/style.devlab.xaml" />
