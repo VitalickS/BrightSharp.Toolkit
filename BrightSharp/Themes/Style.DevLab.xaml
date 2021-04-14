@@ -224,7 +224,7 @@
 
 
     <Color x:Key="SelectedBackgroundColor">#E3E3E3</Color>
-    <Color x:Key="SelectedUnfocusedColor">#FFB6B6B6</Color>
+    <Color x:Key="SelectedUnfocusedColor">#FFD6E6E6</Color>
     <Color x:Key="ControlLightColor">#FFFFFFFF</Color>
     <Color x:Key="ControlMediumColor">#FFC5C5C5</Color>
     <Color x:Key="ControlDarkColor">#FF6B6B6B</Color>

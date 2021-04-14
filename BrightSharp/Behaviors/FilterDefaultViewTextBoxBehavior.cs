@@ -1,29 +1,31 @@
-﻿using System;
+﻿using Microsoft.Xaml.Behaviors;
+using System;
 using System.Collections;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Interactivity;
 using System.Windows.Threading;
 
 namespace BrightSharp.Behaviors
 {
     public class FilterDefaultViewTextBoxBehavior : Behavior<TextBox>
     {
-        DispatcherTimer timer = new DispatcherTimer();
+        readonly DispatcherTimer _timer = new DispatcherTimer();
+        
         public FilterDefaultViewTextBoxBehavior()
         {
-            timer.Tick += Timer_Tick;
+            _timer.Tick += Timer_Tick;
             FilterDelay = TimeSpan.FromSeconds(1);
             IgnoreCase = null; //Case sensitive if any char upper case
             FilterStringPropertyName = "FilterString";
+
         }
 
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            timer.Stop();
+            _timer.Stop();
             if (ItemsSource != null)
             {
                 var view = CollectionViewSource.GetDefaultView(ItemsSource);
@@ -90,7 +92,7 @@ namespace BrightSharp.Behaviors
 
         public Predicate<object> CustomFilter { get; set; }
 
-        public TimeSpan FilterDelay { get { return timer.Interval; } set { timer.Interval = value; } }
+        public TimeSpan FilterDelay { get { return _timer.Interval; } set { _timer.Interval = value; } }
 
         protected override void OnAttached()
         {
@@ -101,14 +103,14 @@ namespace BrightSharp.Behaviors
 
         private void AssociatedObject_TextChanged(object sender, TextChangedEventArgs e)
         {
-            timer.Stop(); timer.Start();
+            _timer.Stop(); _timer.Start();
             HasFilterText = !string.IsNullOrEmpty(AssociatedObject.Text);
         }
 
         protected override void OnDetaching()
         {
             AssociatedObject.TextChanged -= AssociatedObject_TextChanged;
-            timer.Tick -= Timer_Tick;
+            _timer.Tick -= Timer_Tick;
             base.OnDetaching();
         }
     }

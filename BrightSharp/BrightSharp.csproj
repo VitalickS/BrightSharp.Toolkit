@@ -1,218 +1,74 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ACC3C556-F8E4-4F2A-A23D-8E8749679A1B}</ProjectGuid>
-    <OutputType>library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BrightSharp</RootNamespace>
-    <AssemblyName>BrightSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <TargetFrameworkProfile />
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>G:\repositories\Tps.Next\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <None Remove="Themes\icons\app.png" />
+    <None Remove="Themes\icons\copy.png" />
+    <None Remove="Themes\icons\cut.png" />
+    <None Remove="Themes\icons\paste.png" />
+    <None Remove="Themes\icons\undo.png" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Behaviors\FilterDefaultViewTextBoxBehavior.cs" />
-    <Compile Include="Behaviors\SelectAllTextOnFocusBehavior.cs" />
-    <Compile Include="Behaviors\MinMaxSize_Logic.cs" />
-    <Compile Include="Behaviors\WindowMinMaxSizeBehavior.cs" />
-    <Compile Include="Commands\AsyncCommand.cs" />
-    <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Converters\IntToValueConverter.cs" />
-    <Compile Include="Converters\InverseBooleanToVisibilityConverter.cs" />
-    <Compile Include="Diagrams\Adorners\ResizeRotateAdorner.cs" />
-    <Compile Include="Diagrams\Adorners\ResizeRotateChrome.cs" />
-    <Compile Include="Diagrams\Adorners\SizeAdorner.cs" />
-    <Compile Include="Diagrams\Adorners\SizeChrome.cs" />
-    <Compile Include="Diagrams\DesignerItemDecorator.cs" />
-    <Compile Include="Diagrams\VisualExtensions.cs" />
-    <Compile Include="Diagrams\SelectionBehavior.cs" />
-    <Compile Include="Diagrams\Thumbs\MoveThumb.cs" />
-    <Compile Include="Diagrams\Thumbs\ResizeThumb.cs" />
-    <Compile Include="Diagrams\Thumbs\RotateThumb.cs" />
-    <Compile Include="Extensions\WpfExtensions.cs" />
-    <Compile Include="Interop\Constants.cs" />
-    <Compile Include="Interop\NativeMethods.cs" />
-    <Compile Include="Interop\Structures.cs" />
-    <Compile Include="Themes\Theme.cs">
-      <DependentUpon>Theme.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Themes\ThemeManager.cs" />
-    <Compile Include="Diagrams\ZoomControl.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Themes\Controls\ZoomControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Compile Include="Converters\ThicknessConverter.cs" />
-    <Compile Include="Extensions\MarkupExtensionProperties.cs" />
-    <None Include="packages.config" />
-    <None Include="Themes\Theme.Static.cs">
-      <DependentUpon>Theme.Static.xaml</DependentUpon>
-    </None>
-    <Page Include="Themes\Diagrams\DesignerItem.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Diagrams\ResizeRotateChrome.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Diagrams\SizeChrome.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Style.Blue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Style.Classic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Style.DarkBlue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Style.Silver.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Style.DevLab.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Theme.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <None Include="Themes\Theme.Static.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </None>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <AppDesigner Include="Properties\" />
-  </ItemGroup>
+
   <ItemGroup>
     <Resource Include="Themes\icons\app.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Themes\icons\copy.png" />
     <Resource Include="Themes\icons\cut.png" />
     <Resource Include="Themes\icons\paste.png" />
     <Resource Include="Themes\icons\undo.png" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
+  <ItemGroup>
+    <Compile Update="Diagrams\ZoomControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Themes\Theme.cs">
+      <DependentUpon>Theme.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Themes\Controls\ZoomControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Diagrams\DesignerItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Diagrams\ResizeRotateChrome.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Diagrams\SizeChrome.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Style.Blue.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Style.Classic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Style.DarkBlue.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Style.DevLab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Style.Silver.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Theme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

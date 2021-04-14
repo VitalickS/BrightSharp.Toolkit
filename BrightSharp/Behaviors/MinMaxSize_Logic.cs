@@ -2,6 +2,7 @@
 using BrightSharp.Interop.Constants;
 using BrightSharp.Interop.Structures;
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -38,6 +39,7 @@ namespace BrightSharp.Behaviors
             }
         }
 
+        [DebuggerStepThrough]
         private IntPtr WindowProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             switch (msg)

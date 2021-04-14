@@ -17,10 +17,10 @@
     <BorderGapMaskConverter x:Key="BorderGapMaskConverter" />
     <BooleanToVisibilityConverter x:Key="btvc" />
     <conv:InverseBooleanToVisibilityConverter x:Key="ibtvc" />
+    <conv:IntToValueConverter x:Key="btvhc" FalseValue="Hidden" TrueValue="Visible" />
 
     <!--STYLES-->
-
-
+    
     <ContextMenu x:Key="DecoTextBoxContextMenu">
         <MenuItem Command="ApplicationCommands.Copy">
             <MenuItem.Icon>
@@ -2440,7 +2440,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="{x:Type GroupBox}">
+    <Style x:Key="GroupBoxSimpleBorderStyle" TargetType="{x:Type GroupBox}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="BorderBrush" Value="{DynamicResource UiForegroundBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -2485,7 +2485,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="ExpandrStyleGroupBox" TargetType="{x:Type GroupBox}">
+    <Style TargetType="{x:Type GroupBox}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}" />
@@ -2561,28 +2561,6 @@
 								Margin="{TemplateBinding Padding}" />
                         </Border>
                     </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <Style x:Key="{x:Type Label}" TargetType="{x:Type Label}">
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="Padding" Value="2"/>
-        <Setter Property="Foreground" Value="{DynamicResource OnWindowForegroundBrush}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Label}">
-                    <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
-                        <ContentPresenter 
-							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-							VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-							RecognizesAccessKey="True"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -2673,6 +2651,9 @@
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource SelectedUnfocusedBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -2957,7 +2938,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="{x:Type ContextMenu}">
+    <Style x:Key="{x:Type ContextMenu}" TargetType="{x:Type ContextMenu}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Grid.IsSharedSizeScope" Value="true"/>
@@ -3016,15 +2997,14 @@
                 <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetName="MenuBackground" Storyboard.TargetProperty="Opacity" />
             </Storyboard>
         </ControlTemplate.Resources>
-        <Border x:Name="Border">
+        <Border x:Name="Border" Background="{TemplateBinding Background}">
             <Grid>
                 <Border x:Name="MenuBackground" IsHitTestVisible="False" Background="{DynamicResource TopLevelMenuBackgroundHover}" Opacity="0" />
                 <Popup
 					x:Name="Popup"
                     Placement="Relative"
                     VerticalOffset="{Binding ElementName=Border, Path=ActualHeight}"
-                    HorizontalOffset="{Binding ElementName=SubmenuBorder, Path=ActualWidth}"
-					IsOpen="{TemplateBinding IsSubmenuOpen}"
+                    IsOpen="{TemplateBinding IsSubmenuOpen}"
 					AllowsTransparency="True" 
 					Focusable="False"
 					PopupAnimation="Slide">
@@ -3076,7 +3056,7 @@
     <ControlTemplate 
 		x:Key="{x:Static MenuItem.TopLevelItemTemplateKey}" 
 		TargetType="{x:Type MenuItem}">
-        <Border x:Name="Border" >
+        <Border x:Name="Border" Background="{TemplateBinding Background}">
             <Grid>
                 <ContentPresenter 
 					Margin="6,3,6,3" 
@@ -3315,9 +3295,9 @@
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <Style x:Key="{x:Type MenuItem}" TargetType="{x:Type MenuItem}">
+    <Style TargetType="{x:Type MenuItem}">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
         <Style.Triggers>
             <Trigger Property="Role" Value="TopLevelHeader">
                 <Setter Property="BorderThickness" Value="1"/>
@@ -3431,7 +3411,7 @@
                         </Trigger>
                         <Trigger Property="Validation.HasError" Value="true">
                             <Setter Property="BorderBrush" Value="Red" />
-                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors)[0].ErrorContent}"/>
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, FallbackValue={x:Null}, Path=(Validation.Errors)[0].ErrorContent}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -4711,10 +4691,6 @@
         </Setter>
     </Style>
     <Style BasedOn="{StaticResource RoundedTabItemStyle}" TargetType="{x:Type TabItem}"></Style>
-    <Style TargetType="{x:Type TextBlock}">
-        <Setter Property="TextWrapping" Value="NoWrap"/>
-        <Setter Property="TextTrimming" Value="None"/>
-    </Style>
     <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="1" />
@@ -4757,7 +4733,7 @@
                                     </BeginStoryboard>
                                 </EventTrigger>
                             </Label.Triggers>
-                            <TextBlock TextWrapping="Wrap" Text="{Binding ElementName=MyAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"></TextBlock>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding ElementName=MyAdorner, FallbackValue={x:Null}, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"></TextBlock>
                         </Label>
                     </Grid>
                 </ControlTemplate>
@@ -4814,8 +4790,8 @@
                                 </Grid.ColumnDefinitions>
                                 <ContentControl Margin="2,0,0,0" Content="{TemplateBinding bs:MarkupExtensionProperties.LeadingElement}" VerticalAlignment="Center" />
                                 <ContentControl Margin="0,0,2,0" Grid.Column="2" Content="{TemplateBinding bs:MarkupExtensionProperties.TrailingElement}" VerticalAlignment="Center" />
-                                <Border Visibility="{Binding (Validation.HasError), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource btvc}}" Grid.Column="3" VerticalAlignment="Center" Width="15" Height="14" HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="7" Margin="0,0,4,0"
-                                Opacity=".8" ToolTip="{Binding Path=(Validation.Errors)[0].ErrorContent, RelativeSource={RelativeSource TemplatedParent}}">
+                                <Border x:Name="ErrorInfoBorder" Grid.Column="3" Visibility="Collapsed" VerticalAlignment="Center" Width="15" Height="14" HorizontalAlignment="Right" BorderBrush="White" BorderThickness="1" CornerRadius="7" Margin="0,0,4,0"
+                                Opacity=".8">
                                     <Border.Background>
                                         <SolidColorBrush Color="{DynamicResource ValidationErrorColor}" />
                                     </Border.Background>
@@ -4875,7 +4851,8 @@
                                     <SolidColorBrush Color="{DynamicResource ValidationErrorColor}" />
                                 </Setter.Value>
                             </Setter>
-                            <!--<Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors)[0].ErrorContent}"/>-->
+                            <Setter TargetName="ErrorInfoBorder" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ErrorInfoBorder" Property="ToolTip" Value="{Binding Path=(Validation.Errors)[0].ErrorContent, FallbackValue={x:Null}, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -5478,7 +5455,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="{x:Type TreeView}" TargetType="{x:Type TreeView}">
+    <Style TargetType="{x:Type TreeView}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -5490,28 +5467,39 @@
         <Setter Property="Padding" Value="2" />
         <Setter Property="BorderBrush" Value="{DynamicResource SolidBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <!--<EventSetter Event="Drop" Handler="treeView_Drop"/>-->
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeView}">
-                    <Border 
-						x:Name="Border" 
-						CornerRadius="{TemplateBinding bs:MarkupExtensionProperties.CornerRadius}" 
-						Background="{TemplateBinding Background}"
-						BorderBrush="{TemplateBinding BorderBrush}"
-						BorderThickness="{TemplateBinding BorderThickness}">
-                        <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}" Focusable="False">
-                            <ItemsPresenter />
+                    <Border x:Name="Bd" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                        <ScrollViewer x:Name="_tv_scrollviewer_" Background="{TemplateBinding Background}" CanContentScroll="false" Focusable="false" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                            <ItemsPresenter/>
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="ScrollViewer" Property="Opacity" Value="0.7" />
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource SolidBorderBrush}"/>
+                        </Trigger>
+                        <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="true">
+                            <Setter Property="CanContentScroll" TargetName="_tv_scrollviewer_" Value="true"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="true">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <Style x:Key="ExpandCollapseToggleStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Focusable" Value="False"/>
@@ -5583,6 +5571,9 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Padding" Value="0,3,0,3" />
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SolidBorderBrush}" />
         <Setter Property="bs:MarkupExtensionProperties.SpecialWidth" Value="16" />
         <Setter Property="Template">
             <Setter.Value>
@@ -5597,7 +5588,7 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Rectangle x:Name="OffsetRect" Width="{TemplateBinding bs:MarkupExtensionProperties.SpecialWidth}" />
-                        <Border x:Name="Border" Background="{TemplateBinding Background}" Grid.ColumnSpan="2" />
+                        <Border x:Name="Border" Margin="13,0,0,0" Background="{TemplateBinding Background}" Grid.ColumnSpan="2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" />
                         <Rectangle Name="FocusRect" Grid.Column="1" Stroke="#60000000" StrokeDashArray="1 2" Visibility="Hidden" Grid.ColumnSpan="2"/>
                         <ToggleButton Grid.ColumnSpan="2"
 							x:Name="Expander"
@@ -5607,7 +5598,7 @@
                         <Grid Background="Transparent" x:Name="PART_Header" Grid.ColumnSpan="2" Margin="16,0,0,0">
                             <ContentPresenter ContentSource="Header" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Grid>
-                        <ItemsPresenter Grid.Column="1" Grid.Row="1" x:Name="ItemsHost" />
+                        <VirtualizingStackPanel Grid.Column="1" Grid.Row="1" x:Name="ItemsHost" IsItemsHost="true" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="false">
@@ -5616,10 +5607,11 @@
                         <Trigger Property="HasItems" Value="false">
                             <Setter TargetName="Expander" Property="Visibility" Value="Hidden"/>
                             <Setter TargetName="OffsetRect" Property="Width" Value="8" />
-                            <Setter TargetName="PART_Header" Property="Margin" Value="3,0,0,0" />
+                            <!--<Setter TargetName="PART_Header" Property="Margin" Value="3,0,0,0" />-->
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource SelectedBackgroundBrush}"/>
+                            <Setter TargetName="Border" Property="BorderThickness" Value="1"/>
                             <Setter Property="TextBlock.Foreground" Value="{DynamicResource HighLightForegroundBrush}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="False">
@@ -5651,11 +5643,10 @@
         <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderBrush}" />
         <Setter Property="bs:MarkupExtensionProperties.UseMinMaxSizeBehavior" Value="True" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Icon" Value="icons/app.png" />
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CaptionHeight="30" ResizeBorderThickness="4" CornerRadius="0" GlassFrameThickness="0" UseAeroCaptionButtons="False" />
+                <WindowChrome CaptionHeight="30" ResizeBorderThickness="4" CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" />
             </Setter.Value>
         </Setter>
         <Setter Property="Foreground" Value="{DynamicResource OnWindowForegroundBrush}"/>
@@ -5683,9 +5674,31 @@
                                                     <GradientStop Color="WhiteSmoke" Offset="0.0"/>
                                                 </LinearGradientBrush>
                                             </StackPanel.Resources>
-                                            <Button Padding="10,6" VerticalAlignment="Top" Name="PART_MinimizeButton" Click="minimizeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="0" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings" />
-                                            <Button Padding="10,6" VerticalAlignment="Top" Name="PART_MaximizeButton" Click="maximizeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="1" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings" />
-                                            <Button Padding="10,6" Name="PART_CloseButton" Click="closeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="r" bs:MarkupExtensionProperties.CornerRadius="0" BorderBrush="Transparent" FontFamily="Webdings">
+                                            <Button Padding="10,6" VerticalAlignment="Top" Name="PART_MinimizeButton" Click="minimizeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="0" bs:MarkupExtensionProperties.CornerRadius="0" BorderThickness="0" FontFamily="Webdings">
+                                                <Button.Background>
+                                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                        <GradientStop Color="Transparent" Offset="0.0"/>
+                                                    </LinearGradientBrush>
+                                                </Button.Background>
+                                                <Button.Resources>
+                                                    <LinearGradientBrush x:Key="DarkBrush" EndPoint="0,1" StartPoint="0,0">
+                                                        <GradientStop Color="#FF8A8A8A" Offset="0"/>
+                                                    </LinearGradientBrush>
+                                                </Button.Resources>
+                                            </Button>
+                                            <Button Padding="10,6" VerticalAlignment="Top" Name="PART_MaximizeButton" Click="maximizeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="1" bs:MarkupExtensionProperties.CornerRadius="0" BorderThickness="0" FontFamily="Webdings">
+                                                <Button.Background>
+                                                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                                        <GradientStop Color="Transparent" Offset="0.0"/>
+                                                    </LinearGradientBrush>
+                                                </Button.Background>
+                                                <Button.Resources>
+                                                    <LinearGradientBrush x:Key="DarkBrush" EndPoint="0,1" StartPoint="0,0">
+                                                        <GradientStop Color="#FF8A8A8A" Offset="0"/>
+                                                    </LinearGradientBrush>
+                                                </Button.Resources>
+                                            </Button>
+                                            <Button Padding="10,6" Name="PART_CloseButton" Click="closeButton_Click" Focusable="False" WindowChrome.IsHitTestVisibleInChrome="True" Content="r" bs:MarkupExtensionProperties.CornerRadius="0" BorderThickness="0" FontFamily="Webdings">
                                                 <Button.Background>
                                                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                                                         <GradientStop Color="Transparent" Offset="0.0"/>
@@ -5694,15 +5707,14 @@
                                                 <Button.Resources>
                                                     <LinearGradientBrush x:Key="DarkBrush" EndPoint="0,1" StartPoint="0,0">
                                                         <GradientStop Color="#FFFF8A8A" Offset="0"/>
-                                                        <GradientStop Color="#FFD14D4D" Offset="1"/>
                                                     </LinearGradientBrush>
                                                 </Button.Resources>
                                             </Button>
                                         </StackPanel>
-                                        <Label Padding="0,5" Foreground="White" HorizontalContentAlignment="{TemplateBinding bs:MarkupExtensionProperties.HeaderHorizontalAlignment}" Content="{TemplateBinding bs:MarkupExtensionProperties.Header}" FontSize="14">
-                                            <Label.Effect>
-                                                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="Black" />
-                                            </Label.Effect>
+                                        <Label Padding="0,5" Foreground="{DynamicResource OnWindowForegroundBrush}" HorizontalContentAlignment="{TemplateBinding bs:MarkupExtensionProperties.HeaderHorizontalAlignment}" Content="{TemplateBinding bs:MarkupExtensionProperties.Header}" FontSize="14">
+                                            <!--<Label.Effect>
+                                                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="White" />
+                                            </Label.Effect>-->
                                         </Label>
                                     </DockPanel>
                                 </Border>

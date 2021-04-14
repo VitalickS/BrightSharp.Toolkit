@@ -21,6 +21,11 @@ namespace BrightSharp.Commands
             _canExecuteEvaluator = canExecuteEvaluator;
         }
 
+        public RelayCommand(Action methodToExecute)
+        {
+            _methodToExecute = methodToExecute;
+        }
+
         public bool CanExecute(object parameter)
         {
             if (_canExecuteEvaluator == null)
@@ -35,7 +40,7 @@ namespace BrightSharp.Commands
         }
     }
 
-    public class RelayCommand<T> : ICommand
+    public class RelayCommand<T> : ICommand where T : class
     {
         private readonly Action<T> _methodToExecuteWithParam;
         private readonly Func<T, bool> _canExecuteEvaluator;
@@ -56,11 +61,11 @@ namespace BrightSharp.Commands
         {
             if (_canExecuteEvaluator == null)
                 return true;
-            return _canExecuteEvaluator.Invoke((T)parameter);
+            return _canExecuteEvaluator.Invoke(parameter as T);
         }
         public void Execute(object parameter)
         {
-            _methodToExecuteWithParam?.Invoke((T)parameter);
+            _methodToExecuteWithParam?.Invoke(parameter as T);
         }
     }
 }
