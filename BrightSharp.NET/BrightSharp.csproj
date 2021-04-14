@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Themes\icons\app.png" />
+    <None Remove="Themes\icons\copy.png" />
+    <None Remove="Themes\icons\cut.png" />
+    <None Remove="Themes\icons\paste.png" />
+    <None Remove="Themes\icons\undo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Themes\icons\app.png" />
+    <Resource Include="Themes\icons\copy.png" />
+    <Resource Include="Themes\icons\cut.png" />
+    <Resource Include="Themes\icons\paste.png" />
+    <Resource Include="Themes\icons\undo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Diagrams\ZoomControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Themes\Theme.cs">
+      <DependentUpon>Theme.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Themes\Controls\ZoomControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Diagrams\DesignerItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Diagrams\ResizeRotateChrome.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Diagrams\SizeChrome.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Style.Blue.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Style.Classic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Style.DarkBlue.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Style.DevLab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Style.Silver.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Theme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+</Project>

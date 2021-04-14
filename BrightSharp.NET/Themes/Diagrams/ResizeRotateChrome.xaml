@@ -1,0 +1,114 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:BrightSharp.Diagrams">
+    <BooleanToVisibilityConverter x:Key="btvc" />
+    <Style TargetType="{x:Type Shape}" x:Key="ThumbCorner">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="Stroke" Value="#FF0166AC" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Width" Value="7" />
+        <Setter Property="Height" Value="7" />
+        <Setter Property="Margin" Value="-2" />
+        <Setter Property="Fill">
+            <Setter.Value>
+                <RadialGradientBrush Center="0.2, 0.2" GradientOrigin="0.2, 0.2" RadiusX="0.8" RadiusY="0.8">
+                    <GradientStop Color="White" Offset="0.0" />
+                    <GradientStop Color="#FF9AFF9F" Offset="0.8" />
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type s:ResizeRotateChrome}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type s:ResizeRotateChrome}">
+                    <Grid>
+                        <Grid Opacity="0" Margin="-3">
+                            <s:MoveThumb Margin="0,-20,0,0" 
+                                         HorizontalAlignment="Right" 
+                                         VerticalAlignment="Top" 
+                                         Height="16" 
+                                         Width="16" 
+                                         Cursor="SizeAll" 
+                                         Template="{DynamicResource MoveThumbTemplate}" />
+                            <s:RotateThumb Width="20"
+                             Height="20" Visibility="{Binding Path=DataContext.(s:VisualExtensions.CanRotate), RelativeSource={RelativeSource Self}, Converter={StaticResource btvc}}"
+                             Margin="0,-20,0,0"
+                             Cursor="Hand"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Center"/>
+                            <s:ResizeThumb Height="3"
+                             Cursor="SizeNS"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Stretch"/>
+                            <s:ResizeThumb Width="3"
+                             Cursor="SizeWE"
+                             VerticalAlignment="Stretch"
+                             HorizontalAlignment="Left"/>
+                            <s:ResizeThumb Width="3"
+                             Cursor="SizeWE"
+                             VerticalAlignment="Stretch"
+                             HorizontalAlignment="Right"/>
+                            <s:ResizeThumb Height="3"
+                             Cursor="SizeNS"
+                             VerticalAlignment="Bottom"
+                             HorizontalAlignment="Stretch"/>
+                            <s:ResizeThumb Width="7"
+                             Height="7"
+                             Margin="-2"
+                             Cursor="SizeNWSE"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Left"/>
+                            <s:ResizeThumb Width="7"
+                             Height="7"
+                             Margin="-2"
+                             Cursor="SizeNESW"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Right"/>
+                            <s:ResizeThumb Width="7"
+                             Height="7"
+                             Margin="-2"
+                             Cursor="SizeNESW"
+                             VerticalAlignment="Bottom"
+                             HorizontalAlignment="Left"/>
+                            <s:ResizeThumb Width="7"
+                             Height="7"
+                             Margin="-2"
+                             Cursor="SizeNWSE"
+                             VerticalAlignment="Bottom"
+                             HorizontalAlignment="Right"/>
+                        </Grid>
+                        <Canvas HorizontalAlignment="Right" VerticalAlignment="Top">
+                            <ContentControl Canvas.Left="10" Content="{Binding Tag}" />
+                        </Canvas>
+                        <Grid IsHitTestVisible="False" Opacity="1" Margin="-3">
+                            <Rectangle SnapsToDevicePixels="True"
+                         StrokeThickness="1"
+                         Margin="1"
+                         Stroke="{DynamicResource DisabledBorderBrush}" StrokeDashArray="1 0 1"/>
+                            <Line StrokeThickness="1" X1="0" Y1="0" X2="0" Y2="20" Visibility="{Binding Path=DataContext.(s:VisualExtensions.CanRotate), RelativeSource={RelativeSource Self}, Converter={StaticResource btvc}}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,-19,0,0"
+                    Stroke="White" StrokeDashArray="1 2"/>
+                            <Path Style="{StaticResource ThumbCorner}" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-20,0,0" Width="20" Height="20" Data="M 11.7927,9.92031C 12.5184,8.74318 12.6759,7.05297 12.1717,5.75967C 11.5909,4.44354 10.2501,3.37314 8.87896,3.04485C 7.39649,2.74559 5.63977,3.1934 4.48733,4.196C 3.50995,5.1756 2.91946,6.75691 3.08599,8.14841L 0.0842173,8.57665C 0.0347556,8.20576 0.00766225,7.8312 -1.64198e-005,7.45693C 0.038148,6.21681 0.383575,4.9557 0.968669,3.8699C 1.5589,2.89611 2.36362,2.03356 3.28126,1.37902C 5.28605,0.0810452 8.05891,-0.284222 10.3301,0.412526C 12.1794,1.09169 13.9099,2.53647 14.8289,4.31779C 15.3434,5.43808 15.5957,6.72245 15.5449,7.95982C 15.4307,9.19718 15.0066,10.4344 14.358,11.484L 16.0043,12.4819L 11.226,13.5191L 10.1463,8.92239L 11.7927,9.92031 Z M -1.64198e-005,-1.90735e-006 Z M 15.564,14.9728 Z " 
+                                  Fill="YellowGreen" Stroke="{DynamicResource PressedBorderBrush}"
+                                  Visibility="{Binding Path=DataContext.(s:VisualExtensions.CanRotate), RelativeSource={RelativeSource Self}, Converter={StaticResource btvc}}"
+                                  />
+                            <Rectangle Style="{StaticResource ThumbCorner}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Rectangle Style="{StaticResource ThumbCorner}" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                            <Rectangle Style="{StaticResource ThumbCorner}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                            <Rectangle Style="{StaticResource ThumbCorner}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                            <Viewbox Width="16" Height="16" HorizontalAlignment="Right" VerticalAlignment="Top" IsHitTestVisible="False" Margin="0,-20,0,0">
+                                <Path Width="16" Height="16" Stretch="Fill" Fill="{DynamicResource NormalBrush}" StrokeThickness=".5" Stroke="{DynamicResource GlyphBrush}" Data="M 0,8.L 3.18485,4.81417L 3.18485,6.37077L 6.37181,6.37077L 6.37181,3.18408L 4.81418,3.18408L 8.00114,0L 11.1881,3.18408L 9.63047,3.18408L 9.63047,6.37077L 12.8174,6.37077L 12.8174,4.81417L 16.0044,8.L 12.8174,11.1876L 12.8174,9.63096L 9.63047,9.63096L 9.63047,12.8177L 11.1881,12.8177L 8.00114,16.0044L 4.81418,12.8177L 6.37181,12.8177L 6.37181,9.63096L 3.18485,9.63096L 3.18485,11.1876L 0,8. Z M 0,0 Z M 16.0044,16.0044 Z"/>
+                            </Viewbox>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
